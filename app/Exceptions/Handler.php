@@ -2,10 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Dto\Response\MessageDto;
-use App\Exceptions\Iwms\IwmsApiError;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\View;
 use Throwable;
 
 class Handler extends ExceptionHandler
