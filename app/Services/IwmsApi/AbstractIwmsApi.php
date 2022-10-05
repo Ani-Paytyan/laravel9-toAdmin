@@ -31,6 +31,8 @@ abstract class AbstractIwmsApi
         $request->withMiddleware(
             Middleware::mapResponse(function (ResponseInterface $response) {
                 $this->handleError(new Response($response));
+
+                return $response;
             })
         );
 
