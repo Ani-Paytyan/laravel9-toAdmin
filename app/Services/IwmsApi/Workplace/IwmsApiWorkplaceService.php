@@ -2,56 +2,40 @@
 
 namespace App\Services\IwmsApi\Workplace;
 
-use App\Dto\IwmsApi\IwmsApiWorkplaceDto;
+use App\Dto\IwmsApi\IwmsAPIPaginationResponse;
+use App\Dto\IwmsApi\Workplace\IwmsApiGetWorkplacesRequestDto;
+use App\Dto\IwmsApi\Workplace\IwmsApiGetWorkplacesResponseDto;
 use App\Services\IwmsApi\AbstractIwmsApi;
 use Illuminate\Support\Facades\Log;
 
 class IwmsApiWorkplaceService extends AbstractIwmsApi implements IwmsApiWorkplaceServiceInterface
 {
-    const PER_PAGE = 1;
-
-    private string $companyId;
-    private IwmsAPIPaginationResponse $paginationResponse;
-
-    /**
-     * @param IwmsApiWorkplaceDto $dto
-     */
-    public function __construct(IwmsApiWorkplaceDto $dto)
+    public function __construct()
     {
-        $this->paginationResponse = new IwmsAPIPaginationResponse();
-        $this->companyId = $dto->getCompanyId();
         $this->setUserToken(config('iwms.api_user_token'));
     }
 
     /**
-     * @return IwmsAPIPaginationResponse
+     * @param IwmsApiGetWorkplacesRequestDto $dto
+     * @return IwmsApiGetWorkplacesResponseDto
      */
-    public function workplace(): IwmsAPIPaginationResponse
+    public function getWorkplace(IwmsApiGetWorkplacesRequestDto $dto): IwmsApiGetWorkplacesResponseDto
     {
-        do {
-            $this->paginationResponse->init($this->request($this->companyId));
-
-        } while ($this->paginationResponse->hasMorePages());
-
-       return $this->paginationResponse;
-    }
-
-    /**
-     * @param string $companyId
-     * @return array
-     */
-    private function request(string $companyId): array
-    {
+        $result = [];
         try {
-            return ($this->getRequestBuilder()->get('workplaces', [
-                'company_id' => $companyId,
+            $result = ($this->getRequestBuilder()->get('workplaces', [
+                'company_id' => $dto->getCompanyId(),
                 'expand' => 'company',
-                'per-page' => self::PER_PAGE,
-                'page' => $this->paginationResponse->nextPage()
+                'per-page' => IwmsAPIPaginationResponse::PER_PAGE,
+                'page' => $dto->getNextPage()
             ]))->json();
+
         } catch (\Exception $exception) {
-            Log::emergency($exception->getMessage());
+            Log::channel('workplace')->emergency($exception->getMessage());
         }
-        return [];
+
+        return (new IwmsApiGetWorkplacesResponseDto())
+            ->setResult($result['results'] ?? [])
+            ->setMeta($result['_meta'] ?? []);
     }
 }

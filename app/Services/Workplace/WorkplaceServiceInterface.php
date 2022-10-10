@@ -2,9 +2,9 @@
 
 namespace App\Services\Workplace;
 
-use App\Dto\Workplace\WorkplaceDto;
+use App\Dto\IwmsApi\IwmsAPIPaginationResponse;
 
 interface WorkplaceServiceInterface
 {
-    public function workplace(WorkplaceDto $dto);
+    public function syncData(IwmsAPIPaginationResponse $iwmsAPIPaginationResponse): void;
 }

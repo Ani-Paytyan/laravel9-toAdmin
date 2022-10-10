@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Dto\Workplace\WorkplaceDto;
+use App\Dto\IwmsApi\Workplace\IwmsApiGetWorkplacesRequestDto;
 use App\Models\Company;
-use App\Services\Workplace\WorkplaceService;
+use App\Dto\IwmsApi\IwmsAPIPaginationResponse;
+use App\Services\IwmsApi\Workplace\IwmsApiWorkplaceServiceInterface;
 use App\Services\Workplace\WorkplaceServiceInterface;
 use Illuminate\Console\Command;
 
@@ -24,22 +25,27 @@ class WorkplacesFetch extends Command
      */
     protected $description = 'Successfully workplaces fetched';
 
-    private WorkplaceServiceInterface $workplaceService;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->workplaceService = new WorkplaceService();
-    }
-
     /**
+     * @param IwmsApiWorkplaceServiceInterface $iwmsApiWorkplaceService
+     * @param WorkplaceServiceInterface $workplaceService
      * @return void
      */
-    public function handle()
+    public function handle(
+        IwmsApiWorkplaceServiceInterface $iwmsApiWorkplaceService,
+        WorkplaceServiceInterface $workplaceService): void
     {
-        $companies = Company::all();
-        foreach ($companies as $company) {
-            $this->workplaceService->workplace((new WorkplaceDto())->setCompanyId($company->company_id));
+        $companyIds = Company::pluck('company_id')->toArray();
+        foreach ($companyIds as $companyId) {
+            $iwmsAPIPaginationResponse = new IwmsAPIPaginationResponse();
+            do {
+                $iwmsAPIPaginationResponse->init($iwmsApiWorkplaceService->getWorkplace(
+                    (new IwmsApiGetWorkplacesRequestDto())
+                        ->setCompanyId($companyId)
+                        ->setNextPage($iwmsAPIPaginationResponse->nextPage())
+                ));
+            } while ($iwmsAPIPaginationResponse->hasMorePages());
+
+            $workplaceService->syncData($iwmsAPIPaginationResponse);
         }
     }
 }

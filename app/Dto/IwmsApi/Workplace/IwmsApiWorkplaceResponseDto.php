@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\IwmsApi;
+namespace App\Dto\IwmsApi\Workplace;
 
 class IwmsApiWorkplaceResponseDto
 {

@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Services\IwmsApi\Workplace;
+namespace App\Dto\IwmsApi;
 
-use App\Dto\IwmsApi\IwmsApiWorkplaceResponseDto;
+use App\Dto\IwmsApi\Workplace\IwmsApiGetWorkplacesResponseDto;
+use App\Dto\IwmsApi\Workplace\IwmsApiWorkplaceResponseDto;
 
 class IwmsAPIPaginationResponse
 {
+    const PER_PAGE = 10;
+
     private array $results = [];
     private int $pageCount = 0;
     private int $currentPage = 0;
 
-    public function init(array $response): void
+    public function init(IwmsApiGetWorkplacesResponseDto $iwmsApiGetWorkplacesResponseDto): void
     {
-        $this->setResults($response);
-        $this->setPageCount($response);
-        $this->setCurrentPage($response);
+        $meta = $iwmsApiGetWorkplacesResponseDto->getMeta();
+        $this->setResults($iwmsApiGetWorkplacesResponseDto->getResult());
+        $this->setPageCount($meta)
+            ->setCurrentPage($meta);
     }
 
     public function getPageCount(): int
@@ -24,9 +28,7 @@ class IwmsAPIPaginationResponse
 
     public function setPageCount(array $response): self
     {
-        if (!empty($response['_meta'])) {
-            $this->pageCount = $response['_meta']['pageCount'] ?? 0;
-        }
+        $this->pageCount = $response['pageCount'] ?? 0;
         return $this;
     }
 
@@ -37,9 +39,7 @@ class IwmsAPIPaginationResponse
 
     public function setCurrentPage(array $response): self
     {
-        if (!empty($response['_meta'])) {
-            $this->currentPage = $response['_meta']['currentPage'] ?? 0;
-        }
+        $this->currentPage = $response['currentPage'] ?? 0;
         return $this;
     }
 
@@ -50,10 +50,8 @@ class IwmsAPIPaginationResponse
 
     public function setResults(array $response): self
     {
-        if (!empty($response['results'])) {
-            foreach ($response['results'] as $result) {
-                $this->results[] = new IwmsApiWorkplaceResponseDto($result);
-            }
+        foreach ($response as $result) {
+            $this->results[] = new IwmsApiWorkplaceResponseDto($result);
         }
         return $this;
     }
