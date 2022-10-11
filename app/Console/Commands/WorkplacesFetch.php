@@ -36,16 +36,18 @@ class WorkplacesFetch extends Command
     {
         $companyIds = Company::pluck('company_id')->toArray();
         foreach ($companyIds as $companyId) {
-            $iwmsAPIPaginationResponse = new IwmsAPIPaginationResponse();
             do {
-                $iwmsAPIPaginationResponse->init($iwmsApiWorkplaceService->getWorkplace(
+                /** @var IwmsAPIPaginationResponse $iwmsAPIPaginationResponse */
+                $iwmsAPIPaginationResponse = $iwmsApiWorkplaceService->getWorkplace(
                     (new IwmsApiGetWorkplacesRequestDto())
                         ->setCompanyId($companyId)
-                        ->setNextPage($iwmsAPIPaginationResponse->nextPage())
-                ));
+                        ->setPage(
+                            isset($iwmsAPIPaginationResponse) ? $iwmsAPIPaginationResponse->nextPage() : 1
+                        )
+                );
             } while ($iwmsAPIPaginationResponse->hasMorePages());
 
-            $workplaceService->syncData($iwmsAPIPaginationResponse);
+            $workplaceService->syncData($iwmsAPIPaginationResponse->getResults());
         }
     }
 }

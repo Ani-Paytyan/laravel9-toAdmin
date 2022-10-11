@@ -4,15 +4,14 @@ namespace App\Services\Workplace;
 
 use App\Dto\IwmsApi\Workplace\IwmsApiWorkplaceResponseDto;
 use App\Models\Workplace;
-use App\Dto\IwmsApi\IwmsAPIPaginationResponse;
 
 class WorkplaceService implements WorkplaceServiceInterface
 {
 
-    public function syncData(IwmsAPIPaginationResponse $iwmsAPIPaginationResponse): void
+    public function syncData(array $result): void
     {
         $processedIds = [];
-        foreach ($iwmsAPIPaginationResponse->getResults() as $data) {
+        foreach ($result as $data) {
             /** @var IwmsApiWorkplaceResponseDto $data */
             $processedIds[] = $data->getId();
             Workplace::updateOrCreate(
@@ -21,8 +20,6 @@ class WorkplaceService implements WorkplaceServiceInterface
             );
         }
 
-        if (count($processedIds)) {
-            Workplace::whereNotIn('id', $processedIds)->delete();
-        }
+        Workplace::whereNotIn('id', $processedIds)->delete();
     }
 }

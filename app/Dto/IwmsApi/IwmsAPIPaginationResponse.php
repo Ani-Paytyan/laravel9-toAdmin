@@ -2,23 +2,36 @@
 
 namespace App\Dto\IwmsApi;
 
-use App\Dto\IwmsApi\Workplace\IwmsApiGetWorkplacesResponseDto;
 use App\Dto\IwmsApi\Workplace\IwmsApiWorkplaceResponseDto;
 
 class IwmsAPIPaginationResponse
 {
-    const PER_PAGE = 10;
+    const PER_PAGE = 1;
 
     private array $results = [];
     private int $pageCount = 0;
     private int $currentPage = 0;
 
-    public function init(IwmsApiGetWorkplacesResponseDto $iwmsApiGetWorkplacesResponseDto): void
+    private static ?IwmsAPIPaginationResponse $instance = null;
+
+    private function __construct() {}
+
+    public static function getInstance(): self
     {
-        $meta = $iwmsApiGetWorkplacesResponseDto->getMeta();
-        $this->setResults($iwmsApiGetWorkplacesResponseDto->getResult());
-        $this->setPageCount($meta)
-            ->setCurrentPage($meta);
+        if (self::$instance == null) {
+            self::$instance = new IwmsAPIPaginationResponse();
+        }
+
+        return self::$instance;
+    }
+
+    public function init(array $response): self
+    {
+        $this->setResults($response['results'] ?? []);
+        $this->setPageCount($response['_meta'] ?? [])
+            ->setCurrentPage($response['_meta'] ?? []);
+
+        return $this;
     }
 
     public function getPageCount(): int

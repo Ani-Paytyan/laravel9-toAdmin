@@ -5,7 +5,7 @@ namespace App\Dto\IwmsApi\Workplace;
 class IwmsApiGetWorkplacesRequestDto
 {
     private string $companyId;
-    private int $nextPage;
+    private int $page;
 
     public function getCompanyId(): string
     {
@@ -18,14 +18,14 @@ class IwmsApiGetWorkplacesRequestDto
         return $this;
     }
 
-    public function getNextPage(): int
+    public function getPage(): int
     {
-        return $this->nextPage;
+        return $this->page;
     }
 
-    public function setNextPage(int $nextPage): self
+    public function setPage(int $page): self
     {
-        $this->nextPage = $nextPage;
+        $this->page = $page;
         return $this;
     }
 }
