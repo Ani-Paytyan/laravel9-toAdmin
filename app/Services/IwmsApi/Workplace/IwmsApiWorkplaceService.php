@@ -4,6 +4,7 @@ namespace App\Services\IwmsApi\Workplace;
 
 use App\Dto\IwmsApi\IwmsAPIPaginationResponse;
 use App\Dto\IwmsApi\Workplace\IwmsApiGetWorkplacesRequestDto;
+use App\Dto\IwmsApi\Workplace\IwmsWorkplacePaginationResponse;
 use App\Services\IwmsApi\AbstractIwmsApi;
 
 class IwmsApiWorkplaceService extends AbstractIwmsApi implements IwmsApiWorkplaceServiceInterface
@@ -26,6 +27,6 @@ class IwmsApiWorkplaceService extends AbstractIwmsApi implements IwmsApiWorkplac
             'page' => $dto->getPage()
         ]))->json();
 
-        return IwmsAPIPaginationResponse::getInstance()->init($result ?? []);
+        return IwmsWorkplacePaginationResponse::getInstance()->init($result ?? []);
     }
 }

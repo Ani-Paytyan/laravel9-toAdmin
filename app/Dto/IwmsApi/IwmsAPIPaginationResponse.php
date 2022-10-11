@@ -2,28 +2,27 @@
 
 namespace App\Dto\IwmsApi;
 
-use App\Dto\IwmsApi\Workplace\IwmsApiWorkplaceResponseDto;
-
-class IwmsAPIPaginationResponse
+abstract class IwmsAPIPaginationResponse
 {
     const PER_PAGE = 1;
 
-    private array $results = [];
+    protected array $results = [];
     private int $pageCount = 0;
     private int $currentPage = 0;
 
     private static ?IwmsAPIPaginationResponse $instance = null;
 
-    private function __construct() {}
-
     public static function getInstance(): self
     {
         if (self::$instance == null) {
-            self::$instance = new IwmsAPIPaginationResponse();
+            self::$instance = new static();
         }
 
         return self::$instance;
     }
+
+    public abstract function getResults(): array;
+    public abstract function setResults(array $response);
 
     public function init(array $response): self
     {
@@ -53,19 +52,6 @@ class IwmsAPIPaginationResponse
     public function setCurrentPage(array $response): self
     {
         $this->currentPage = $response['currentPage'] ?? 0;
-        return $this;
-    }
-
-    public function getResults(): array
-    {
-        return $this->results;
-    }
-
-    public function setResults(array $response): self
-    {
-        foreach ($response as $result) {
-            $this->results[] = new IwmsApiWorkplaceResponseDto($result);
-        }
         return $this;
     }
 
