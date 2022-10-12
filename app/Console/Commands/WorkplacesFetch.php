@@ -34,7 +34,7 @@ class WorkplacesFetch extends Command
         IwmsApiWorkplaceServiceInterface $iwmsApiWorkplaceService,
         WorkplaceServiceInterface $workplaceService): void
     {
-        $companyIds = Company::whereNull('deleted_at')->pluck('id')->toArray();
+        $companyIds = Company::pluck('id')->toArray();
         $workplaces = [];
         foreach ($companyIds as $companyId) {
             do {
@@ -48,8 +48,7 @@ class WorkplacesFetch extends Command
                 );
                 $workplaces = array_merge($workplaces, $iwmsAPIPaginationResponse->getResult());
             } while ($iwmsAPIPaginationResponse->hasMorePages());
-
-            $workplaceService->sync($workplaces);
         }
+        $workplaceService->sync($workplaces);
     }
 }
