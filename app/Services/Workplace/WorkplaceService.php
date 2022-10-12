@@ -20,7 +20,7 @@ class WorkplaceService implements WorkplaceServiceInterface
                     $data->toArray(),
                 );
 
-            $workplace->companies()->syncWithDetaching($data->getCompanyId());
+            $workplace->companies()->syncWithoutDetaching($data->getCompanyId());
         }
         Workplace::whereNotIn('id', array_unique($processedIds))->delete();
     }
