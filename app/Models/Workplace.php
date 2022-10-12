@@ -11,6 +11,8 @@ class Workplace extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public $incrementing = false;
+
     /**
      * The table associated with the model.
      *
@@ -25,8 +27,12 @@ class Workplace extends Model
      */
     protected $fillable = [
         'id',
-        'company_id',
         'name',
         'address',
     ];
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class);
+    }
 }
