@@ -2,34 +2,22 @@
 
 namespace App\Dto\IwmsApi;
 
-abstract class IwmsAPIPaginationResponse
+class IwmsAPIPaginationResponse
 {
     const PER_PAGE = 1;
 
-    protected array $results = [];
+    private array $result = [];
     private int $pageCount = 0;
     private int $currentPage = 0;
 
-    private static ?IwmsAPIPaginationResponse $instance = null;
-
-    public static function getInstance(): self
+    public function getResult(): array
     {
-        if (self::$instance == null) {
-            self::$instance = new static();
-        }
-
-        return self::$instance;
+        return $this->result;
     }
 
-    public abstract function getResults(): array;
-    public abstract function setResults(array $response);
-
-    public function init(array $response): self
+    public function setResult(array $result): self
     {
-        $this->setResults($response['results'] ?? []);
-        $this->setPageCount($response['_meta'] ?? [])
-            ->setCurrentPage($response['_meta'] ?? []);
-
+        $this->result = $result;
         return $this;
     }
 
@@ -38,9 +26,9 @@ abstract class IwmsAPIPaginationResponse
         return $this->pageCount;
     }
 
-    public function setPageCount(array $response): self
+    public function setPageCount(int $pageCount): self
     {
-        $this->pageCount = $response['pageCount'] ?? 0;
+        $this->pageCount = $pageCount;
         return $this;
     }
 
@@ -49,9 +37,9 @@ abstract class IwmsAPIPaginationResponse
         return $this->currentPage;
     }
 
-    public function setCurrentPage(array $response): self
+    public function setCurrentPage(int $currentPage): self
     {
-        $this->currentPage = $response['currentPage'] ?? 0;
+        $this->currentPage = $currentPage;
         return $this;
     }
 
@@ -63,5 +51,12 @@ abstract class IwmsAPIPaginationResponse
     public function hasMorePages(): bool
     {
         return $this->currentPage < $this->pageCount;
+    }
+
+    public static function createFromApiResponse(array $response): self
+    {
+        return (new self())
+            ->setCurrentPage($response['_meta']['currentPage'])
+            ->setPageCount($response['_meta']['pageCount']);
     }
 }

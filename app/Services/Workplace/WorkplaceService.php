@@ -8,7 +8,7 @@ use App\Models\Workplace;
 class WorkplaceService implements WorkplaceServiceInterface
 {
 
-    public function syncData(array $result): void
+    public function sync(array $result): void
     {
         $processedIds = [];
         foreach ($result as $data) {

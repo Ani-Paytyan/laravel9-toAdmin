@@ -45,9 +45,10 @@ class WorkplacesFetch extends Command
                             isset($iwmsAPIPaginationResponse) ? $iwmsAPIPaginationResponse->nextPage() : 1
                         )
                 );
+                $workplaces = array_merge($workplaces, $iwmsAPIPaginationResponse->getResult());
             } while ($iwmsAPIPaginationResponse->hasMorePages());
 
-            $workplaceService->syncData($iwmsAPIPaginationResponse->getResults());
+            $workplaceService->sync($workplaces);
         }
     }
 }
