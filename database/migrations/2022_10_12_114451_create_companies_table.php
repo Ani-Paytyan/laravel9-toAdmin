@@ -17,12 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name')->nullable();
             $table->string('address')->nullable();
-
-            $table->foreignId('type_id')
-                ->references('id')
-                ->on('company_types')
-                ->onUpdate('cascade');
-
+            $table->integer('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

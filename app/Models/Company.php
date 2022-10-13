@@ -11,6 +11,8 @@ class Company extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public $incrementing = false;
+
     protected $table = 'companies';
 
     /**
@@ -22,11 +24,6 @@ class Company extends Model
         'id',
         'name',
         'address',
-        'type_id',
+        'type',
     ];
-
-    public function companyType()
-    {
-        return $this->belongsTo(CompanyType::class);
-    }
 }

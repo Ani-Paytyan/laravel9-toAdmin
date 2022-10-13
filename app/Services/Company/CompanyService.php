@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Company;
 
 use App\Models\Company;
@@ -12,13 +13,14 @@ class CompanyService implements CompanyServiceInterface
         foreach ($result as $data) {
             /** @var IwmsApiCompanyResponseDto $data */
             $processedIds[] = $data->getId();
-            Company::updateOrCreate(
-                ['id' => $data->getId()],
-                $data->toArray()
-            );
+            $company = Company::withTrashed()
+                ->updateOrCreate(
+                    ['id' => $data->getId()],
+                    $data->toArray()
+                );
+            $company->restore();
         }
 
         Company::whereNotIn('id', $processedIds)->delete();
     }
-
 }

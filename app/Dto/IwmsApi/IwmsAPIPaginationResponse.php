@@ -4,7 +4,7 @@ namespace App\Dto\IwmsApi;
 
 class IwmsAPIPaginationResponse
 {
-    const PER_PAGE = 2;
+    const PER_PAGE = 50;
 
     private array $result = [];
     private int $pageCount = 0;
