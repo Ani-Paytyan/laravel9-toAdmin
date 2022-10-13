@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('workplaces', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('address')->nullable();
             $table->string('name')->nullable();
             $table->timestamps();

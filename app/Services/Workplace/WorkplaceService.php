@@ -19,10 +19,9 @@ class WorkplaceService implements WorkplaceServiceInterface
                     ['id' => $data->getId()],
                     $data->toArray(),
                 );
-
-            $workplace->companies()->syncWithoutDetaching($data->getCompanyId());
+            $workplace->restore();
         }
-        Workplace::whereNotIn('id', array_unique($processedIds))->delete();
+        Workplace::whereNotIn('id', $processedIds)->delete();
     }
 
 }

@@ -13,10 +13,9 @@ class Company extends Model
     use SoftDeletes;
     use DeprecatedUuidMethodsTrait;
 
-    protected $table = 'companies';
-
     public $incrementing = false;
 
+    protected $table = 'companies';
 
     /**
      * The attributes that are mass assignable.
@@ -27,11 +26,11 @@ class Company extends Model
         'id',
         'name',
         'address',
-        'type_id',
+        'type',
     ];
 
     public function workplaces()
     {
-       return $this->belongsToMany(Workplace::class);
+       return $this->hasMany(Workplace::class);
     }
 }

@@ -27,12 +27,13 @@ class Workplace extends Model
      */
     protected $fillable = [
         'id',
+        'company_id',
         'name',
         'address',
     ];
 
-    public function companies()
+    public function company()
     {
-        return $this->belongsToMany(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }
