@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Services\Company\CompanyServiceInterface;
-use App\Services\Company\CompanyService;
+use App\Services\Workplace\WorkplaceService;
+use App\Services\Workplace\WorkplaceServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
-class CompanyServiceProvider extends ServiceProvider
+class WorkplaceServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -15,7 +15,7 @@ class CompanyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(CompanyServiceInterface::class, CompanyService::class);
+        $this->app->singleton(WorkplaceServiceInterface::class, WorkplaceService::class);
     }
 
     /**
@@ -27,5 +27,4 @@ class CompanyServiceProvider extends ServiceProvider
     {
         //
     }
-
 }

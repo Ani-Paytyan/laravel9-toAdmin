@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('workplaces', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name')->nullable();
+            $table->foreignUuid('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('address')->nullable();
-            $table->integer('type')->nullable();
+            $table->string('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('workplaces');
     }
 };

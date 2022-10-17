@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Dto\IwmsApi\Company;
+namespace App\Dto\IwmsApi\Workplace;
 
-class IwmsApiCompanyResponseDto
+class IwmsApiWorkplaceResponseDto
 {
     private string $id;
-    private int $type;
+    private string $companyId;
     private ?string $name;
     private ?string $address;
 
@@ -14,7 +14,7 @@ class IwmsApiCompanyResponseDto
         $this->id = $item['id'];
         $this->name = $item['name'];
         $this->address = $item['address'];
-        $this->type = $item['type'];
+        $this->companyId = $item['company']['id'] ?? '';
     }
 
     public function getId(): string
@@ -28,14 +28,14 @@ class IwmsApiCompanyResponseDto
         return $this;
     }
 
-    public function getType(): int
+    public function getCompanyId(): string
     {
-        return $this->type;
+        return $this->companyId;
     }
 
-    public function setType(int $type): self
+    public function setCompanyId(string $companyId): self
     {
-        $this->type = $type;
+        $this->companyId = $companyId;
         return $this;
     }
 
@@ -65,9 +65,9 @@ class IwmsApiCompanyResponseDto
     {
         return [
             'id' => $this->getId(),
+            'company_id' => $this->getCompanyId(),
             'address' => $this->getAddress(),
-            'name' => $this->getName(),
-            'type_id' => $this->getType()
+            'name' => $this->getName()
         ];
     }
 }
