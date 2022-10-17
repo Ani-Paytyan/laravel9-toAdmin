@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AntenaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,4 @@ Route::get('/', [DashboardController::class, 'index'])
     ->middleware('auth');
 
 Route::prefix('auth')->name('auth.')->group($basePath . '/auth.php');
+Route::resource('antena', AntenaController::class);
