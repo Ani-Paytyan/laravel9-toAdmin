@@ -1,7 +1,7 @@
-@if (session('message') !== null)
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
+@if(session('message') !== null)
+    <x-common.alert type="{{ (session('message'))->getType() }}" class="mb-4">
+        {{ (session('message'))->getMessage() }}
+    </x-common.alert>
 @endif
 
 @if ($errors->any())
