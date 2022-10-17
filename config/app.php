@@ -196,7 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\IwmsApiProvider::class,
         App\Providers\WorkplaceServiceProvider::class,
-
+        App\Providers\CompanyServiceProvider::class,
     ],
 
     /*

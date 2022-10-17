@@ -26,4 +26,9 @@ class Company extends Model
         'address',
         'type',
     ];
+
+    public function workplaces()
+    {
+        return $this->hasMany(Workplace::class);
+    }
 }
