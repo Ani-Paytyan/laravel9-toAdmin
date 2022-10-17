@@ -4,15 +4,9 @@ namespace App\Services\Antena;
 
 use App\Dto\Antena\AntenaRequestDto;
 use App\Models\Antena;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class AntenaService implements AntenaServiceInterface
 {
-    public function getAntenaList(): LengthAwarePaginator
-    {
-        return Antena::paginate(AntenaRequestDto::PAGE);
-    }
-
     public function addAntena(AntenaRequestDto $antenaRequestDto): void
     {
         Antena::create($antenaRequestDto->toArray());

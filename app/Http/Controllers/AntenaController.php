@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dto\Antena\AntenaRequestDto;
+use App\Dto\Response\MessageDto;
 use App\Http\Requests\AntenaRequest;
 use App\Models\Antena;
 use App\Services\Antena\AntenaServiceInterface;
@@ -18,7 +19,7 @@ class AntenaController extends Controller
 
     public function index()
     {
-        $antenas = $this->antenaService->getAntenaList();
+        $antenas = Antena::paginate(AntenaRequestDto::PAGE);
         return view('antena.index', compact('antenas'));
     }
 
@@ -31,7 +32,12 @@ class AntenaController extends Controller
     {
         $this->antenaService->addAntena(AntenaRequestDto::createRequest($request->all()));
 
-        return redirect('antena')->with('message', 'Success');
+        return redirect('antena')->with([
+            'message' => new MessageDto(
+                trans('message.antena.success_message'),
+                MessageDto::TYPE_SUCCESS
+            ),
+        ]);
     }
 
     public function show(Antena $antena)
@@ -47,12 +53,24 @@ class AntenaController extends Controller
     public function update(AntenaRequest $request, Antena $antena)
     {
         $this->antenaService->updateAntena(AntenaRequestDto::createRequest($request->all()), $antena);
-        return redirect('antena')->with('message', 'Success');
+
+        return redirect('antena')->with([
+            'message' => new MessageDto(
+                trans('message.antena.success_message'),
+                MessageDto::TYPE_SUCCESS
+            ),
+        ]);
     }
 
     public function destroy(Antena $antena)
     {
         $this->antenaService->deleteAntena($antena);
-        return redirect('antena')->with('message', 'Success');
+
+        return redirect('antena')->with([
+            'message' => new MessageDto(
+                trans('message.antena.success_message'),
+                MessageDto::TYPE_SUCCESS
+            ),
+        ]);
     }
 }
