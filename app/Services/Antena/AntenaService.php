@@ -4,13 +4,13 @@ namespace App\Services\Antena;
 
 use App\Dto\Antena\AntenaRequestDto;
 use App\Models\Antena;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AntenaService implements AntenaServiceInterface
 {
-    public function getAntenaList(): Collection
+    public function getAntenaList(): LengthAwarePaginator
     {
-        return Antena::all();
+        return Antena::paginate(AntenaRequestDto::PAGE);
     }
 
     public function addAntena(AntenaRequestDto $antenaRequestDto): void
@@ -21,5 +21,10 @@ class AntenaService implements AntenaServiceInterface
     public function updateAntena(AntenaRequestDto $antenaRequestDto, Antena $antena): void
     {
         $antena->update($antenaRequestDto->toArray());
+    }
+
+    public function deleteAntena(Antena $antena): void
+    {
+        $antena->delete();
     }
 }

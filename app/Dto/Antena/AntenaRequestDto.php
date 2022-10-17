@@ -4,6 +4,8 @@ namespace App\Dto\Antena;
 
 class AntenaRequestDto
 {
+    const PAGE = 10;
+
     private string $macAddress;
     private int $type;
 

@@ -22,7 +22,7 @@ class ManufactureType extends Model
 
     public function antenas()
     {
-        return $this->hasMany(Antena::class, 'foreign_key','type_id');
+        return $this->hasMany(Antena::class);
     }
 
 }

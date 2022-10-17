@@ -50,9 +50,9 @@ class AntenaController extends Controller
         return redirect('antena')->with('message', 'Success');
     }
 
-    public function destroy($id)
+    public function destroy(Antena $antena)
     {
-        Antena::destroy($id);
-        return redirect('atena')->with('message', 'Success');
+        $this->antenaService->deleteAntena($antena);
+        return redirect('antena')->with('message', 'Success');
     }
 }
