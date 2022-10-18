@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AntenaController;
+use App\Http\Controllers\WorkplaceController;
+use App\Http\Controllers\WorkplaceAntentaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,6 @@ Route::get('/', [DashboardController::class, 'index'])
 
 Route::prefix('auth')->name('auth.')->group($basePath . '/auth.php');
 Route::resource('antena', AntenaController::class);
+Route::resource('workplace', WorkplaceController::class)->only('index', 'show', 'destroy');
+Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy');
+

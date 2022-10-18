@@ -36,4 +36,9 @@ class Workplace extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function antenas()
+    {
+        return $this->belongsToMany(Antena::class);
+    }
 }

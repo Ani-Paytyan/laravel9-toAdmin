@@ -45,6 +45,11 @@
                                 <i class="bi bi-people"></i> Users
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/workplace">
+                                <i class="bi bi-people"></i> Workplaces
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

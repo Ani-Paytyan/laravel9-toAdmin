@@ -25,4 +25,9 @@ class Antena extends Model
     {
         return $this->belongsTo(ManufactureType::class);
     }
+
+    public function workplaces()
+    {
+        return $this->belongsToMany(Workplace::class);
+    }
 }
