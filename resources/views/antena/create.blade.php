@@ -1,0 +1,40 @@
+@extends('layout.dashboard')
+
+@section('title', trans('page.dashboard.title'))
+@section('content')
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>{{ trans('page.antena.create_title') }}</h2>
+            </div>
+            <div class="pull-right float-end">
+                <a class="btn btn-primary" href="{{ route('antena.index') }}"> {{ trans('page.dashboard.back_button') }}</a>
+            </div>
+        </div>
+    </div>
+
+    <x-alert-component />
+
+    <form action="{{ route('antena.store') }}" method="POST">
+        @csrf
+
+        <div class="mb-5">
+            <x-form.input
+                    name="mac_address"
+                    type="text"
+                    id="mac_address"
+                    label="{{ trans('attributes.antena.mac_address') }}"
+                    class="form-control-muted"
+            />
+        </div>
+        <div class="mb-5">
+            <x-form.select name="type_id" data-placeholder="{{ trans('attributes.antena.choose_type') }}"
+                           :options="['1' => 'RadioLand', '2' => 'Minew' ]" label="{{ trans('attributes.antena.manufacture_type') }}">
+            </x-form.select>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center m-5">
+            <button type="submit" class="btn btn-primary">{{ trans('page.dashboard.submit_button') }}</button>
+        </div>
+    </form>
+@endsection

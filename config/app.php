@@ -195,7 +195,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\IwmsApiProvider::class,
-
+        App\Providers\AntenaServiceProvider::class,
+        App\Providers\WorkplaceServiceProvider::class,
+        App\Providers\CompanyServiceProvider::class,
     ],
 
     /*
