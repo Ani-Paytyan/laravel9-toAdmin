@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Workplace;
 use App\Queries\AntennaQueriesInterface;
-use App\Services\AntenaWorkplace\AntenaWorkplaceServiceInterface;
+use App\Services\Workplace\WorkplaceServiceInterface;
 
 class WorkplaceController extends Controller
 {
     const PAGE = 10;
 
-    public AntenaWorkplaceServiceInterface $antenaWorkplasceService;
+    public WorkplaceServiceInterface $workplaceService;
     public AntennaQueriesInterface $antennaQueries;
 
     public function __construct(
-        AntenaWorkplaceServiceInterface $antenaWorkplasceService,
+        WorkplaceServiceInterface $workplaceService,
         AntennaQueriesInterface $antennaQueries
     )
     {
-        $this->antenaWorkplasceService = $antenaWorkplasceService;
+        $this->workplaceService = $workplaceService;
         $this->antennaQueries = $antennaQueries;
     }
     public function index()

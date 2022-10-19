@@ -47,7 +47,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/workplace">
-                                <i class="bi bi-people"></i> Workplaces
+                                <i class="bi bi-building"></i> Workplaces
                             </a>
                         </li>
                     </ul>

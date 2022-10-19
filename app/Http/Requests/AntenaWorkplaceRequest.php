@@ -23,8 +23,10 @@ class AntenaWorkplaceRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'address_id' => 'required|string',
+            'antena_id' => 'required|string',
+            'type' => 'required|string'
         ];
     }
 }
