@@ -11,8 +11,15 @@
             <div class="pull-right float-end">
                 <a class="btn btn-primary" href="{{ route('workplace.index') }}">{{ trans('page.dashboard.back_button') }}</a>
             </div>
+            <div class="pull-left">
+                <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#antenaModal">
+                    {{ trans('page.antena.add_antena') }}
+                </button>
+            </div>
         </div>
     </div>
+    <x-alert-component />
+
     <table class="table table-bordered top-20">
         <tr>
             <th>{{ trans('attributes.workplace.name') }}</th>
@@ -36,11 +43,6 @@
 
     </table>
 
-    </div>
-    <div class="pull-left">
-        <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#antenaModal">
-            {{ trans('page.antena.add_antena') }}
-        </button>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="antenaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
