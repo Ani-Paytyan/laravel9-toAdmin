@@ -45,6 +45,11 @@
                                 <i class="bi bi-people"></i> Users
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="antena">
+                                <i class="bi bi-reception-3"></i> Antenas
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
