@@ -2,7 +2,6 @@
 
 namespace App\Services\Workplace;
 
-use App\Dto\AntenaWorkplace\AntenaWorkplaceRequestDto;
 use App\Dto\IwmsApi\Workplace\IwmsApiWorkplaceResponseDto;
 use App\Models\Antena;
 use App\Models\Workplace;
@@ -25,14 +24,10 @@ class WorkplaceService implements WorkplaceServiceInterface
         Workplace::whereNotIn('id', $processedIds)->delete();
     }
 
-    public function addAntena(AntenaWorkplaceRequestDto $antenaWorkplaceRequestDto): void
+    public function addAntena(Workplace $workplace, Antena $antena, string $type): void
     {
-        $workplace = $antenaWorkplaceRequestDto->getWorkplace();
-
         $workplace->antenas()->syncWithoutDetaching([
-            $antenaWorkplaceRequestDto->getAntenaUuid() => [
-                'type' => $antenaWorkplaceRequestDto->getType()
-            ]
+            $antena->id => [ 'type' => $type ]
         ]);
     }
 
