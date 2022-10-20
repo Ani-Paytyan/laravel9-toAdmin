@@ -25,6 +25,6 @@ class ManufactureTypeSeeder extends Seeder
                 'name' => 'Minew'
             ]
         ];
-        foreach($manufactureTypes as $type) { ManufactureType::create($type); }
+        foreach($manufactureTypes as $type) { ManufactureType::updateOrCreate($type); }
     }
 }
