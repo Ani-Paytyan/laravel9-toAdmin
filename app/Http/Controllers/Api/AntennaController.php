@@ -3,22 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AntenaResource;
 use App\Models\Antena;
-use App\Services\Api\AntennaApiServiceInterface;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class AntennaController extends Controller
 {
     const PAGE = 10;
 
-    public AntennaApiServiceInterface $antennaApiService;
-
-    public function __construct(AntennaApiServiceInterface $antennaApiService)
+    public function getAntennas(): AnonymousResourceCollection
     {
-        $this->antennaApiService = $antennaApiService;
-    }
-
-    public function getAntennas()
-    {
-        return Antena::paginate(self::PAGE, ['mac_address','type_id']);
+        return AntenaResource::collection(Antena::paginate(self::PAGE));
     }
 }
