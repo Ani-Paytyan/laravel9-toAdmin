@@ -198,6 +198,7 @@ return [
         App\Providers\AntenaServiceProvider::class,
         App\Providers\WorkplaceServiceProvider::class,
         App\Providers\CompanyServiceProvider::class,
+        App\Providers\UniqueItemServiceProvider::class,
     ],
 
     /*
