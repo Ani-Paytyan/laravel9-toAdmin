@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('check.antennas.token')->group(function () {
+Route::middleware('api_auth')->group(function () {
     Route::get('/antenas', [Api\AntennaController::class, 'getAntennas']);
 });
 
