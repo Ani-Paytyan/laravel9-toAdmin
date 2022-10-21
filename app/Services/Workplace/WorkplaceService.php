@@ -3,11 +3,11 @@
 namespace App\Services\Workplace;
 
 use App\Dto\IwmsApi\Workplace\IwmsApiWorkplaceResponseDto;
+use App\Models\Antena;
 use App\Models\Workplace;
 
 class WorkplaceService implements WorkplaceServiceInterface
 {
-
     public function sync(array $result): void
     {
         $processedIds = [];
@@ -24,4 +24,15 @@ class WorkplaceService implements WorkplaceServiceInterface
         Workplace::whereNotIn('id', $processedIds)->delete();
     }
 
+    public function addAntena(Workplace $workplace, Antena $antena, string $type): void
+    {
+        $workplace->antenas()->syncWithoutDetaching([
+            $antena->id => [ 'type' => $type ]
+        ]);
+    }
+
+    public function deleteAntena(Workplace $workplace, Antena $antena): void
+    {
+        $workplace->antenas()->detach($antena);
+    }
 }

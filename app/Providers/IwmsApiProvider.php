@@ -8,6 +8,8 @@ use App\Services\IwmsApi\Company\IwmsApiCompanyService;
 use App\Services\IwmsApi\Company\IwmsApiCompanyServiceInterface;
 use App\Services\IwmsApi\UniqueItem\IwmsApiUniqueItemService;
 use App\Services\IwmsApi\UniqueItem\IwmsApiUniqueItemServiceInterface;
+use App\Services\IwmsApi\Item\IwmsApiItemService;
+use App\Services\IwmsApi\Item\IwmsApiItemServiceInterface;
 use App\Services\IwmsApi\Workplace\IwmsApiWorkplaceService;
 use App\Services\IwmsApi\Workplace\IwmsApiWorkplaceServiceInterface;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +27,7 @@ class IwmsApiProvider extends ServiceProvider
         $this->app->singleton(IwmsApiWorkplaceServiceInterface::class, IwmsApiWorkplaceService::class);
         $this->app->singleton(IwmsApiCompanyServiceInterface::class, IwmsApiCompanyService::class);
         $this->app->singleton(IwmsApiUniqueItemServiceInterface::class, IwmsApiUniqueItemService::class);
+        $this->app->singleton(IwmsApiItemServiceInterface::class, IwmsApiItemService::class);
     }
 
     /**

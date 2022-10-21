@@ -21,5 +21,10 @@ return [
         'create_title' => 'Create Antena',
         'show_title' => 'Show Antena',
         'edit_title' => 'Edit Antena',
+    ],
+
+    'workplace' => [
+        'title' => 'Workplace',
+        'modal_title' => 'Add antena',
     ]
 ];
