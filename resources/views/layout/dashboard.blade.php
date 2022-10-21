@@ -46,6 +46,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="antena">
+                                <i class="bi bi-reception-3"></i> Antenas
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/workplace">
                                 <i class="bi bi-building"></i> Workplaces
                             </a>
