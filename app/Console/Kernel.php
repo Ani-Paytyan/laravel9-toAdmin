@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\CompaniesFetch;
+use App\Console\Commands\UniqueItemsFetch;
 use App\Console\Commands\ItemsFetch;
 use App\Console\Commands\WorkplacesFetch;
 use Illuminate\Console\Scheduling\Schedule;
@@ -20,6 +21,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(CompaniesFetch::class)->everyFifteenMinutes();
         $schedule->command(WorkplacesFetch::class)->everyFifteenMinutes();
+        $schedule->command(UniqueItemsFetch::class)->everyFifteenMinutes();
         $schedule->command(ItemsFetch::class)->everyFifteenMinutes();
         // $schedule->command('inspire')->hourly();
     }
