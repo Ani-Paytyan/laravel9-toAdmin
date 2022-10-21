@@ -21,7 +21,7 @@ class WorkplaceAntentaController extends Controller
     {
         $this->workplaceService->addAntena(
             $workplace,
-            Antena::find($request->get('antena_id')),
+            Antena::findOrFail($request->get('antena_id')),
             $request->get('type')
         );
 

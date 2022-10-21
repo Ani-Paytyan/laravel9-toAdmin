@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Models\Workplace
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Antena[] $antenas
+ * @property-read int|null $antenas_count
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Workplace newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Workplace newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Workplace onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Workplace query()
+ * @method static \Illuminate\Database\Query\Builder|Workplace withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Workplace withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Workplace extends Model
 {
     use HasFactory;
