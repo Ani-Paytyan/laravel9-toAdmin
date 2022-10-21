@@ -55,4 +55,9 @@ class Workplace extends Model
     {
         return $this->belongsToMany(Antena::class);
     }
+
+    public function items()
+    {
+        return $this->morphToMany(Item::class, 'taggable');
+    }
 }

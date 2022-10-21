@@ -26,5 +26,9 @@ return [
     'workplace' => [
         'title' => 'Workplace',
         'modal_title' => 'Add antena',
+    ],
+
+    'item' => [
+        'title' => 'Item',
     ]
 ];

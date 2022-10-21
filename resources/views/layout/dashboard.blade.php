@@ -55,6 +55,11 @@
                                 <i class="bi bi-building"></i> Workplaces
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/item">
+                                <i class="bi bi-building"></i> Items
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
