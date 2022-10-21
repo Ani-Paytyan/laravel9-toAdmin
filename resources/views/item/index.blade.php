@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->name}}</td>
-                <td>125</td>
+                <td>{{ $item->unique_item_count }}<td>
             </tr>
         @endforeach
     </table>
