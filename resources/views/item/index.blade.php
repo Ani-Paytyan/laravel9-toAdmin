@@ -19,7 +19,9 @@
         @foreach ($items as $item)
             <tr>
                 <td>{{ $item->id }}</td>
-                <td>{{ $item->name}}</td>
+                <td>
+                    <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="{{ route('item.edit',$item->id) }}">{{ $item->name}}}</a>
+                </td>
                 <td>{{ $item->unique_item_count }}<td>
             </tr>
         @endforeach

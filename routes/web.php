@@ -34,5 +34,6 @@ Route::resource('workplace', WorkplaceController::class)->only('index', 'show', 
     ->name('index', 'workplace.index')
     ->name('show', 'workplace.show');
 Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy');
-Route::resource('item', ItemController::class)->only('index')
-    ->name('index', 'item.index');
+Route::resource('item', ItemController::class)->only('index', 'edit', 'update')
+    ->name('index', 'item.index')
+    ->name('edit', 'item.edit');

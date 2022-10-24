@@ -29,6 +29,10 @@ return [
     ],
 
     'item' => [
-        'title' => 'Item',
+        'title' => 'Items',
+    ],
+
+    'unique_items' => [
+        'title' => 'Unique Items',
     ]
 ];
