@@ -57,7 +57,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/item">
-                                <i class="bi bi-building"></i> Items
+                                <i class="bi bi-layout-wtf"></i> Items
                             </a>
                         </li>
                     </ul>
