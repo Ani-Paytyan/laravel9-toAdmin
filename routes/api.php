@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('api_auth')->group(function () {
     Route::get('/antenas', [Api\AntennaController::class, 'getAntennas']);
+    Route::get('v1/unique', [Api\UniqueItemController::class, 'getUniqueItems']);
 });
 
