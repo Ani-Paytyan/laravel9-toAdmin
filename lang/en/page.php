@@ -26,5 +26,12 @@ return [
     'workplace' => [
         'title' => 'Workplace',
         'modal_title' => 'Add antena',
+    ],
+
+    'registration_box' => [
+        'title' => 'Registration Boxes',
+        'create_title' => 'Create Registration Boxes',
+        'edit_title' => 'Edit Registration Boxes',
+        'add_registration_box' => 'Add Registration Box',
     ]
 ];

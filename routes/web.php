@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AntenaController;
 use App\Http\Controllers\WorkplaceController;
 use App\Http\Controllers\WorkplaceAntentaController;
+use App\Http\Controllers\RegistrationBoxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,7 @@ Route::resource('workplace', WorkplaceController::class)->only('index', 'show', 
     ->name('index', 'workplace.index')
     ->name('show', 'workplace.show');
 Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy');
-
+Route::resource('registrationBox', RegistrationBoxController::class)
+    ->name('index', 'registrationBox.index')
+    ->name('create','registrationBox.create')
+    ->name('edit','registrationBox.edit');

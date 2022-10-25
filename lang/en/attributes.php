@@ -17,5 +17,13 @@ return [
         'company' => 'Company',
         'address' => 'Address',
         'number_attached_antena' => 'Number of attached antennas',
-    ]
+    ],
+
+    'registration_box' => [
+        'id' => 'ID',
+        'name' => 'Name',
+        'rssi_throttle' => 'Rssi Throttle',
+        'antenas' => 'Antenas',
+    ],
+
 ];

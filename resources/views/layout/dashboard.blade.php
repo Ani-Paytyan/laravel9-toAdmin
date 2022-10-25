@@ -55,6 +55,11 @@
                                 <i class="bi bi-building"></i> Workplaces
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/registrationBox">
+                                <i class="bi bi-box"></i> Registration boxes
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
