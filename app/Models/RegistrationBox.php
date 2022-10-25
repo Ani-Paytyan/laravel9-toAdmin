@@ -13,6 +13,8 @@ class RegistrationBox extends Model
 
     protected $table = 'registration_boxes';
 
+    public $incrementing = false;
+
     protected $fillable = [
         'id',
         'name',

@@ -13,4 +13,6 @@ interface RegistrationBoxServiceInterface
     public function updateRegistrationBox(RegistrationBoxUpdateRequestDto $registrationBoxUpdateRequestDto, RegistrationBox $registrationBox): void;
 
     public function deleteRegistrationBox(RegistrationBox $registrationBox): void;
+
+    public function restoreRegistrationBox(string $registrationBoxId): void;
 }

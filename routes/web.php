@@ -38,3 +38,7 @@ Route::resource('registrationBox', RegistrationBoxController::class)
     ->name('index', 'registrationBox.index')
     ->name('create','registrationBox.create')
     ->name('edit','registrationBox.edit');
+Route::name('registrationBox.')->group(function() {
+    Route::get('/deleted_list', [RegistrationBoxController::class, 'listDeleted'])->name('listDeleted');
+    Route::post('/deleted_list/restore/{registrationBox}', [RegistrationBoxController::class, 'restore'])->name('restore');
+});

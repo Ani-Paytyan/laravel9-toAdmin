@@ -25,4 +25,9 @@ class RegistrationBoxService implements RegistrationBoxServiceInterface
     {
         $registrationBox->delete();
     }
+
+    public function restoreRegistrationBox(string $registrationBoxId): void
+    {
+        RegistrationBox::withTrashed()->find($registrationBoxId)->restore();
+    }
 }

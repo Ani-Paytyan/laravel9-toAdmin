@@ -10,6 +10,7 @@ use App\Http\Requests\RegistrationBoxUpdateRequest;
 use App\Models\Antena;
 use App\Models\RegistrationBox;
 use App\Services\RegistrationBox\RegistrationBoxServiceInterface;
+use Illuminate\Http\Request;
 
 class RegistrationBoxController extends Controller
 {
@@ -91,6 +92,24 @@ class RegistrationBoxController extends Controller
     public function destroy(RegistrationBox $registrationBox)
     {
         $this->registrationBoxService->deleteRegistrationBox($registrationBox);
+
+        return redirect('registrationBox')->with([
+            'message' => new MessageDto(
+                trans('message.antena.success_message'),
+                MessageDto::TYPE_SUCCESS
+            ),
+        ]);
+    }
+
+    public function listDeleted()
+    {
+        $boxes = RegistrationBox::onlyTrashed()->paginate(self::PAGE);
+        return view('registrationBox.listDeleted', compact('boxes'));
+    }
+
+    public function restore(string $registrationBoxId)
+    {
+        $this->registrationBoxService->restoreRegistrationBox($registrationBoxId);
 
         return redirect('registrationBox')->with([
             'message' => new MessageDto(

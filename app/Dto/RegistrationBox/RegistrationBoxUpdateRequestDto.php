@@ -6,7 +6,7 @@ class RegistrationBoxUpdateRequestDto
 {
     private string $name;
     private int $rssiThrottle;
-    private string $antena_id;
+    private string $antenaId;
 
     public function getName(): string
     {
@@ -32,12 +32,12 @@ class RegistrationBoxUpdateRequestDto
 
     public function getAntenaId(): string
     {
-        return $this->antena_id;
+        return $this->antenaId;
     }
 
     public function setAntenaId(string $antenaId): self
     {
-        $this->antena_id = $antenaId;
+        $this->antenaId = $antenaId;
         return $this;
     }
 
