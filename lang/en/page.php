@@ -26,5 +26,13 @@ return [
     'workplace' => [
         'title' => 'Workplace',
         'modal_title' => 'Add antena',
+    ],
+
+    'item' => [
+        'title' => 'Items',
+    ],
+
+    'unique_items' => [
+        'title' => 'Unique Items',
     ]
 ];

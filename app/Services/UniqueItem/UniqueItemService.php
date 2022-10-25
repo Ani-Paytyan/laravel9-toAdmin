@@ -22,4 +22,11 @@ class UniqueItemService implements UniqueItemServiceInterface
         }
         UniqueItem::whereNotIn('id', $processedIds)->delete();
     }
+
+    public function updateUniqueItems(array $uniqueItems): void
+    {
+        foreach($uniqueItems as $id => $mac) {
+            UniqueItem::find($id)->update(['mac' => $mac]);
+        }
+    }
 }

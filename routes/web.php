@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AntenaController;
 use App\Http\Controllers\WorkplaceController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WorkplaceAntentaController;
 
 /*
@@ -33,4 +34,6 @@ Route::resource('workplace', WorkplaceController::class)->only('index', 'show', 
     ->name('index', 'workplace.index')
     ->name('show', 'workplace.show');
 Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy');
-
+Route::resource('item', ItemController::class)->only('index', 'edit', 'update')
+    ->name('index', 'item.index')
+    ->name('edit', 'item.edit');
