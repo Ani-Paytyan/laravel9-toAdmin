@@ -6,6 +6,7 @@ use App\Http\Controllers\AntenaController;
 use App\Http\Controllers\WorkplaceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WorkplaceAntentaController;
+use App\Http\Controllers\RegistrationBoxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,11 @@ Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('cr
 Route::resource('item', ItemController::class)->only('index', 'edit', 'update')
     ->name('index', 'item.index')
     ->name('edit', 'item.edit');
+Route::resource('registrationBox', RegistrationBoxController::class)
+    ->name('index', 'registrationBox.index')
+    ->name('create','registrationBox.create')
+    ->name('edit','registrationBox.edit');
+Route::name('registrationBox.')->group(function() {
+    Route::get('/deleted_list', [RegistrationBoxController::class, 'listDeleted'])->name('listDeleted');
+    Route::post('/deleted_list/restore/{registrationBox}', [RegistrationBoxController::class, 'restore'])->name('restore');
+});

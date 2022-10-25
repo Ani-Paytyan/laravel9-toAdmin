@@ -8,6 +8,8 @@ return [
         'show_button' => 'Show',
         'edit_button' => 'Edit',
         'delete_button' => 'Delete',
+        'restore_button' => 'Restore',
+        'list_delete' => 'Deleted List',
     ],
 
     'login' => [
@@ -26,6 +28,14 @@ return [
     'workplace' => [
         'title' => 'Workplace',
         'modal_title' => 'Add antena',
+    ],
+
+    'registration_box' => [
+        'title' => 'Registration Boxes',
+        'create_title' => 'Create Registration Boxes',
+        'edit_title' => 'Edit Registration Boxes',
+        'add_registration_box' => 'Add Registration Box',
+        'title_deleted' => 'Deleted List',
     ],
 
     'item' => [
