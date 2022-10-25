@@ -13,6 +13,6 @@ class UniqueItemController extends Controller
 
     public function getUniqueItems(): AnonymousResourceCollection
     {
-        return UniqueItemResource::collection(UniqueItem::paginate(self::PAGE));
+        return UniqueItemResource::collection(UniqueItem::whereNotNull('mac')->paginate(self::PAGE));
     }
 }
