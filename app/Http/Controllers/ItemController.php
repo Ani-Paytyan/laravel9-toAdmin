@@ -33,9 +33,7 @@ class ItemController extends Controller
 
     public function update(Request $request)
     {
-        foreach($request->get('mac', []) as $id => $mac) {
-            UniqueItem::find($id)->update(['mac' => $mac]);
-        }
+        $this->uniqueItemService->updateUniqueItems($request->get('mac') ?? []);
 
         return redirect('item')->with([
             'message' => new MessageDto(
