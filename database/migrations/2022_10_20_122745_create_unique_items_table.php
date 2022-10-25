@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('unique_items', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('item_id');
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('item_id')
+                ->references('id')
+                ->on('items')
+                ->onUpdate('cascade');
             $table->string('workplace_id');
             $table->string('article')->nullable();
             $table->string('mac')->nullable();

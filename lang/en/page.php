@@ -36,5 +36,13 @@ return [
         'edit_title' => 'Edit Registration Boxes',
         'add_registration_box' => 'Add Registration Box',
         'title_deleted' => 'Deleted List',
+    ],
+
+    'item' => [
+        'title' => 'Items',
+    ],
+
+    'unique_items' => [
+        'title' => 'Unique Items',
     ]
 ];

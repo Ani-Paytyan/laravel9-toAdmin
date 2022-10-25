@@ -21,4 +21,14 @@ class Item extends Model
         'name',
         'description',
     ];
+
+    public function workplaces()
+    {
+        return $this->morphToMany(Workplace::class, 'taggable');
+    }
+
+    public function uniqueItem()
+    {
+        return $this->hasMany(UniqueItem::class);
+    }
 }

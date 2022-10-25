@@ -22,4 +22,9 @@ class UniqueItem extends Model
         'article',
         'mac',
     ];
+
+    public function items()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }
