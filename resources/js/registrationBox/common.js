@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 $(document).ready(function() {
     let token = $("input[name='_token']").val();
     let regBoxId = $('#registrationBoxId').val();
