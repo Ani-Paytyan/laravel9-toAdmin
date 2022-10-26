@@ -54,15 +54,9 @@ class RegistrationBoxController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return void
-     */
-    public function show($id)
+    public function show(RegistrationBox $registrationBox)
     {
-        //
+        return view('registrationBox.show', compact('registrationBox'));
     }
 
     public function edit(RegistrationBox $registrationBox)
@@ -117,5 +111,10 @@ class RegistrationBoxController extends Controller
                 MessageDto::TYPE_SUCCESS
             ),
         ]);
+    }
+
+    public function rssiStore(Request $request, string $registrationBoxId)
+    {
+        RegistrationBox::find($registrationBoxId)->update(['rssi_throttle' => $request->get('rssiNumber')]);
     }
 }
