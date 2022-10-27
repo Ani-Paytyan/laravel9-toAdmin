@@ -30,4 +30,9 @@ class RegistrationBoxService implements RegistrationBoxServiceInterface
     {
         RegistrationBox::withTrashed()->find($registrationBoxId)->restore();
     }
+
+    public function rssiStore(RegistrationBox $registrationBox, int $rssiNumber): void
+    {
+        $registrationBox->update(['rssi_throttle' => $rssiNumber]);
+    }
 }

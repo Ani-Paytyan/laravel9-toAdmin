@@ -18,7 +18,7 @@
             @csrf
             <input type="hidden" value="{{ $registrationBox->id }}" id="registrationBoxId">
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <label for="customRange2" class="form-label">0-100</label>
+                <label for="customRange2" class="form-label">{{ trans('page.registration_box.rssi') }}</label>
                 <input type="range" class="form-range" value="{{$registrationBox->rssi_throttle}}" step="1" min="0" max="100" id="customRange2" oninput="this.nextElementSibling.value = this.value">
                 <output>{{$registrationBox->rssi_throttle}}</output>
             </div>
@@ -27,6 +27,6 @@
 @endsection
 
 @push('bodyEnd')
-    <script src="/build/js/common.js"></script>
+    <script src="{{ mix('build/js/registration-box.js')  }}"></script>
 @endpush
 

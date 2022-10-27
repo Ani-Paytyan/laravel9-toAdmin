@@ -113,8 +113,8 @@ class RegistrationBoxController extends Controller
         ]);
     }
 
-    public function rssiStore(Request $request, string $registrationBoxId)
+    public function rssiStore(Request $request, RegistrationBox $registrationBox)
     {
-        RegistrationBox::find($registrationBoxId)->update(['rssi_throttle' => $request->get('rssiNumber')]);
+        $this->registrationBoxService->rssiStore($registrationBox, $request->get('rssiNumber'));
     }
 }

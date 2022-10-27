@@ -1,7 +1,7 @@
 $(document).ready(function() {
     let token = $("input[name='_token']").val();
     let regBoxId = $('#registrationBoxId').val();
-    $('.form-range').click(function () {
+    $('.form-range').on("change", function () {
         $.ajax({
             url: "/rssi_store/" + regBoxId,
             data: {
