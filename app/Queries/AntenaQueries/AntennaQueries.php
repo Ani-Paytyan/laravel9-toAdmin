@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Queries;
+namespace App\Queries\AntenaQueries;
 
 use App\Models\Antena;
 use App\Models\Workplace;
@@ -14,5 +14,4 @@ class AntennaQueries implements AntennaQueriesInterface
             $query->where('workplaces.id', $workplace->id);
         });
     }
-
 }

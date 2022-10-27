@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api;
+use App\Http\Controllers\WatcherAntennaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,4 @@ Route::middleware('api_auth')->group(function () {
     Route::get('/antenas', [Api\AntennaController::class, 'getAntennas']);
     Route::get('v1/unique', [Api\UniqueItemController::class, 'getUniqueItems']);
 });
-
+Route::get('watcher/{name}', [WatcherAntennaController::class, 'getAntennaData']);

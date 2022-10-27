@@ -203,7 +203,8 @@ return [
         App\Providers\CompanyServiceProvider::class,
         App\Providers\ItemServiceProvider::class,
         App\Providers\UniqueItemServiceProvider::class,
-        App\Providers\RegistrationBoxServiceProvider::class,
+        App\Providers\RegistrationBoxProvider::class,
+        App\Providers\WatcherProvider::class,
     ],
 
     /*

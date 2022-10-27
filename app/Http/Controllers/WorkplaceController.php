@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Workplace;
-use App\Queries\AntennaQueriesInterface;
+use App\Queries\AntenaQueries\AntennaQueriesInterface;
 use App\Services\Workplace\WorkplaceServiceInterface;
 
 class WorkplaceController extends Controller
