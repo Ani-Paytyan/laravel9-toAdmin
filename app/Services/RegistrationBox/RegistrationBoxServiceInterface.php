@@ -15,4 +15,6 @@ interface RegistrationBoxServiceInterface
     public function deleteRegistrationBox(RegistrationBox $registrationBox): void;
 
     public function restoreRegistrationBox(string $registrationBoxId): void;
+
+    public function rssiStore(RegistrationBox $registrationBox, int $rssiNumber): void;
 }

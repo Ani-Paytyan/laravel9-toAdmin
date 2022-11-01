@@ -28,6 +28,7 @@
                 <td>{{ $box->name }}</td>
                 <td>{{ $box->rssi_throttle }}</td>
                 <td>
+                    <a class="btn btn-info" href="{{ route('registrationBox.show',$box->id) }}">{{ trans('page.dashboard.show_button') }}</a>
                     <a class="btn btn-primary" href="{{ route('registrationBox.edit',$box->id) }}">{{ trans('page.dashboard.edit_button') }}</a>
                     <form action="{{ route('registrationBox.destroy',$box->id) }}" method="POST" class="d-inline-block">
                         @csrf
