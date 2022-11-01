@@ -7,6 +7,7 @@ use App\Http\Controllers\WorkplaceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WorkplaceAntentaController;
 use App\Http\Controllers\RegistrationBoxController;
+use \App\Http\Controllers\WatcherAntennaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,10 @@ Route::name('registrationBox.')->group(function() {
     Route::get('/deleted_list', [RegistrationBoxController::class, 'listDeleted'])->name('listDeleted');
     Route::post('/deleted_list/restore/{registrationBox}', [RegistrationBoxController::class, 'restore'])->name('restore');
 });
+Route::name('watcher.')->group(function() {
+    Route::get('/watcher/antenna/{name}', [WatcherAntennaController::class, 'getAntennaData'])->name('antennaData');
+    Route::get('/watcher/item_unique', [WatcherAntennaController::class, 'getUniqueItemByItemId'])->name('getUniqueItemByItem');
+    Route::post('/watcher/item_unique/{name}', [WatcherAntennaController::class, 'uniqueItemToPlug'])->name('unique_item_to_plug');
+    Route::post('/watcher/item_unique/disable/{uniqueItem}/{name}', [WatcherAntennaController::class, 'uniqueItemDisable'])->name('unique_item_disable');
+});
+

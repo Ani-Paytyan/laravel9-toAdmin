@@ -19,14 +19,14 @@ class AntennaDataResource extends JsonResource
 
         return [
             'mac' => $this->getMac(),
-            'unique_item' => [
+            'unique_item' => $uniqueItem ? [
                 'id' => $uniqueItem->id,
                 'article' => $uniqueItem->article,
                 'item' =>  [
                     'id' => $uniqueItem->item->id,
                     'name' => $uniqueItem->item->name,
                 ]
-            ]
+            ] : null
         ];
     }
 }

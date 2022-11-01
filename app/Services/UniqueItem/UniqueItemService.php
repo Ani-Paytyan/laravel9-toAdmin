@@ -3,6 +3,7 @@
 namespace App\Services\UniqueItem;
 
 use App\Dto\IwmsApi\Unique_Item\IwmsApiUniqueItemResponseDto;
+use App\Dto\UniqueItem\UniqueItemRequestDto;
 use App\Models\UniqueItem;
 
 class UniqueItemService implements UniqueItemServiceInterface
@@ -28,5 +29,16 @@ class UniqueItemService implements UniqueItemServiceInterface
         foreach($uniqueItems as $id => $mac) {
             UniqueItem::find($id)->update(['mac' => $mac]);
         }
+    }
+
+    public function updateUniqueItem(UniqueItemRequestDto $uniqueItemRequestDto): void
+    {
+        UniqueItem::find($uniqueItemRequestDto->getUniqueItemId())
+            ->update(['mac' => $uniqueItemRequestDto->getMac()]);
+    }
+
+    public function getUniqueItemByItemId(string $itemId): array
+    {
+        return UniqueItem::where('item_id', $itemId)->pluck('article', 'id')->toArray();
     }
 }

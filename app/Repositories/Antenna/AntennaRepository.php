@@ -10,6 +10,7 @@ use App\Models\UniqueItem;
 use App\Queries\RegistrationBox\RegistrationBoxQueriesInterface;
 use App\Services\WatcherApi\AbstractWatcherApi;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class AntennaRepository extends AbstractWatcherApi implements AntennaRepositoryInterface
 {
@@ -24,21 +25,33 @@ class AntennaRepository extends AbstractWatcherApi implements AntennaRepositoryI
     {
         $apiResult = $this->getWatcherAntennas($antenna->mac_address);
         $uniqueItemResponse = new Collection();
+
         foreach($apiResult['result'] ?? [] as $apiItem) {
             if (!$this->antennaRssiRegistrationBoxExist($antenna->id, abs($apiItem['rssi']))) continue;
 
             $uniqueItems = UniqueItem::with('item')->where('mac', $apiItem['mac'])->get();
-            $uniqueItemMac = $uniqueItems->map(fn($uniqueItem) => (
-                new AntennaDataDto())->setMac($apiItem['mac'])->setUniqueItem($uniqueItem),
+            $uniqueItemMac = $uniqueItems->map(fn($uniqueItem) =>
+                (new AntennaDataDto())->setMac($apiItem['mac'])->setUniqueItem($uniqueItem),
             );
+
+            if ($uniqueItemMac->isEmpty()) {
+                $uniqueItemMac->push((new AntennaDataDto())->setMac($apiItem['mac']));
+            }
             $uniqueItemResponse = $uniqueItemResponse->merge($uniqueItemMac);
         }
+
         return UniqueItemMacDto::createFromResponse($uniqueItemResponse);
     }
 
     private function getWatcherAntennas(string $mac): array
     {
-        return ($this->getRequestBuilder()->get('v1/antenna/see/'. $mac))->json();
+        if (!Cache::has('antenna_data') || date('i') % 2 == 0) {
+            $antenna_data = ($this->getRequestBuilder()->get('v1/antenna/see/'. $mac))->json();
+            Cache::put('antenna_data', $antenna_data, 120);
+            return $antenna_data;
+        }
+
+        return Cache::get('antenna_data');
     }
 
     private function antennaRssiRegistrationBoxExist(string $antennaId, int $rssi): bool

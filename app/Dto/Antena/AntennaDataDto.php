@@ -7,7 +7,7 @@ use App\Models\UniqueItem;
 class AntennaDataDto
 {
     private string $mac;
-    private ?UniqueItem $uniqueItem = null;
+    private ?UniqueItem $uniqueItem;
 
     public function getMac(): string
     {
@@ -22,10 +22,10 @@ class AntennaDataDto
 
     public function getUniqueItem(): ?UniqueItem
     {
-        return $this->uniqueItem;
+        return $this->uniqueItem ?? null;
     }
 
-    public function setUniqueItem(UniqueItem $uniqueItem): self
+    public function setUniqueItem(?UniqueItem $uniqueItem): self
     {
         $this->uniqueItem = $uniqueItem;
         return $this;

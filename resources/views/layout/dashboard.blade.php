@@ -65,6 +65,11 @@
                                 <i class="bi bi-box"></i> Registration boxes
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/watcher/antenna/AAAAAAAAAAAA">
+                                <i class="bi bi-dash-circle"></i> Data With Antenna
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

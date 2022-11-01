@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AntennaDataUpdate;
 use App\Console\Commands\CompaniesFetch;
 use App\Console\Commands\UniqueItemsFetch;
 use App\Console\Commands\ItemsFetch;
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(WorkplacesFetch::class)->everyFifteenMinutes();
         $schedule->command(UniqueItemsFetch::class)->everyFifteenMinutes();
         $schedule->command(ItemsFetch::class)->everyFifteenMinutes();
+        $schedule->command(AntennaDataUpdate::class)->everyThreeMinutes();
         // $schedule->command('inspire')->hourly();
     }
 

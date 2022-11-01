@@ -44,5 +44,12 @@ return [
 
     'unique_items' => [
         'title' => 'Unique Items',
+    ],
+
+    'antenna_data' => [
+        'title' => 'Antenna Data',
+        'to_plug' => 'To Plug',
+        'disable' => 'Disable',
+        'add_unique_item' => 'Connect Mac Address',
     ]
 ];
