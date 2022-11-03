@@ -48,9 +48,9 @@ Route::name('registrationBox.')->group(function() {
     Route::post('/deleted_list/restore/{registrationBox}', [RegistrationBoxController::class, 'restore'])->name('restore');
 });
 Route::name('watcher.')->group(function() {
-    Route::get('/watcher/antenna/{name}', [WatcherAntennaController::class, 'getAntennaData'])->name('antennaData');
+    Route::get('/watcher/antenna/{registrationBox}', [WatcherAntennaController::class, 'getAntennaData'])->name('antennaData');
     Route::get('/watcher/item_unique', [WatcherAntennaController::class, 'getUniqueItemByItemId'])->name('getUniqueItemByItem');
     Route::post('/watcher/item_unique/{name}', [WatcherAntennaController::class, 'uniqueItemToPlug'])->name('unique_item_to_plug');
-    Route::post('/watcher/item_unique/disable/{uniqueItem}/{name}', [WatcherAntennaController::class, 'uniqueItemDisable'])->name('unique_item_disable');
+    Route::post('/watcher/item_unique/disable/{uniqueItem}', [WatcherAntennaController::class, 'uniqueItemDisable'])->name('unique_item_disable');
 });
 

@@ -3,61 +3,61 @@
 namespace App\Repositories\Antenna;
 
 use App\Dto\Antena\AntennaDataDto;
-use App\Dto\RegistrationBox\RegistrationBoxFilterDto;
-use App\Dto\Watcher\UniqueItemMacDto;
 use App\Models\Antena;
 use App\Models\UniqueItem;
-use App\Queries\RegistrationBox\RegistrationBoxQueriesInterface;
-use App\Services\WatcherApi\AbstractWatcherApi;
+use App\Services\WatcherApi\WatcherAntenna\WatcherAntennaApiService;
+use App\Services\WatcherApi\WatcherAntenna\WatcherAntennaApiServiceInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
-class AntennaRepository extends AbstractWatcherApi implements AntennaRepositoryInterface
+class AntennaRepository implements AntennaRepositoryInterface
 {
     public function __construct(
-        public RegistrationBoxQueriesInterface $registrationBoxQueries
+        private WatcherAntennaApiServiceInterface $watcherAntennaApiService
     )
     {
-        $this->setApiKey(config('watcher.api_key_token'));
+        $this->watcherAntennaApiService = new WatcherAntennaApiService();
     }
 
-    public function getAntennaData(Antena $antenna): UniqueItemMacDto
+    /**
+     * @param Antena $antenna
+     * @param int $rssi
+     * @return Collection
+     */
+    public function getAntennaData(Antena $antenna, int $rssi): Collection
     {
-        $apiResult = $this->getWatcherAntennas($antenna->mac_address);
+        $apiResult = $this->watcherAntennaApiService->see($antenna->mac_address);
+        $uniqueItems = $this->getUniqueItems($this->getFilterdMacs($apiResult, $rssi));
         $uniqueItemResponse = new Collection();
-
-        foreach($apiResult['result'] ?? [] as $apiItem) {
-            if (!$this->antennaRssiRegistrationBoxExist($antenna->id, abs($apiItem['rssi']))) continue;
-
-            $uniqueItems = UniqueItem::with('item')->where('mac', $apiItem['mac'])->get();
-            $uniqueItemMac = $uniqueItems->map(fn($uniqueItem) =>
-                (new AntennaDataDto())->setMac($apiItem['mac'])->setUniqueItem($uniqueItem),
+        foreach ($apiResult['result'] ?? [] as $item) {
+            $uniqueItemResponse->push(
+                (new AntennaDataDto())
+                    ->setMac($item['mac'])
+                    ->setUniqueItem($uniqueItems[$item['mac']] ?? null)
             );
-
-            if ($uniqueItemMac->isEmpty()) {
-                $uniqueItemMac->push((new AntennaDataDto())->setMac($apiItem['mac']));
-            }
-            $uniqueItemResponse = $uniqueItemResponse->merge($uniqueItemMac);
         }
-
-        return UniqueItemMacDto::createFromResponse($uniqueItemResponse);
+        return $uniqueItemResponse;
     }
 
-    private function getWatcherAntennas(string $mac): array
+    /**
+     * @param array $apiResult
+     * @param int $rssi
+     * @return array
+     */
+    public function getFilterdMacs(array $apiResult, int $rssi): array
     {
-        if (!Cache::has('antenna_data') || date('i') % 2 == 0) {
-            $antenna_data = ($this->getRequestBuilder()->get('v1/antenna/see/'. $mac))->json();
-            Cache::put('antenna_data', $antenna_data, 120);
-            return $antenna_data;
+        $filteredMacs = [];
+        foreach ($apiResult['result'] as $item) {
+            if(abs($item['rssi']) >= $rssi) $filteredMacs[] = $item['mac'];
         }
-
-        return Cache::get('antenna_data');
+        return $filteredMacs;
     }
 
-    private function antennaRssiRegistrationBoxExist(string $antennaId, int $rssi): bool
+    /**
+     * @param $macs
+     * @return Collection
+     */
+    public function getUniqueItems($macs): Collection
     {
-        return !!$this->registrationBoxQueries->getRegistrationBoxesByAntennas(
-            RegistrationBoxFilterDto::createFromRequest($antennaId, $rssi)
-        )->count();
+        return UniqueItem::with('item')->whereIn('mac', $macs)->get()->keyBy('mac');
     }
 }

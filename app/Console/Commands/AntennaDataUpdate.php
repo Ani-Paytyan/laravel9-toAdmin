@@ -28,6 +28,6 @@ class AntennaDataUpdate extends Command
      */
     public function handle(WatcherAntennaController $watcherAntennaController)
     {
-        $watcherAntennaController->getAntennaData('AAAAAAAAAAAA');
+        $watcherAntennaController->getAntennaData('c68f8945-591a-11ed-aa1d-0242ac160003');
     }
 }

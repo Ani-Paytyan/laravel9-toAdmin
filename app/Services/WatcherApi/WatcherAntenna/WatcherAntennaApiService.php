@@ -2,22 +2,24 @@
 
 namespace App\Services\WatcherApi\WatcherAntenna;
 
-use App\Dto\Watcher\UniqueItemMacDto;
-use App\Models\Antena;
-use App\Repositories\Antenna\AntennaRepositoryInterface;
 use App\Services\WatcherApi\AbstractWatcherApi;
+use Illuminate\Support\Facades\Cache;
 
 class WatcherAntennaApiService extends AbstractWatcherApi implements WatcherAntennaApiServiceInterface
 {
-    public AntennaRepositoryInterface $antennaRepository;
-
-    public function __construct(AntennaRepositoryInterface $antennaRepository)
+    public function __construct()
     {
-        $this->antennaRepository = $antennaRepository;
+        $this->setApiKey(config('watcher.api_key_token'));
     }
 
-    public function see(string $mac): UniqueItemMacDto
+    public function see(string $mac): array
     {
-        return $this->antennaRepository->getAntennaData(Antena::where('mac_address', $mac)->first());
+        if (!Cache::has('antenna_data') || date('i') % 2 == 0) {
+            $antenna_data = ($this->getRequestBuilder()->get('v1/antenna/see/'. $mac))->json();
+            Cache::put('antenna_data', $antenna_data, 120);
+
+            return $antenna_data;
+        }
+        return Cache::get('antenna_data');
     }
 }

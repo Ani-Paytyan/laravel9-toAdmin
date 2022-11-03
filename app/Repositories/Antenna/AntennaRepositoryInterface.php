@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Antenna;
 
-use App\Dto\Watcher\UniqueItemMacDto;
 use App\Models\Antena;
+use Illuminate\Support\Collection;
 
 interface AntennaRepositoryInterface
 {
-    public function getAntennaData(Antena $antenna): UniqueItemMacDto;
+    public function getAntennaData(Antena $antenna, int $rssi): Collection;
 }

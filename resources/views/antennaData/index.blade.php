@@ -27,7 +27,7 @@
                 <td>{{ $data['unique_item'] ? $data['unique_item']['item']['name']: 'Not connected'}}</td>
 
                 @if($data['unique_item'])
-                    <form action="{{ route('watcher.unique_item_disable', [$data['unique_item']['id'], $mac]) }}" method="POST">
+                    <form action="{{ route('watcher.unique_item_disable', $data['unique_item']['id']) }}" method="POST">
                         @csrf
                         <td>
                             <button type="submit" class="btn btn-danger">{{ trans('page.antenna_data.disable') }}</button>
