@@ -13,15 +13,15 @@
 
     <x-alert-component />
 
-    <table class="table table-bordered top-20">
+    <table class="table table-bordered top-20 antennaDataTable">
         <tr>
             <th>{{ trans('attributes.antenna_data.mac_address') }}</th>
             <th>{{ trans('attributes.antenna_data.article_name') }}</th>
             <th>{{ trans('attributes.antenna_data.item_name') }}</th>
             <th></th>
         </tr>
-        @foreach ($antennaData as $data)
-            <tr>
+    @foreach ($antennaData as $data)
+            <tr class="antennaData">
                 <td>{{ $data['mac'] }}</td>
                 <td>{{ $data['unique_item'] ? $data['unique_item']['article']: 'Not connected' }}</td>
                 <td>{{ $data['unique_item'] ? $data['unique_item']['item']['name']: 'Not connected'}}</td>
@@ -67,5 +67,12 @@
     </div>
 @endsection
 @push('bodyEnd')
+    <script>
+        const translations = {
+           'btn_disable' : '{{ trans('page.antenna_data.disable') }}',
+           'btn_to_plug' : '{{ trans('page.antenna_data.to_plug') }}',
+        };
+        const token = '{{ @csrf_token() }}';
+    </script>
     <script src="{{ mix('build/js/antenna-data.js')  }}"></script>
 @endpush

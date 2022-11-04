@@ -33,6 +33,10 @@ class WatcherAntennaController extends Controller
                 $registrationBox->rssi_throttle
             )
         ));
+        if(request()->ajax()) {
+            $mac = $registrationBox->antenna->mac_address;
+            return ['antennaData' => $antennaData, 'mac' => $mac];
+        }
         $items = Item::all()->pluck( 'name', 'id')->toArray();
         $mac = $registrationBox->antenna->mac_address;
 

@@ -5,18 +5,15 @@ namespace App\Repositories\Antenna;
 use App\Dto\Antena\AntennaDataDto;
 use App\Models\Antena;
 use App\Models\UniqueItem;
-use App\Services\WatcherApi\WatcherAntenna\WatcherAntennaApiService;
 use App\Services\WatcherApi\WatcherAntenna\WatcherAntennaApiServiceInterface;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class AntennaRepository implements AntennaRepositoryInterface
 {
     public function __construct(
         private WatcherAntennaApiServiceInterface $watcherAntennaApiService
-    )
-    {
-        $this->watcherAntennaApiService = new WatcherAntennaApiService();
-    }
+    ){}
 
     /**
      * @param Antena $antenna
@@ -25,7 +22,7 @@ class AntennaRepository implements AntennaRepositoryInterface
      */
     public function getAntennaData(Antena $antenna, int $rssi): Collection
     {
-        $apiResult = $this->watcherAntennaApiService->see($antenna->mac_address);
+        $apiResult = $this->getAntennaResponse($antenna);
         $uniqueItems = $this->getUniqueItems($this->getFilterdMacs($apiResult, $rssi));
         $uniqueItemResponse = new Collection();
         foreach ($apiResult['result'] ?? [] as $item) {
@@ -38,12 +35,25 @@ class AntennaRepository implements AntennaRepositoryInterface
         return $uniqueItemResponse;
     }
 
+    private function getAntennaResponse($antenna)
+    {
+        if (date('i') % 2 == 0) {
+            Cache::put(
+                'antenna_data',
+                $this->watcherAntennaApiService->see($antenna->mac_address),
+                120
+            );
+        }
+
+        return Cache::get('antenna_data');
+    }
+
     /**
      * @param array $apiResult
      * @param int $rssi
      * @return array
      */
-    public function getFilterdMacs(array $apiResult, int $rssi): array
+    private function getFilterdMacs(array $apiResult, int $rssi): array
     {
         $filteredMacs = [];
         foreach ($apiResult['result'] as $item) {
@@ -56,7 +66,7 @@ class AntennaRepository implements AntennaRepositoryInterface
      * @param $macs
      * @return Collection
      */
-    public function getUniqueItems($macs): Collection
+    private function getUniqueItems($macs): Collection
     {
         return UniqueItem::with('item')->whereIn('mac', $macs)->get()->keyBy('mac');
     }
