@@ -22,30 +22,39 @@ use \App\Http\Controllers\WatcherAntennaController;
 
 $basePath = base_path('routes/web');
 
-Route::get('/', [DashboardController::class, 'index'])
-    ->name('dashboard')
-    ->middleware('auth');
-
 Route::prefix('auth')->name('auth.')->group($basePath . '/auth.php');
-Route::resource('antena', AntenaController::class)
-    ->name('index', 'antena.index')
-    ->name('create','antena.create')
-    ->name('show','antena.show')
-    ->name('edit','antena.edit');
-Route::resource('workplace', WorkplaceController::class)->only('index', 'show', 'destroy')
-    ->name('index', 'workplace.index')
-    ->name('show', 'workplace.show');
-Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy');
-Route::resource('item', ItemController::class)->only('index', 'edit', 'update')
-    ->name('index', 'item.index')
-    ->name('edit', 'item.edit');
-Route::resource('registrationBox', RegistrationBoxController::class)
-    ->name('index', 'registrationBox.index')
-    ->name('create','registrationBox.create')
-    ->name('edit','registrationBox.edit');
-Route::name('registrationBox.')->group(function() {
-    Route::get('/deleted_list', [RegistrationBoxController::class, 'listDeleted'])->name('listDeleted');
-    Route::post('/deleted_list/restore/{registrationBox}', [RegistrationBoxController::class, 'restore'])->name('restore');
+
+Route::middleware('auth')->group(function ()
+{
+    Route::get('/', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    Route::resource('antena', AntenaController::class)
+        ->name('index', 'antena.index')
+        ->name('create','antena.create')
+        ->name('show','antena.show')
+        ->name('edit','antena.edit');
+
+    Route::resource('workplace', WorkplaceController::class)->only('index', 'show', 'destroy')
+        ->name('index', 'workplace.index')
+        ->name('show', 'workplace.show');
+    Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy');
+
+    Route::resource('item', ItemController::class)->only('index', 'edit', 'update')
+        ->name('index', 'item.index')
+        ->name('edit', 'item.edit');
+
+    Route::resource('registrationBox', RegistrationBoxController::class)
+        ->name('index', 'registrationBox.index')
+        ->name('create','registrationBox.create')
+        ->name('show','registrationBox.show')
+        ->name('edit','registrationBox.edit');
+
+    Route::name('registrationBox.')->group(function() {
+        Route::get('/deleted_list', [RegistrationBoxController::class, 'listDeleted'])->name('listDeleted');
+        Route::post('/deleted_list/restore/{registrationBox}', [RegistrationBoxController::class, 'restore'])->name('restore');
+        Route::post('/rssi_store/{registrationBox}', [RegistrationBoxController::class, 'rssiStore'])->name('rssi_store');
+    });
 });
 Route::name('watcher.')->group(function() {
     Route::get('/watcher/antenna/{registrationBox}', [WatcherAntennaController::class, 'getAntennaData'])->name('antennaData');
