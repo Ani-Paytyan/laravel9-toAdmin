@@ -62,24 +62,21 @@ class RegistrationBoxController extends Controller
         ]);
     }
 
-    public function show(string $registrationBoxId)
+    public function show(RegistrationBox $registrationBox)
     {
-        $registrationBox = RegistrationBox::find($registrationBoxId);
-        if($registrationBox) {
-            $antennaData = collect(AntennaDataResource::collection(
-                $this->antennaRepository->getAntennaData(
-                    $registrationBox->antenna,
-                    $registrationBox->rssi_throttle
-                )
-            ));
-            if(request()->ajax()) {
-                $mac = $registrationBox->antenna->mac_address;
-                return ['antennaData' => $antennaData, 'mac' => $mac];
-            }
-            $items = Item::all()->pluck( 'name', 'id')->toArray();
+        $antennaData = collect(AntennaDataResource::collection(
+            $this->antennaRepository->getAntennaData(
+                $registrationBox->antenna,
+                $registrationBox->rssi_throttle
+            )
+        ));
+        if(request()->ajax()) {
             $mac = $registrationBox->antenna->mac_address;
-            $data = compact('registrationBox','antennaData', 'items', 'mac');
+            return ['antennaData' => $antennaData, 'mac' => $mac];
         }
+        $items = Item::all()->pluck( 'name', 'id')->toArray();
+        $mac = $registrationBox->antenna->mac_address;
+        $data = compact('registrationBox','antennaData', 'items', 'mac');
         return view('registrationBox.show', $data ?? []);
     }
 

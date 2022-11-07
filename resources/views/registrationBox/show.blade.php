@@ -8,32 +8,33 @@
             <div class="pull-left">
                 <h2>{{ trans('page.antena.show_title') }}</h2>
             </div>
-                <div class="pull-right float-end">
-                    <a class="btn btn-primary" href="{{ route('registrationBox.index') }}">{{ trans('page.dashboard.back_button') }}</a>
-                </div>
+            <div class="pull-right float-end">
+                <a class="btn btn-primary"
+                   href="{{ route('registrationBox.index') }}">{{ trans('page.dashboard.back_button') }}</a>
+            </div>
         </div>
     </div>
-    @if(!empty($registrationBox))
-        <div class="row">
-            <form id="rsiiSLider" method="POST">
-                @csrf
-                <input type="hidden" value="{{ $registrationBox->id }}" id="registrationBoxId">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <label for="customRange2" class="form-label">{{ trans('page.registration_box.rssi') }}</label>
-                    <input type="range" class="form-range" value="{{$registrationBox->rssi_throttle }}" step="1" min="0" max="100" id="customRange2" oninput="this.nextElementSibling.value = this.value">
-                    <output>{{$registrationBox->rssi_throttle }}</output>
-                </div>
-            </form>
-        </div>
+    <div class="row">
+        <form id="rsiiSLider" method="POST">
+            @csrf
+            <input type="hidden" value="{{ $registrationBox->id }}" id="registrationBoxId">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <label for="customRange2" class="form-label">{{ trans('page.registration_box.rssi') }}</label>
+                <input type="range" class="form-range" value="{{$registrationBox->rssi_throttle }}" step="1" min="0"
+                       max="100" id="customRange2" oninput="this.nextElementSibling.value = this.value">
+                <output>{{$registrationBox->rssi_throttle }}</output>
+            </div>
+        </form>
+    </div>
 
-        <div class="row">
+    <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left button">
                 <h2>{{ trans('page.antenna_data.title') }}</h2>
             </div>
         </div>
     </div>
-        <x-alert-component />
+    <x-alert-component/>
     <table class="table table-bordered top-20 antennaDataTable">
         <tr>
             <th>{{ trans('attributes.antenna_data.mac_address') }}</th>
@@ -41,60 +42,65 @@
             <th>{{ trans('attributes.antenna_data.item_name') }}</th>
             <th></th>
         </tr>
-            @foreach ($antennaData as $data)
-                <tr class="antennaData">
-                    <td>{{ $data['mac'] }}</td>
-                    <td>{{ $data['unique_item'] ? $data['unique_item']['article']: 'Not connected' }}</td>
-                    <td>{{ $data['unique_item'] ? $data['unique_item']['item']['name']: 'Not connected'}}</td>
+        @foreach ($antennaData as $data)
+            <tr class="antennaData">
+                <td>{{ $data['mac'] }}</td>
+                <td>{{ $data['unique_item'] ? $data['unique_item']['article']: 'Not connected' }}</td>
+                <td>{{ $data['unique_item'] ? $data['unique_item']['item']['name']: 'Not connected'}}</td>
 
-                    @if($data['unique_item'])
-                        <form action="{{ route('watcher.unique_item_disable', $data['unique_item']['id']) }}" method="POST">
-                            @csrf
-                            <td>
-                                <button type="submit" class="btn btn-danger">{{ trans('page.antenna_data.disable') }}</button>
-                            </td>
-                        </form>
-                    @else
+                @if($data['unique_item'])
+                    <form action="{{ route('watcher.unique_item_disable', $data['unique_item']['id']) }}" method="POST">
+                        @csrf
                         <td>
-                            <div class="pull-left">
-                                <button type="button" class="btn btn-primary macUniqueItem" data-mac={{ $data['mac'] }} data-bs-toggle="modal" data-bs-target="#antennaDataModal">
-                                    {{ trans('page.antenna_data.to_plug') }}
-                                </button>
-                            </div>
+                            <button type="submit"
+                                    class="btn btn-danger">{{ trans('page.antenna_data.disable') }}</button>
                         </td>
-                    @endif
-                </tr>
-            @endforeach
+                    </form>
+                @else
+                    <td>
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-primary macUniqueItem"
+                                    data-mac={{ $data['mac'] }} data-bs-toggle="modal"
+                                    data-bs-target="#antennaDataModal">
+                                {{ trans('page.antenna_data.to_plug') }}
+                            </button>
+                        </div>
+                    </td>
+                @endif
+            </tr>
+        @endforeach
     </table>
 
     <!-- Modal -->
-        <div class="modal fade" id="antennaDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ trans('page.antenna_data.add_unique_item') }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="_token" value="{{ @csrf_token() }}">
-                        <x-form.select name="item_id" :options="$items" class="items"  label="{{ trans('attributes.antenna_data.item_name') }}" ></x-form.select>
-                        <x-form.select name="unique_id" :options="$uniqueItems ?? []" id="uniqueItems" label="{{ trans('attributes.antenna_data.unique_item') }}" ></x-form.select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="addAntennaData" form="addAntennaData">{{ trans('page.dashboard.submit_button') }}</button>
-                    </div>
+    <div class="modal fade" id="antennaDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ trans('page.antenna_data.add_unique_item') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="_token" value="{{ @csrf_token() }}">
+                    <x-form.select name="item_id" :options="$items" class="items"
+                                   label="{{ trans('attributes.antenna_data.item_name') }}"></x-form.select>
+                    <x-form.select name="unique_id" :options="$uniqueItems ?? []" id="uniqueItems"
+                                   label="{{ trans('attributes.antenna_data.unique_item') }}"></x-form.select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="addAntennaData"
+                            form="addAntennaData">{{ trans('page.dashboard.submit_button') }}</button>
                 </div>
             </div>
         </div>
-    @endif
+    </div>
 @endsection
 
 @push('bodyEnd')
     <script src="{{ mix('build/js/registration-box.js')  }}"></script>
     <script>
         const translations = {
-            'btn_disable' : '{{ trans('page.antenna_data.disable') }}',
-            'btn_to_plug' : '{{ trans('page.antenna_data.to_plug') }}',
+            'btn_disable': '{{ trans('page.antenna_data.disable') }}',
+            'btn_to_plug': '{{ trans('page.antenna_data.to_plug') }}',
         };
         const token = '{{ @csrf_token() }}';
     </script>
