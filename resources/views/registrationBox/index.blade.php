@@ -21,6 +21,7 @@
             <th>{{ trans('attributes.registration_box.id') }}</th>
             <th>{{ trans('attributes.registration_box.name') }}</th>
             <th>{{ trans('attributes.registration_box.rssi_throttle') }}</th>
+            <th></th>
         </tr>
         @foreach ($boxes as $box)
             <tr>
@@ -35,6 +36,9 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">{{ trans('page.dashboard.delete_button') }}</button>
                     </form>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ route('watcher.antennaData',$box->id) }}">{{ trans('page.registration_box.antenna_data_button') }}</a>
                 </td>
             </tr>
         @endforeach

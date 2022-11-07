@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Queries;
+namespace App\Queries\AntenaQueries;
 
 use App\Models\Workplace;
 use Illuminate\Database\Eloquent\Builder;

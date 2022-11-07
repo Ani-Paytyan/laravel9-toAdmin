@@ -19,7 +19,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('items')
                 ->onUpdate('cascade');
-            $table->string('workplace_id');
+            $table->string('workplace_id')->nullable();
             $table->string('article')->nullable();
             $table->string('mac')->nullable();
             $table->timestamps();

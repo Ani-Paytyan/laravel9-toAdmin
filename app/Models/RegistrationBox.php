@@ -22,8 +22,8 @@ class RegistrationBox extends Model
         'antena_id',
     ];
 
-    public function antenas()
+    public function antenna()
     {
-        return $this->belongsTo(Antena::class);
+        return $this->belongsTo(Antena::class, 'antena_id', 'id', 'antenas');
     }
 }

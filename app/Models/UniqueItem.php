@@ -23,7 +23,7 @@ class UniqueItem extends Model
         'mac',
     ];
 
-    public function items()
+    public function item()
     {
         return $this->belongsTo(Item::class);
     }

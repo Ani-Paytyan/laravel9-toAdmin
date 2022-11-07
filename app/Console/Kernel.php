@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AntennaDataUpdate;
 use App\Console\Commands\CompaniesFetch;
 use App\Console\Commands\UniqueItemsFetch;
 use App\Console\Commands\ItemsFetch;

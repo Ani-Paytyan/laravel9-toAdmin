@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Queries\RegistrationBox\RegistrationBoxQueries;
+use App\Queries\RegistrationBox\RegistrationBoxQueriesInterface;
 use App\Services\RegistrationBox\RegistrationBoxService;
 use App\Services\RegistrationBox\RegistrationBoxServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
-class RegistrationBoxServiceProvider extends ServiceProvider
+class RegistrationBoxProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -16,6 +18,7 @@ class RegistrationBoxServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(RegistrationBoxServiceInterface::class, RegistrationBoxService::class);
+        $this->app->singleton(RegistrationBoxQueriesInterface::class, RegistrationBoxQueries::class);
     }
 
     /**

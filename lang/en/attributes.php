@@ -36,5 +36,12 @@ return [
         'id' => 'Id',
         'article' => 'Article',
         'mac' => 'MAC',
+    ],
+
+    'antenna_data' => [
+        'mac_address' => 'Mac Address',
+        'article_name' => 'Article',
+        'item_name' => 'Item',
+        'unique_item' => 'Unique Item',
     ]
 ];

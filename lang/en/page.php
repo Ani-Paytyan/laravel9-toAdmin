@@ -36,7 +36,8 @@ return [
         'edit_title' => 'Edit Registration Boxes',
         'add_registration_box' => 'Add Registration Box',
         'title_deleted' => 'Deleted List',
-        'rssi' => 'RSSI'
+        'rssi' => 'RSSI',
+        'antenna_data_button' => 'Antenna Data',
     ],
 
     'item' => [
@@ -45,5 +46,12 @@ return [
 
     'unique_items' => [
         'title' => 'Unique Items',
+    ],
+
+    'antenna_data' => [
+        'title' => 'Antenna Data',
+        'to_plug' => 'To Plug',
+        'disable' => 'Disable',
+        'add_unique_item' => 'Connect Mac Address',
     ]
 ];

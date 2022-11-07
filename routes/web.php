@@ -7,6 +7,7 @@ use App\Http\Controllers\WorkplaceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WorkplaceAntentaController;
 use App\Http\Controllers\RegistrationBoxController;
+use \App\Http\Controllers\WatcherAntennaController;
 use Illuminate\Http\Request;
 
 /*
@@ -55,4 +56,12 @@ Route::middleware('auth')->group(function ()
         Route::post('/deleted_list/restore/{registrationBox}', [RegistrationBoxController::class, 'restore'])->name('restore');
         Route::post('/rssi_store/{registrationBox}', [RegistrationBoxController::class, 'rssiStore'])->name('rssi_store');
     });
+
+    Route::name('watcher.')->group(function() {
+        Route::get('/watcher/antenna/{registrationBox}', [WatcherAntennaController::class, 'getAntennaData'])->name('antennaData');
+        Route::get('/watcher/item_unique', [WatcherAntennaController::class, 'getUniqueItemByItemId'])->name('getUniqueItemByItem');
+        Route::post('/watcher/item_unique/{name}', [WatcherAntennaController::class, 'uniqueItemToPlug'])->name('unique_item_to_plug');
+        Route::post('/watcher/item_unique/disable/{uniqueItem}', [WatcherAntennaController::class, 'uniqueItemDisable'])->name('unique_item_disable');
+    });
 });
+
