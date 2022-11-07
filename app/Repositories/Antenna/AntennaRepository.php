@@ -37,15 +37,8 @@ class AntennaRepository implements AntennaRepositoryInterface
 
     private function getAntennaResponse($antenna)
     {
-        if (date('i') % 2 == 0) {
-            Cache::put(
-                'antenna_data',
-                $this->watcherAntennaApiService->see($antenna->mac_address),
-                120
-            );
-        }
+        return $this->watcherAntennaApiService->see($antenna->mac_address);
 
-        return Cache::get('antenna_data');
     }
 
     /**
@@ -56,7 +49,7 @@ class AntennaRepository implements AntennaRepositoryInterface
     private function getFilterdMacs(array $apiResult, int $rssi): array
     {
         $filteredMacs = [];
-        foreach ($apiResult['result'] as $item) {
+        foreach ($apiResult['result'] ?? [] as $item) {
             if(abs($item['rssi']) >= $rssi) $filteredMacs[] = $item['mac'];
         }
         return $filteredMacs;

@@ -43,9 +43,7 @@ $(document).ready(function() {
     });
 
     window.setInterval(async function () {
-        if (new Date().getMinutes() % 2 === 0) {
-            await updateTable();
-        }
+        await updateTable();
     }, 3000);
 
     function updateTable() {
