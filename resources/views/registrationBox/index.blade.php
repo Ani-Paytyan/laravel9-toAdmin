@@ -37,9 +37,6 @@
                         <button type="submit" class="btn btn-danger">{{ trans('page.dashboard.delete_button') }}</button>
                     </form>
                 </td>
-                <td>
-                    <a class="btn btn-primary" href="{{ route('watcher.antennaData',$box->id) }}">{{ trans('page.registration_box.antenna_data_button') }}</a>
-                </td>
             </tr>
         @endforeach
         <a class="btn btn-primary" href="{{ route('registrationBox.listDeleted') }}">{{ trans('page.dashboard.list_delete') }}</a>

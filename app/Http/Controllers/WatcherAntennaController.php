@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Dto\Response\MessageDto;
 use App\Dto\UniqueItem\UniqueItemRequestDto;
 use App\Http\Requests\UniqueItemStoreRequest;
-use App\Http\Resources\AntennaDataResource;
-use App\Models\Item;
-use App\Models\RegistrationBox;
 use App\Models\UniqueItem;
 use App\Repositories\Antenna\AntennaRepository;
 use App\Repositories\Antenna\AntennaRepositoryInterface;
@@ -24,25 +21,6 @@ class WatcherAntennaController extends Controller
     ){
         $this->antennaRepository = new AntennaRepository($watcherAntennaApiService);
     }
-
-    public function getAntennaData(RegistrationBox $registrationBox)
-    {
-        $antennaData = collect(AntennaDataResource::collection(
-            $this->antennaRepository->getAntennaData(
-                $registrationBox->antenna,
-                $registrationBox->rssi_throttle
-            )
-        ));
-        if(request()->ajax()) {
-            $mac = $registrationBox->antenna->mac_address;
-            return ['antennaData' => $antennaData, 'mac' => $mac];
-        }
-        $items = Item::all()->pluck( 'name', 'id')->toArray();
-        $mac = $registrationBox->antenna->mac_address;
-
-        return view('antennaData.index', compact('antennaData', 'items', 'mac'));
-    }
-
     public function getUniqueItemByItemId(Request $request): array
     {
         return ['uniqueItems' => $this->uniqueItemService->getUniqueItemByItemId($request->get('itemId'))];

@@ -7,8 +7,11 @@ use App\Dto\RegistrationBox\RegistrationBoxUpdateRequestDto;
 use App\Dto\Response\MessageDto;
 use App\Http\Requests\RegistrationBoxCreateRequest;
 use App\Http\Requests\RegistrationBoxUpdateRequest;
+use App\Http\Resources\AntennaDataResource;
 use App\Models\Antena;
+use App\Models\Item;
 use App\Models\RegistrationBox;
+use App\Repositories\Antenna\AntennaRepositoryInterface;
 use App\Services\RegistrationBox\RegistrationBoxServiceInterface;
 use Illuminate\Http\Request;
 
@@ -19,11 +22,16 @@ class RegistrationBoxController extends Controller
     private array $rssiRange;
 
     public RegistrationBoxServiceInterface $registrationBoxService;
+    public AntennaRepositoryInterface $antennaRepository;
 
-    public function __construct(RegistrationBoxServiceInterface $registrationBoxService)
+    public function __construct(
+        RegistrationBoxServiceInterface $registrationBoxService,
+        AntennaRepositoryInterface $antennaRepository
+    )
     {
         $this->rssiRange = range(0, 100);
         $this->registrationBoxService = $registrationBoxService;
+        $this->antennaRepository = $antennaRepository;
     }
 
     public function index()
@@ -54,9 +62,25 @@ class RegistrationBoxController extends Controller
         ]);
     }
 
-    public function show(RegistrationBox $registrationBox)
+    public function show(string $registrationBoxId)
     {
-        return view('registrationBox.show', compact('registrationBox'));
+        $registrationBox = RegistrationBox::find($registrationBoxId);
+        if($registrationBox) {
+            $antennaData = collect(AntennaDataResource::collection(
+                $this->antennaRepository->getAntennaData(
+                    $registrationBox->antenna,
+                    $registrationBox->rssi_throttle
+                )
+            ));
+            if(request()->ajax()) {
+                $mac = $registrationBox->antenna->mac_address;
+                return ['antennaData' => $antennaData, 'mac' => $mac];
+            }
+            $items = Item::all()->pluck( 'name', 'id')->toArray();
+            $mac = $registrationBox->antenna->mac_address;
+            $data = compact('registrationBox','antennaData', 'items', 'mac');
+        }
+        return view('registrationBox.show', $data ?? []);
     }
 
     public function edit(RegistrationBox $registrationBox)
