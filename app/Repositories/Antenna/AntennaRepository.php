@@ -7,7 +7,6 @@ use App\Models\Antena;
 use App\Models\UniqueItem;
 use App\Services\WatcherApi\WatcherAntenna\WatcherAntennaApiServiceInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
 class AntennaRepository implements AntennaRepositoryInterface
 {

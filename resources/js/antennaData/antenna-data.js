@@ -50,7 +50,7 @@ $(document).ready(function() {
         var url = window.location.pathname;
         var registrationBoxId = url.substring(url.lastIndexOf('/') + 1);
         $.ajax({
-            url: "/watcher/antenna/" + registrationBoxId,
+            url: "/registrationBox/" + registrationBoxId,
             data: {},
             type: "GET",
             dataType: 'json',
