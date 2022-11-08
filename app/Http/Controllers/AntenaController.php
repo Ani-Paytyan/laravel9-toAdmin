@@ -19,7 +19,7 @@ class AntenaController extends Controller
 
     public function index()
     {
-        $antenas = Antena::paginate(AntenaRequestDto::PAGE);
+        $antenas = Antena::with('manufactureType')->paginate(AntenaRequestDto::PAGE);
         return view('antena.index', compact('antenas'));
     }
 

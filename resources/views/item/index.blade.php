@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left button">
-                <h2>{{ trans('page.workplace.title') }}</h2>
+                <h2>{{ trans('page.item.title') }}</h2>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ $item->id }}</td>
                 <td>
-                    <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="{{ route('item.edit',$item->id) }}">{{ $item->name}}}</a>
+                    <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="{{ route('item.edit',$item->id) }}">{{ $item->name }}</a>
                 </td>
                 <td>{{ $item->unique_item_count }}<td>
             </tr>

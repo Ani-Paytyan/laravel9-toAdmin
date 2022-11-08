@@ -24,7 +24,7 @@
         @foreach ($antenas as $antena)
             <tr>
                 <td>{{ $antena->mac_address }}</td>
-                <td>{{ $antena->type_id}}</td>
+                <td>{{ $antena->manufactureType->name }}</td>
                 <td>
                     <a class="btn btn-info" href="{{ route('antena.show',$antena->id) }}">{{ trans('page.dashboard.show_button') }}</a>
                     <a class="btn btn-primary" href="{{ route('antena.edit',$antena->id) }}">{{ trans('page.dashboard.edit_button') }}</a>

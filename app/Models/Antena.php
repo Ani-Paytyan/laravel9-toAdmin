@@ -23,7 +23,7 @@ class Antena extends Model
 
     public function manufactureType()
     {
-        return $this->belongsTo(ManufactureType::class);
+        return $this->belongsTo(ManufactureType::class, 'type_id');
     }
 
     public function workplaces()
