@@ -21,7 +21,7 @@ class AntennaRepository implements AntennaRepositoryInterface
      */
     public function getAntennaData(Antena $antenna, int $rssi): Collection
     {
-        $apiResult = $this->getAntennaResponse($antenna);
+        $apiResult = $this->getAntennaResponse($antenna->mac_address);
         $uniqueItems = $this->getUniqueItems($this->getFilterdMacs($apiResult, $rssi));
         $uniqueItemResponse = new Collection();
         foreach ($apiResult['result'] ?? [] as $item) {
@@ -34,10 +34,9 @@ class AntennaRepository implements AntennaRepositoryInterface
         return $uniqueItemResponse;
     }
 
-    private function getAntennaResponse($antenna)
+    private function getAntennaResponse(string $mac)
     {
-        return $this->watcherAntennaApiService->see($antenna->mac_address);
-
+        return $this->watcherAntennaApiService->see($mac);
     }
 
     /**
