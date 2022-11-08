@@ -13,12 +13,11 @@ class UniqueItemService implements UniqueItemServiceInterface
         foreach ($result as $data) {
             /** @var IwmsApiUniqueItemResponseDto $data */
             $processedIds[] = $data->getId();
-            $uniqueItem = UniqueItem::withTrashed()
+            UniqueItem::withTrashed()
                 ->updateOrCreate(
                     ['id' => $data->getId()],
                     $data->toArray(),
                 );
-            $uniqueItem->restore();
         }
         UniqueItem::whereNotIn('id', $processedIds)->delete();
     }

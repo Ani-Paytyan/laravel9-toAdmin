@@ -13,12 +13,10 @@ class ItemService implements ItemServiceInterface
         foreach ($result as $data) {
             /** @var IwmsApiItemResponseDto $data */
             $processedIds[] = $data->getId();
-            $item = Item::withTrashed()
-                ->updateOrCreate(
+            Item::withTrashed()->updateOrCreate(
                     ['id' => $data->getId()],
                     $data->toArray(),
                 );
-            $item->restore();
         }
         Item::whereNotIn('id', $processedIds)->delete();
     }

@@ -13,12 +13,10 @@ class CompanyService implements CompanyServiceInterface
         foreach ($result as $data) {
             /** @var IwmsApiCompanyResponseDto $data */
             $processedIds[] = $data->getId();
-            $company = Company::withTrashed()
-                ->updateOrCreate(
-                    ['id' => $data->getId()],
-                    $data->toArray()
-                );
-            $company->restore();
+            Company::withTrashed()->updateOrCreate(
+                ['id' => $data->getId()],
+                $data->toArray()
+            );
         }
 
         Company::whereNotIn('id', $processedIds)->delete();

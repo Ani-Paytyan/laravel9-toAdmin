@@ -2,12 +2,15 @@
 
 namespace App\Dto\IwmsApi\Unique_Item;
 
+use Carbon\Carbon;
+
 class IwmsApiUniqueItemResponseDto
 {
     private string $id;
     private string $itemId;
     private string $workplaceId;
     private string $article;
+    private bool $isDeleted;
 
     public function __construct(array $item)
     {
@@ -15,6 +18,7 @@ class IwmsApiUniqueItemResponseDto
         $this->itemId = $item['item_id'];
         $this->workplaceId = $item['workplace_id'];
         $this->article = $item['article'];
+        $this->isDeleted = $this->itemIsDeleted($item['status']);
     }
 
     public function getId(): string
@@ -66,7 +70,24 @@ class IwmsApiUniqueItemResponseDto
             'id' => $this->getId(),
             'item_id' => $this->getItemId(),
             'workplace_id' => $this->getWorkplaceId(),
-            'article' => $this->getArticle()
+            'article' => $this->getArticle(),
+            'deleted_at' => $this->isDeleted ? Carbon::now() : null
         ];
+    }
+
+    public function setIsDeleted(bool $value): self
+    {
+        $this->isDeleted = $value;
+        return $this;
+    }
+
+    public function getIsDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function itemIsDeleted(string $status): bool
+    {
+        return $status === 'Deleted';
     }
 }

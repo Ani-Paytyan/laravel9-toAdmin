@@ -14,12 +14,11 @@ class WorkplaceService implements WorkplaceServiceInterface
         foreach ($result as $data) {
             /** @var IwmsApiWorkplaceResponseDto $data */
             $processedIds[] = $data->getId();
-            $workplace = Workplace::withTrashed()
+            Workplace::withTrashed()
                 ->updateOrCreate(
                     ['id' => $data->getId()],
                     $data->toArray(),
                 );
-            $workplace->restore();
         }
         Workplace::whereNotIn('id', $processedIds)->delete();
     }
