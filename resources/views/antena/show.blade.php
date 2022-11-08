@@ -24,7 +24,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ trans('attributes.antena.manufacture_type') }}</strong>
-                {{ $antena->type_id }}
+                {{ $antena->manufactureType->name }}
             </div>
         </div>
     </div>
