@@ -2,12 +2,15 @@
 
 namespace App\Dto\IwmsApi\Workplace;
 
+use Carbon\Carbon;
+
 class IwmsApiWorkplaceResponseDto
 {
     private string $id;
     private string $companyId;
     private ?string $name;
     private ?string $address;
+    private bool $isDeleted;
 
     public function __construct(array $item)
     {
@@ -15,6 +18,8 @@ class IwmsApiWorkplaceResponseDto
         $this->name = $item['name'];
         $this->address = $item['address'];
         $this->companyId = $item['company']['id'] ?? '';
+        $this->isDeleted = $this->itemIsDeleted($item['status']);
+
     }
 
     public function getId(): string
@@ -67,7 +72,24 @@ class IwmsApiWorkplaceResponseDto
             'id' => $this->getId(),
             'company_id' => $this->getCompanyId(),
             'address' => $this->getAddress(),
-            'name' => $this->getName()
+            'name' => $this->getName(),
+            'deleted_at' => $this->isDeleted ? Carbon::now() : null
         ];
+    }
+
+    public function setIsDeleted(bool $value): self
+    {
+        $this->isDeleted = $value;
+        return $this;
+    }
+
+    public function getIsDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function itemIsDeleted(string $status): bool
+    {
+        return $status === 'Deleted';
     }
 }

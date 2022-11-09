@@ -2,12 +2,15 @@
 
 namespace App\Dto\IwmsApi\Item;
 
+use Carbon\Carbon;
+
 class IwmsApiItemResponseDto
 {
     private string $id;
     private ?string $name;
     private ?string $description;
     private ?string $serialNumber;
+    private bool $isDeleted;
 
     public function __construct(array $item)
     {
@@ -15,6 +18,7 @@ class IwmsApiItemResponseDto
         $this->name = $item['name'];
         $this->description = $item['description'];
         $this->serialNumber = $item['serial_number'];
+        $this->isDeleted = $this->itemIsDeleted($item['status']);
     }
 
     public function getId(): string
@@ -67,7 +71,24 @@ class IwmsApiItemResponseDto
             'id' => $this->getId(),
             'serial_number' => $this->getSerialNumber(),
             'name' => $this->getName(),
-            'description' => $this->getDescription()
+            'description' => $this->getDescription(),
+            'deleted_at' => $this->isDeleted ? Carbon::now() : null
         ];
+    }
+
+    public function setIsDeleted(bool $value): self
+    {
+        $this->isDeleted = $value;
+        return $this;
+    }
+
+    public function getIsDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function itemIsDeleted(string $status): bool
+    {
+        return $status === 'Deleted';
     }
 }
