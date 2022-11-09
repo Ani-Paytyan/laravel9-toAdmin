@@ -19,7 +19,7 @@
     <table class="table table-bordered">
         <tr>
             <th>{{ trans('attributes.antena.mac_address') }}</th>
-            <th>{{ trans('attributes.antena.choose_type') }}</th>
+            <th>{{ trans('attributes.antena.type') }}</th>
         </tr>
         @foreach ($antenas as $antena)
             <tr>
