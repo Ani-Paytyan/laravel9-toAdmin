@@ -8,11 +8,6 @@ use App\Services\IwmsApi\AbstractIwmsApi;
 
 class IwmsApiAuthService extends AbstractIwmsApi implements IwmsApiAuthServiceInterface
 {
-    public function __construct()
-    {
-        $this->setUserToken(config('iwms.api_user_token'));
-    }
-
     public function login(IwmsApiLoginDto $dto): IwmsApiUserDto
     {
         $response = $this->getRequestBuilder()->post('login', [
@@ -27,8 +22,9 @@ class IwmsApiAuthService extends AbstractIwmsApi implements IwmsApiAuthServiceIn
         return IwmsApiUserDto::createFromApiResponse($response->json());
     }
 
-    public function logout(): void
+    public function logout(string $authUserToken): void
     {
+        $this->setUserToken($authUserToken);
         $this->getRequestBuilder()->post('logout');
     }
 }
