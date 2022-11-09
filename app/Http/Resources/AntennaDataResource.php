@@ -23,8 +23,8 @@ class AntennaDataResource extends JsonResource
                 'id' => $uniqueItem->id,
                 'article' => $uniqueItem->article,
                 'item' =>  [
-                    'id' => $uniqueItem->item->id,
-                    'name' => $uniqueItem->item->name,
+                    'id' => $uniqueItem?->item?->id,
+                    'name' => $uniqueItem?->item?->name,
                 ]
             ] : null
         ];

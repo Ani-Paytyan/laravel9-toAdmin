@@ -70,7 +70,7 @@ $(document).ready(function() {
         return `<tr class='antennaData'>
             <td>${mac}</td>
             <td>${uniqueItem['article']}</td>
-            <td>${uniqueItem['item']['name']}</td>
+            <td>${uniqueItem['item'] ? uniqueItem['item']['name'] : ''}</td>
             <td>
                 <form action="/watcher/item_unique/disable/${uniqueItem['id']}" method="POST">
                     <input type="hidden" name="_token" value="${token}">
