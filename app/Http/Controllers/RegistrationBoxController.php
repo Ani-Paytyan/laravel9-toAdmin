@@ -64,18 +64,19 @@ class RegistrationBoxController extends Controller
 
     public function show(RegistrationBox $registrationBox)
     {
-        $antennaData = collect(AntennaDataResource::collection(
-            $this->antennaRepository->getAntennaData(
-                $registrationBox->antenna,
-                $registrationBox->rssi_throttle
-            )
-        ));
+        $antennaData = $registrationBox->antenna ?
+            collect(AntennaDataResource::collection(
+                $this->antennaRepository->getAntennaData(
+                    $registrationBox->antenna,
+                    $registrationBox->rssi_throttle
+                )
+            )) : [];
         if(request()->ajax()) {
-            $mac = $registrationBox->antenna->mac_address;
+            $mac = $registrationBox?->antenna?->mac_address;
             return ['antennaData' => $antennaData, 'mac' => $mac];
         }
         $items = Item::all()->pluck( 'name', 'id')->toArray();
-        $mac = $registrationBox->antenna->mac_address;
+        $mac = $registrationBox?->antenna?->mac_address;
         $data = compact('registrationBox','antennaData', 'items', 'mac');
         return view('registrationBox.show', $data ?? []);
     }
