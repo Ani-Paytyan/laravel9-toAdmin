@@ -25,6 +25,7 @@ class UniqueItemService implements UniqueItemServiceInterface
 
     public function updateUniqueItems(array $uniqueItems): void
     {
+        UniqueItem::whereIn('mac', array_values($uniqueItems))->update(['mac' => null]);
         foreach($uniqueItems as $id => $mac) {
             UniqueItem::find($id)->update(['mac' => $mac]);
         }
