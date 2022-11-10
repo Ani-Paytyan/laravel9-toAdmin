@@ -28,6 +28,7 @@ class AntennaRepository implements AntennaRepositoryInterface
             $uniqueItemResponse->push(
                 (new AntennaDataDto())
                     ->setMac($item['mac'])
+                    ->setRssi($item['rssi'])
                     ->setUniqueItem($uniqueItems[$item['mac']] ?? null)
             );
         }

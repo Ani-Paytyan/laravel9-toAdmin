@@ -13,19 +13,20 @@ class AntennaDataResource extends JsonResource
      * @param  Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         $uniqueItem = $this->getUniqueItem();
 
         return [
             'mac' => $this->getMac(),
+            'rssi' => $this->getRssi(),
             'unique_item' => $uniqueItem ? [
                 'id' => $uniqueItem->id,
                 'article' => $uniqueItem->article,
-                'item' =>  [
-                    'id' => $uniqueItem?->item?->id,
-                    'name' => $uniqueItem?->item?->name,
-                ]
+                'item' => $uniqueItem->item ? [
+                    'id' => $uniqueItem->item->id,
+                    'name' => $uniqueItem->item->name,
+                ] : null
             ] : null
         ];
     }

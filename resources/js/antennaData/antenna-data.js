@@ -6,9 +6,7 @@ $(document).ready(function() {
         let itemId = $('.items').val();
         $.ajax({
             url: "/watcher/item_unique",
-            data: {
-                itemId: itemId,
-            },
+            data: {itemId},
             type: "GET",
             dataType: 'json',
             success: function (data) {
@@ -47,8 +45,7 @@ $(document).ready(function() {
     }, 3000);
 
     function updateTable() {
-        var url = window.location.pathname;
-        var registrationBoxId = url.substring(url.lastIndexOf('/') + 1);
+        let registrationBoxId = window.location.pathname.substring(url.lastIndexOf('/') + 1);
         $.ajax({
             url: "/registrationBox/" + registrationBoxId,
             data: {},
@@ -58,7 +55,7 @@ $(document).ready(function() {
                 $('.antennaDataTable tr.antennaData').remove();
                 $.each(data.antennaData, function(i) {
                     let tr = data.antennaData[i]['unique_item']
-                        ? getUniqueItemRowDisabled(data.antennaData[i]['mac'], data.antennaData[i]['unique_item'])
+                        ? getUniqueItemRowDisabled(data.antennaData[i])
                         : getUniqueItemRowTuPlug(data.antennaData[i]['mac']) ;
                     $('.antennaDataTable ').append(tr);
                 });
@@ -66,15 +63,16 @@ $(document).ready(function() {
         });
     }
 
-    function getUniqueItemRowDisabled(mac, uniqueItem) {
+    function getUniqueItemRowDisabled(antennaData) {
         return `<tr class='antennaData'>
-            <td>${mac}</td>
-            <td>${uniqueItem['article']}</td>
-            <td>${uniqueItem['item'] ? uniqueItem['item']['name'] : ''}</td>
+            <td>${antennaData['mac']}</td>
+            <td>${antennaData['rssi']}</td>
+            <td>${antennaData['uniqueItem']['article']}</td>
+            <td>${antennaData['uniqueItem']['item']['name'] ?? ''}</td>
             <td>
-                <form action="/watcher/item_unique/disable/${uniqueItem['id']}" method="POST">
+                <form action="/watcher/item_unique/disable/${antennaData['uniqueItem']['id']}" method="POST">
                     <input type="hidden" name="_token" value="${token}">
-                    <button  type="submit" class="btn btn-danger disableButton" data-mac='${uniqueItem['id']}'>
+                    <button  type="submit" class="btn btn-danger disableButton" data-mac='${antennaData['uniqueItem']['id']}'>
                         ${ translations.btn_disable}
                     </button>
                 </form>
@@ -85,6 +83,7 @@ $(document).ready(function() {
     function getUniqueItemRowTuPlug(mac) {
         return `<tr class='antennaData'>
             <td>${mac}</td>
+            <td>Not connected</td>
             <td>Not connected</td>
             <td>Not connected</td>
             <td>

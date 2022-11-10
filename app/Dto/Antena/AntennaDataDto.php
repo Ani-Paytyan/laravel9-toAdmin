@@ -7,6 +7,7 @@ use App\Models\UniqueItem;
 class AntennaDataDto
 {
     private string $mac;
+    private int $rssi;
     private ?UniqueItem $uniqueItem;
 
     public function getMac(): string
@@ -20,6 +21,17 @@ class AntennaDataDto
         return $this;
     }
 
+    public function getRssi(): string
+    {
+        return $this->rssi;
+    }
+
+    public function setRssi(int $rssi): self
+    {
+        $this->rssi = $rssi;
+        return $this;
+    }
+
     public function getUniqueItem(): ?UniqueItem
     {
         return $this->uniqueItem ?? null;
@@ -29,13 +41,5 @@ class AntennaDataDto
     {
         $this->uniqueItem = $uniqueItem;
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'mac' => $this->getMac(),
-            'unique_item' => $this->getUniqueItem()
-         ];
     }
 }
