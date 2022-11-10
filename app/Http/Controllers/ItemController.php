@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Dto\Response\MessageDto;
-use App\Models\Item;
-use App\Models\UniqueItem;
-use App\Services\UniqueItem\UniqueItemServiceInterface;
+use App\Http\Requests\UniqueItemUpdateRequest;
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Services\UniqueItem\UniqueItemServiceInterface;
 
 class ItemController extends Controller
 {
@@ -31,7 +31,7 @@ class ItemController extends Controller
         return view('item.edit', compact('uniqueItems', 'item'));
     }
 
-    public function update(Request $request)
+    public function update(UniqueItemUpdateRequest $request)
     {
         $this->uniqueItemService->updateUniqueItems($request->get('mac') ?? []);
 

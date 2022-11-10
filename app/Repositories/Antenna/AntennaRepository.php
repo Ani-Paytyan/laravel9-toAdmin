@@ -21,10 +21,10 @@ class AntennaRepository implements AntennaRepositoryInterface
      */
     public function getAntennaData(Antena $antenna, int $rssi): Collection
     {
-        $apiResult = $this->getAntennaResponse($antenna->mac_address);
-        $uniqueItems = $this->getUniqueItems($this->getFilterdMacs($apiResult, $rssi));
+        $filteredItems = $this->getFilteredItems($this->getAntennaResponse($antenna->mac_address), $rssi);
+        $uniqueItems = $this->getUniqueItems(array_map(fn ($item) => $item['mac'], $filteredItems));
         $uniqueItemResponse = new Collection();
-        foreach ($apiResult['result'] ?? [] as $item) {
+        foreach ($filteredItems ?? [] as $item) {
             $uniqueItemResponse->push(
                 (new AntennaDataDto())
                     ->setMac($item['mac'])
@@ -44,13 +44,11 @@ class AntennaRepository implements AntennaRepositoryInterface
      * @param int $rssi
      * @return array
      */
-    private function getFilterdMacs(array $apiResult, int $rssi): array
+    private function getFilteredItems(array $apiResult, int $rssi): array
     {
-        $filteredMacs = [];
-        foreach ($apiResult['result'] ?? [] as $item) {
-            if(abs($item['rssi']) >= $rssi) $filteredMacs[] = $item['mac'];
-        }
-        return $filteredMacs;
+        return array_filter($apiResult['result'] ?? [], function ($item) use ($rssi) {
+            return abs($item['rssi']) >= $rssi;
+        });
     }
 
     /**
