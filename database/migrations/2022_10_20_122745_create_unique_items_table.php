@@ -21,7 +21,7 @@ return new class extends Migration
                 ->onUpdate('cascade');
             $table->string('workplace_id')->nullable();
             $table->string('article')->nullable();
-            $table->string('mac')->nullable();
+            $table->string('mac')->unique()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
