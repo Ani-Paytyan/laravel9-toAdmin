@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="_token" value="{{ @csrf_token() }}">
-                    <x-form.select name="item_id" :options="$items" class="items"
+                    <x-form.select name="item_id" :options="$items ?? []" id="items"
                                    label="{{ trans('attributes.antenna_data.item_name') }}"></x-form.select>
                     <x-form.select name="unique_id" :options="$uniqueItems ?? []" id="uniqueItems"
                                    label="{{ trans('attributes.antenna_data.unique_item') }}"></x-form.select>
