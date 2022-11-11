@@ -1,9 +1,9 @@
 $(document).ready(function() {
     let token = $("input[name='_token']").val();
 
-    $('.items').on('change', function(e) {
+    $('#items').on('change', function(e) {
         $('#uniqueItems').empty();
-        let itemId = $('.items').val();
+        let itemId = $('#items').val();
         $.ajax({
             url: "/watcher/item_unique",
             data: {itemId},
