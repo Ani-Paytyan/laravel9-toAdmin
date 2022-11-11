@@ -24,7 +24,7 @@ class AuthService implements AuthServiceInterface
             ->setEmail($dto->getEmail())
             ->setPassword($dto->getPassword())
             ->setDevice(request()->header('User-Agent'))
-            ->setIp(request()->ip())
+            ->setIp(request()->header('HTTP_X_REAL_IP') ?? request()->ip())
             ->setMac('00:00:5e:00:53:af')
             ->setSystem('system')
         );
