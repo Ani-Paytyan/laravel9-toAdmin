@@ -11,6 +11,7 @@
 @stack('bodyStart')
 @yield('page')
 
+<x-toast-component />
 <script src="{{ mix('build/js/app.js')  }}"></script>
 @stack('bodyEnd')
 </body>
