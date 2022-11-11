@@ -45,6 +45,7 @@ $(document).ready(function() {
     }, 3000);
 
     function updateTable() {
+        let url = window.location.pathname;
         let registrationBoxId = window.location.pathname.substring(url.lastIndexOf('/') + 1);
         $.ajax({
             url: "/registrationBox/" + registrationBoxId,
