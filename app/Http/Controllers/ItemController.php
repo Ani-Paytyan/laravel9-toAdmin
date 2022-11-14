@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Dto\Item\ItemFilterDto;
 use App\Dto\Response\MessageDto;
 use App\Http\Requests\UniqueItemUpdateRequest;
-use App\Queries\ItemQueries\ItemQueriesInterface;
-use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Services\Item\ItemServiceInterface;
 use App\Services\UniqueItem\UniqueItemServiceInterface;
 
 class ItemController extends Controller
@@ -16,16 +14,12 @@ class ItemController extends Controller
 
     public function __construct(
         private UniqueItemServiceInterface $uniqueItemService,
-        private ItemQueriesInterface $itemQueries
+        private ItemServiceInterface $itemService,
     ){}
 
-    public function index(Request $request)
+    public function index()
     {
-        $items = $this->itemQueries
-            ->getFilterQuery(ItemFilterDto::createFromRequest($request))
-            ->withCount('uniqueItem')
-            ->paginate(self::PAGE);
-
+        $items = $this->itemService->getItemSortingByName(self::PAGE);
         return view('item.index', compact('items'));
     }
 

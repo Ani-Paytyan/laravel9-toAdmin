@@ -15,14 +15,6 @@
             <th>{{ trans('attributes.item.id') }}</th>
             <th>
                 {{ trans('attributes.item.name') }}
-                <div class="btn-group-vertical">
-                    <a href="?sortBy=name" class="btn btn-xs btn-link p-0">
-                        <i class="bi bi-sort-up"></i>
-                    </a>
-                    <a href="?sortBy=name&sortType=desc" class="btn btn-xs btn-link p-0">
-                        <i class="bi bi-sort-down"></i>
-                    </a>
-                </div>
             </th>
             <th>{{ trans('attributes.item.number_of_unique_items') }}</th>
         </tr>
