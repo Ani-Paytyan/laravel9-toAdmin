@@ -46,7 +46,7 @@
         @foreach ($antennaData as $data)
             <tr class="antennaData">
                 <td>{{ $data['mac'] }}</td>
-                <td>{{ $data['rssi'] }}</td>
+                <td>{{ abs($data['rssi']) }}</td>
                 <td>{{ $data['unique_item'] ? $data['unique_item']['article']: 'Not connected' }}</td>
                 <td>{{ $data['unique_item'] ? $data['unique_item']['item']['name']: 'Not connected'}}</td>
 
