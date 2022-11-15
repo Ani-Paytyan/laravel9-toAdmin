@@ -22,8 +22,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(CompaniesFetch::class)->everyFifteenMinutes();
         $schedule->command(WorkplacesFetch::class)->everyFifteenMinutes();
-        $schedule->command(UniqueItemsFetch::class)->everyFifteenMinutes();
         $schedule->command(ItemsFetch::class)->everyFifteenMinutes();
+        $schedule->command(UniqueItemsFetch::class)->everyFifteenMinutes();
         // $schedule->command('inspire')->hourly();
     }
 
