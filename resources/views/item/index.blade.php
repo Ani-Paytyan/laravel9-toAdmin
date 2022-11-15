@@ -13,7 +13,9 @@
     <table class="table table-bordered top-20">
         <tr>
             <th>{{ trans('attributes.item.id') }}</th>
-            <th>{{ trans('attributes.item.name') }}</th>
+            <th>
+                {{ trans('attributes.item.name') }}
+            </th>
             <th>{{ trans('attributes.item.number_of_unique_items') }}</th>
         </tr>
         @foreach ($items as $item)
@@ -27,6 +29,6 @@
         @endforeach
     </table>
     <div class="d-flex">
-        {!! $items->links('pagination::bootstrap-4') !!}
+        {!! $items->withQueryString()->links('pagination::bootstrap-4') !!}
     </div>
 @endsection

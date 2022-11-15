@@ -4,24 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Dto\Response\MessageDto;
 use App\Http\Requests\UniqueItemUpdateRequest;
-use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Services\Item\ItemServiceInterface;
 use App\Services\UniqueItem\UniqueItemServiceInterface;
 
 class ItemController extends Controller
 {
     const PAGE = 10;
 
-    public UniqueItemServiceInterface $uniqueItemService;
-
-    public function __construct(UniqueItemServiceInterface $uniqueItemService)
-    {
-        $this->uniqueItemService = $uniqueItemService;
-    }
+    public function __construct(
+        private UniqueItemServiceInterface $uniqueItemService,
+        private ItemServiceInterface $itemService,
+    ){}
 
     public function index()
     {
-        $items = Item::withCount('uniqueItem')->paginate(self::PAGE);
+        $items = $this->itemService->getItemSortingByName(self::PAGE);
         return view('item.index', compact('items'));
     }
 
