@@ -7,6 +7,7 @@ use App\Console\Commands\CompaniesFetch;
 use App\Console\Commands\UniqueItemsFetch;
 use App\Console\Commands\ItemsFetch;
 use App\Console\Commands\WorkplacesFetch;
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -20,10 +21,26 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CompaniesFetch::class)->everyFifteenMinutes();
+        $syncCommands = [
+            $schedule->command(CompaniesFetch::class),
+            $schedule->command(WorkplacesFetch::class),
+            $schedule->command(ItemsFetch::class),
+            $schedule->command(UniqueItemsFetch::class),
+        ];
+
+        foreach ($syncCommands as $command) {
+            /** @var Event $command */
+            if (config('app.sync_testing')) {
+                $command->everyMinute();
+            } else {
+                $command->everyFifteenMinutes();
+            }
+        }
+
+        /*$schedule->command(CompaniesFetch::class)->everyFifteenMinutes();
         $schedule->command(WorkplacesFetch::class)->everyFifteenMinutes();
         $schedule->command(ItemsFetch::class)->everyFifteenMinutes();
-        $schedule->command(UniqueItemsFetch::class)->everyFifteenMinutes();
+        $schedule->command(UniqueItemsFetch::class)->everyFifteenMinutes();*/
         // $schedule->command('inspire')->hourly();
     }
 
