@@ -12,8 +12,8 @@
     </div>
     <table class="table table-bordered top-20">
         <tr>
-            <th>{{ trans('attributes.workplace.name') }}</th>
-            <th>{{ trans('attributes.workplace.company') }}</th>
+            <th>{{ trans('attributes.antena.mac') }}</th>
+            <th>{{ trans('attributes.antena.position') }}</th>
             <th>{{ trans('attributes.workplace.address') }}</th>
             <th>{{ trans('attributes.workplace.number_attached_antena') }}</th>
             <th></th>
