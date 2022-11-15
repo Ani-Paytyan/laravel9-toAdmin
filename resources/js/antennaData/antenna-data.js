@@ -25,19 +25,21 @@ $(document).ready(function() {
     $('.addAntennaData').on('click', function(e) {
         let mac = $('.macUniqueItem').data('mac');
         let uniqueItemId = $("#uniqueItems").val();
-        $.ajax({
-            url: "/watcher/item_unique/" + uniqueItemId,
-            data: {
-                _token: token,
-                mac: mac
-            },
-            type: "POST",
-            dataType: 'json',
-            success: function () {
-                window.location.reload()
-            },
-            error: function (data) {}
-        });
+        if(mac && uniqueItemId) {
+                $.ajax({
+                url: "/watcher/item_unique/" + uniqueItemId,
+                data: {
+                    _token: token,
+                    mac: mac
+                },
+                type: "POST",
+                dataType: 'json',
+                success: function () {
+                    window.location.reload()
+                },
+                error: function (data) {}
+            });
+        }
     });
 
     window.setInterval(async function () {
