@@ -57,6 +57,12 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'apiErrLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/apiErrLog.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

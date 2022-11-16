@@ -4,6 +4,7 @@ namespace App\Services\Item;
 
 use App\Dto\IwmsApi\Item\IwmsApiItemResponseDto;
 use App\Models\Item;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ItemService implements ItemServiceInterface
 {
@@ -19,5 +20,10 @@ class ItemService implements ItemServiceInterface
                 );
         }
         Item::whereNotIn('id', $processedIds)->delete();
+    }
+
+    public function getItemSortingByName($page): LengthAwarePaginator
+    {
+        return Item::withCount('uniqueItem')->orderBy('name', 'asc')->paginate($page);
     }
 }
