@@ -22,6 +22,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('manufacture_types')
                 ->onUpdate('cascade');
+            $table->boolean('is_online')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

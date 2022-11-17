@@ -20,16 +20,19 @@
     </div>
     <x-alert-component />
 
-    <table class="table table-bordered top-20">
+    <table class="table table-bordered top-20" id="workplaceAntennaDataTable">
         <tr>
-            <th>{{ trans('attributes.workplace.name') }}</th>
+            <th>{{ trans('attributes.antena.mac_address') }}</th>
+            <th>{{ trans('attributes.antena.status') }}</th>
             <th>{{ trans('attributes.workplace.company') }}</th>
             <th></th>
         </tr>
-
         @foreach ($antenas as $antena)
-            <tr>
+            <tr class="workplaceAntennaData">
                 <td>{{ $antena->mac_address }}</td>
+                <td>
+                    <span class="logged-in text-{{$antena->is_online ? 'success' : 'danger'}}">●</span>
+                </td>
                 <td>{{ $antena->type_id}}</td>
                 <td>
                     <form action="{{ route('workplace.antena.destroy',[$workplace, $antena]) }}"  method="POST">
@@ -66,3 +69,12 @@
         </div>
     </div>
 @endsection
+@push('bodyEnd')
+    <script>
+        const translation = {
+            'btn_delete': '{{ trans('page.dashboard.delete_button') }}',
+        };
+        const tokenStatus = '{{ @csrf_token() }}';
+    </script>
+<script src="{{ mix('build/js/antenna-status.js')  }}"></script>
+@endpush

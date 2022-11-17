@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\AntennaDataUpdate;
+use App\Console\Commands\AntennaStatusFetch;
 use App\Console\Commands\CompaniesFetch;
 use App\Console\Commands\UniqueItemsFetch;
 use App\Console\Commands\ItemsFetch;
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(WorkplacesFetch::class),
             $schedule->command(ItemsFetch::class),
             $schedule->command(UniqueItemsFetch::class),
+            $schedule->command(AntennaStatusFetch::class),
         ];
 
         foreach ($syncCommands as $command) {

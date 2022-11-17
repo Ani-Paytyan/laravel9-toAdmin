@@ -12,4 +12,6 @@ interface AntenaServiceInterface
     public function updateAntena(AntenaRequestDto $antenaRequestDto, Antena $antena): void;
 
     public function deleteAntena(Antena $antena): void;
+
+    public function updateAntennaStatus(array $macAddressStatus);
 }

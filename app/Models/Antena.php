@@ -18,7 +18,8 @@ class Antena extends Model
     protected $fillable = [
         'id',
         'mac_address',
-        'type_id'
+        'type_id',
+        'is_online'
     ];
 
     public function manufactureType()
