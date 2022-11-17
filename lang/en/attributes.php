@@ -12,9 +12,12 @@ return [
         'choose_type' => 'Choose Type',
         'mac' => 'MAC',
         'position' => 'Position',
+        'manufacture_type' => 'Manufacture Type'
     ],
 
     'workplace' => [
+        'name' => 'Name',
+        'company' => 'Company',
         'address' => 'Address',
         'number_attached_antena' => 'Number of attached antennas',
     ],
