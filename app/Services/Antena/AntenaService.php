@@ -21,4 +21,11 @@ class AntenaService implements AntenaServiceInterface
     {
         $antena->delete();
     }
+
+    public function  updateAntennaStatus(array $macAddressStatus): void
+    {
+        foreach ($macAddressStatus ?? [] as $key => $data) {
+            Antena::where('mac_address', $key)->update(['is_online' => $data]);
+        }
+    }
 }
