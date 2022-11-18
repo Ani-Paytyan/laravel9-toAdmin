@@ -9,6 +9,8 @@ use Illuminate\Console\Command;
 
 class AntennaStatusFetch extends Command
 {
+    const CHUNK_COUNT = 10;
+
     /**
      * The name and signature of the console command.
      *
@@ -32,7 +34,7 @@ class AntennaStatusFetch extends Command
         WatcherAntennaApiServiceInterface $watcherAntennaApiService,
         AntenaServiceInterface $antennaService): void
     {
-        Antena::chunk(10, function ($antennasMac) use ($watcherAntennaApiService, $antennaService){
+        Antena::chunk(self::CHUNK_COUNT, function ($antennasMac) use ($watcherAntennaApiService, $antennaService){
             $macAddressStatus = $watcherAntennaApiService->antennaStatus($antennasMac->pluck('mac_address')->toArray());
             $antennaService->updateAntennaStatus($macAddressStatus['result']);
         });;
