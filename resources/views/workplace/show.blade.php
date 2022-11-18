@@ -22,15 +22,15 @@
 
     <table class="table table-bordered top-20">
         <tr>
-            <th>{{ trans('attributes.workplace.name') }}</th>
-            <th>{{ trans('attributes.workplace.company') }}</th>
+            <th>{{ trans('attributes.antena.mac') }}</th>
+            <th>{{ trans('attributes.antena.position') }}</th>
             <th></th>
         </tr>
 
         @foreach ($antenas as $antena)
             <tr>
                 <td>{{ $antena->mac_address }}</td>
-                <td>{{ $antena->type_id}}</td>
+                <td>{{ $antena->type_id == 1 ? 'In' : 'Out' }}</td>
                 <td>
                     <form action="{{ route('workplace.antena.destroy',[$workplace, $antena]) }}"  method="POST">
                         @csrf
@@ -55,8 +55,8 @@
                     <form id="addAntena" action="{{ route('workplace.antena.create', $workplace) }}"  method="POST">
                         @csrf
                         @method('HEAD')
-                        <x-form.select name="antena_id"  :options="$filterAntena" label="{{ trans('attributes.antena.manufacture_type') }}" ></x-form.select>
-                        <x-form.select name="type"  :options="['in' => 'In', 'out' => 'Out']" label="{{ trans('attributes.antena.manufacture_type') }}" ></x-form.select>
+                        <x-form.select name="antena_id"  :options="$filterAntena" label="{{ trans('attributes.antena.mac') }}" ></x-form.select>
+                        <x-form.select name="type"  :options="['in' => 'In', 'out' => 'Out']" label="{{ trans('attributes.antena.position') }}" ></x-form.select>
                     </form>
                 </div>
                 <div class="modal-footer">
