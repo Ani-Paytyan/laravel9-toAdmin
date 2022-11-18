@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    window.setTimeout(async function () {
+    window.setInterval(async function () {
         await updateTable();
     }, 60000);
 
