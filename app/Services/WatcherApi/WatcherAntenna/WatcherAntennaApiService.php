@@ -2,7 +2,7 @@
 
 namespace App\Services\WatcherApi\WatcherAntenna;
 
-use App\Dto\Watcher\WatcherAntennaStatusDto;
+use App\Models\Antena;
 use App\Services\WatcherApi\AbstractWatcherApi;
 
 class WatcherAntennaApiService extends AbstractWatcherApi implements WatcherAntennaApiServiceInterface
@@ -17,10 +17,20 @@ class WatcherAntennaApiService extends AbstractWatcherApi implements WatcherAnte
         return ($this->getRequestBuilder()->get('v1/antenna/see/'. $mac))->json();
     }
 
-    public function antennaStatus(WatcherAntennaStatusDto $dto): array
+    public function antennaStatus()
     {
-        return $this->getRequestBuilder()->post('v1/antenna/statuses', [
-            'list' => $dto->getList()
-        ])->json();
+        Antena::chunk(2, function ($antennasMac){
+            $result = $this->getRequestBuilder()->post('v1/antenna/statuses', [
+                    'list' => $antennasMac->pluck('mac_address')->toArray()
+                ])->json();
+            $this->updateAntennaStatus($result);
+        });;
+    }
+
+    public function updateAntennaStatus(array $macAddressStatus)
+    {
+        foreach ($macAddressStatus['result'] ?? [] as $key => $data) {
+            Antena::where('mac_address', $key)->update(['is_online' => $data]);
+        }
     }
 }

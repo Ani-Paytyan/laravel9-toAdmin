@@ -2,9 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Dto\Watcher\WatcherAntennaStatusDto;
-use App\Models\Antena;
-use App\Services\Antena\AntenaServiceInterface;
 use App\Services\WatcherApi\WatcherAntenna\WatcherAntennaApiServiceInterface;
 use Illuminate\Console\Command;
 
@@ -26,16 +23,11 @@ class AntennaStatusFetch extends Command
 
     /**
      * @param WatcherAntennaApiServiceInterface $watcherAntennaApiService
-     * @param AntenaServiceInterface $antenaService
      * @return void
      */
     public function handle(
-        WatcherAntennaApiServiceInterface $watcherAntennaApiService,
-        AntenaServiceInterface $antenaService ): void
+        WatcherAntennaApiServiceInterface $watcherAntennaApiService): void
     {
-        $antennasMac =  Antena::pluck('mac_address')->toArray();
-        $macAddressStatus = $watcherAntennaApiService->antennaStatus((new WatcherAntennaStatusDto())
-            ->setList($antennasMac));
-        $antenaService->updateAntennaStatus($macAddressStatus);
+        $watcherAntennaApiService->antennaStatus();
     }
 }
