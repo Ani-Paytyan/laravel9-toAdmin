@@ -33,7 +33,7 @@ class AntennaStatusFetch extends Command
         AntenaServiceInterface $antennaService): void
     {
         Antena::chunk(10, function ($antennasMac) use ($watcherAntennaApiService, $antennaService){
-            $macAddressStatus =$watcherAntennaApiService->antennaStatus($antennasMac->pluck('mac_address')->toArray());
+            $macAddressStatus = $watcherAntennaApiService->antennaStatus($antennasMac->pluck('mac_address')->toArray());
             $antennaService->updateAntennaStatus($macAddressStatus['result']);
         });;
     }
