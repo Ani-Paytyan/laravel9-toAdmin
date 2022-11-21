@@ -12,6 +12,8 @@ return [
         'choose_type' => 'Choose Type',
         'manufacture_type' => 'Manufacture Type',
         'status' => 'Status',
+        'mac' => 'MAC',
+        'position' => 'Position',
     ],
 
     'workplace' => [
