@@ -24,7 +24,7 @@
         <tr>
             <th>{{ trans('attributes.antena.mac') }}</th>
             <th>{{ trans('attributes.antena.status') }}</th>
-            <th>{{ trans('attributes.workplace.position') }}</th>
+            <th>{{ trans('attributes.antena.position') }}</th>
             <th></th>
         </tr>
         @foreach ($antenas as $antena)
