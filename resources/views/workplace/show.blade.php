@@ -44,7 +44,7 @@
     </table>
 
     <!-- Modal -->
-    <div class="modal fade" id="antenaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="antenaModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -55,8 +55,8 @@
                     <form id="addAntena" action="{{ route('workplace.antena.create', $workplace) }}"  method="POST">
                         @csrf
                         @method('HEAD')
-                        <x-form.select name="antena_id"  :options="$filterAntena" label="{{ trans('attributes.antena.mac') }}" ></x-form.select>
-                        <x-form.select name="type"  :options="['in' => 'In', 'out' => 'Out']" label="{{ trans('attributes.antena.position') }}" ></x-form.select>
+                        <x-form.select name="antena_id" :withSearch="true" :options="$filterAntena" label="{{ trans('attributes.antena.mac') }}" @overwrite></x-form.select>
+                        <x-form.select name="type" :options="['in' => 'In', 'out' => 'Out']" label="{{ trans('attributes.antena.position') }}" ></x-form.select>
                     </form>
                 </div>
                 <div class="modal-footer">
