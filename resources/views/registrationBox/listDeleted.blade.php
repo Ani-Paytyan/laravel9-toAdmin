@@ -3,6 +3,9 @@
 @section('title', trans('page.dashboard.title'))
 
 @section('content')
+    <div class="message">
+        <x-alert-component />
+    </div>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -14,7 +17,6 @@
         </div>
     </div>
 
-    <x-alert-component />
     <table class="table table-bordered">
         <tr>
             <th>{{ trans('attributes.registration_box.id') }}</th>

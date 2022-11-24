@@ -3,6 +3,9 @@
 @section('title', trans('page.dashboard.title'))
 
 @section('content')
+    <div class="message">
+        <x-alert-component />
+    </div>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left button">
@@ -18,7 +21,6 @@
             </div>
         </div>
     </div>
-    <x-alert-component />
 
     <table class="table table-bordered top-20">
         <tr>
@@ -66,3 +68,6 @@
         </div>
     </div>
 @endsection
+@push('bodyEnd')
+    <script src="{{ mix('build/js/message-time.js') }}"></script>
+@endpush
