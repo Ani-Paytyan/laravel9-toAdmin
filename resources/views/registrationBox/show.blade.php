@@ -74,7 +74,7 @@
     </table>
 
     <!-- Modal -->
-    <div class="modal fade" id="antennaDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="antennaDataModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="_token" value="{{ @csrf_token() }}">
-                    <x-form.select name="item_id" :withSearch="true" :options="$items ?? []" id="items"
+                    <x-form.select id="aaa" name="item_id" :withSearch="true" :options="$items ?? []" id="items"
                                    label="{{ trans('attributes.antenna_data.item_name') }}"></x-form.select>
                     <x-form.select name="unique_id" :withSearch="true" :options="$uniqueItems ?? []" id="uniqueItems"
                                    label="{{ trans('attributes.antenna_data.unique_item') }}"></x-form.select>
@@ -107,5 +107,6 @@
         const token = '{{ @csrf_token() }}';
     </script>
     <script src="{{ mix('build/js/antenna-data.js')  }}"></script>
+    <script src="{{ mix('build/js/input.js')  }}"></script>
 @endpush
 

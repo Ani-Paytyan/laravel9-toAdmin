@@ -66,3 +66,6 @@
         </div>
     </div>
 @endsection
+@push('bodyEnd')
+    <script src="{{ mix('build/js/input.js')  }}"></script>
+@endpush
