@@ -23,11 +23,27 @@
                 <th>{{ trans('attributes.unique_item.id') }}</th>
                 <th>{{ trans('attributes.unique_item.article') }}</th>
                 <th>{{ trans('attributes.unique_item.mac') }}</th>
+                <th>{{ trans('attributes.unique_item.is_online') }}</th>
+                <th>{{ trans('attributes.unique_item.is_inside') }}</th>
             </tr>
             @foreach ($uniqueItems as $uniqueItem)
                 <tr>
                     <td>{{ $uniqueItem->id }}</td>
                     <td>{{ $uniqueItem->article }}</td>
+                    <td>
+                        @if($uniqueItem->is_online)
+                            <div style="background-color:green; color:white; text-align: center">Online</div>
+                        @else
+                            <div style="background-color:red; color:white; text-align: center">Offline</div>
+                        @endif
+                    </td>
+                    <td>
+                        @if($uniqueItem->is_inside)
+                            <div style="background-color:green; color:white; text-align: center">Inside</div>
+                        @else
+                            <div style="background-color:red; color:white; text-align: center">Outside</div>
+                        @endif
+                    </td>
                     <td>
                         <div class="mb-5">
                             <x-form.input
