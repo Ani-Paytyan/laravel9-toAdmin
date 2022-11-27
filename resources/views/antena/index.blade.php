@@ -28,9 +28,9 @@
                 <td>{{ $antena->manufactureType->name }}</td>
                 <td>
                     @if($antena->is_online)
-                        <div style="background-color:green"></div>
+                        <div style="background-color:green">Online</div>
                     @else
-                        <div style="background-color:red"></div>
+                        <div style="background-color:red">Offline</div>
                     @endif
 
                 </td>
