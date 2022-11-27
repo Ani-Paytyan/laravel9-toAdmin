@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AntenaResource;
 use App\Models\Antena;
+use http\Env\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class AntennaController extends Controller
@@ -13,6 +14,12 @@ class AntennaController extends Controller
 
     public function getAntennas(): AnonymousResourceCollection
     {
-        return AntenaResource::collection(Antena::paginate(self::PAGE));
+        return AntenaResource::collection(Antena::all());
     }
+
+    public function setAntennaStatus($mac, $online) {
+        $antenna = Antena::where('mac_address', $mac)->firstOrFail();
+        $antenna->is_onlince = $antenna == 1;
+    }
+
 }
