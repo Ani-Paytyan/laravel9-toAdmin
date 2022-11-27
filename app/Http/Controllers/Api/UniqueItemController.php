@@ -15,4 +15,17 @@ class UniqueItemController extends Controller
     {
         return UniqueItemResource::collection(UniqueItem::whereNotNull('mac')->get());
     }
+
+    public function setItemOnline($mac, $online) {
+        $item = UniqueItem::where('mac', $mac)->firstOrFail();
+        $item->is_online = $online == 1;
+        $item->save();
+    }
+
+    public function setItemInside($mac, $inside) {
+        $item = UniqueItem::where('mac', $mac)->firstOrFail();
+        $item->is_inside = $inside == 1;
+        $item->save();
+    }
+
 }

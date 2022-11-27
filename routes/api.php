@@ -28,7 +28,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('api_auth')->group(function () {
     Route::get('/antennas', [Api\AntennaController::class, 'getAntennas']);
     Route::post('/antennas/{mac}/{online}', [Api\AntennaController::class, 'setAntennaStatus']);
+
     Route::get('/unique', [Api\UniqueItemController::class, 'getUniqueItems']);
+
+    Route::post('/unique/{mac}/online/{online}', [Api\UniqueItemController::class, 'setItemOnline']);
+    Route::post('/unique/{mac}/inside/{inside}', [Api\UniqueItemController::class, 'setItemInside']);
+
     Route::get('/workplaces', [Api\WorkplaceController::class, 'getWorkplaces']);
 });
 Route::get('watcher/{name}', [WatcherAntennaController::class, 'getAntennaData']);
