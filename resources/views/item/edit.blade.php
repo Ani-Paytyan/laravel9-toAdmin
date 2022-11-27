@@ -30,6 +30,18 @@
                 <tr>
                     <td>{{ $uniqueItem->id }}</td>
                     <td>{{ $uniqueItem->article }}</td>
+
+                    <td>
+                        <div class="mb-5">
+                            <x-form.input
+                                name="mac[{{$uniqueItem->id}}]"
+                                type="text"
+                                id="password"
+                                class="form-control-muted"
+                                value="{{ $uniqueItem->mac }}"
+                            />
+                        </div>
+                    </td>
                     <td>
                         @if($uniqueItem->is_online)
                             <div style="background-color:green; color:white; text-align: center">Online</div>
@@ -43,17 +55,6 @@
                         @else
                             <div style="background-color:red; color:white; text-align: center">Outside</div>
                         @endif
-                    </td>
-                    <td>
-                        <div class="mb-5">
-                            <x-form.input
-                                name="mac[{{$uniqueItem->id}}]"
-                                type="text"
-                                id="password"
-                                class="form-control-muted"
-                                value="{{ $uniqueItem->mac }}"
-                            />
-                        </div>
                     </td>
                 </tr>
             @endforeach
