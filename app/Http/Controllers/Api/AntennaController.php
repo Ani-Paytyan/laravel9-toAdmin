@@ -20,6 +20,7 @@ class AntennaController extends Controller
     public function setAntennaStatus($mac, $online) {
         $antenna = Antena::where('mac_address', $mac)->firstOrFail();
         $antenna->is_online = $online == 1;
+        $antenna->save();
     }
 
 }
