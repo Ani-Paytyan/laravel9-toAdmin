@@ -3,9 +3,6 @@
 @section('title', trans('page.dashboard.title'))
 
 @section('content')
-    <div class="message">
-        <x-alert-component />
-    </div>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">

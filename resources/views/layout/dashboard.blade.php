@@ -64,6 +64,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="message">
+                    <x-alert-component />
+                </div>
             </header>
 
             <!-- Main -->
@@ -75,3 +78,6 @@
         </div>
     </div>
 @endsection
+@push('bodyEnd')
+    <script src="{{ mix('build/js/message-time.js') }}"></script>
+@endpush
