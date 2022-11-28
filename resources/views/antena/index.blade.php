@@ -20,11 +20,20 @@
         <tr>
             <th>{{ trans('attributes.antena.mac_address') }}</th>
             <th>{{ trans('attributes.antena.type') }}</th>
+            <th>{{ trans('attributes.antena.online') }}</th>
         </tr>
         @foreach ($antenas as $antena)
             <tr>
                 <td>{{ $antena->mac_address }}</td>
                 <td>{{ $antena->manufactureType->name }}</td>
+                <td>
+                    @if($antena->is_online)
+                        <div style="background-color:green; color:white; text-align: center">Online</div>
+                    @else
+                        <div style="background-color:red; color:white; text-align: center">Offline</div>
+                    @endif
+
+                </td>
                 <td>
                     <a class="btn btn-info" href="{{ route('antena.show',$antena->id) }}">{{ trans('page.dashboard.show_button') }}</a>
                     <a class="btn btn-primary" href="{{ route('antena.edit',$antena->id) }}">{{ trans('page.dashboard.edit_button') }}</a>
