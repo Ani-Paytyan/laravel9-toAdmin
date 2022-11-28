@@ -45,13 +45,13 @@
         </tr>
         @foreach ($antennaData as $data)
             <tr class="antennaData">
-                <td>{{ $data['mac'] }}</td>
-                <td>{{ abs($data['rssi']) }}</td>
-                <td>{{ $data['unique_item'] ? $data['unique_item']['article']: 'Not connected' }}</td>
-                <td>{{ $data['unique_item'] ? $data['unique_item']['item']['name']: 'Not connected'}}</td>
+                <td>{{ $data->getMac() }}</td>
+                <td>{{ abs($data->getRssi()) }}</td>
+                <td>{{ $data->getUniqueItem() ?$data->getUniqueItem()['article']: 'Not connected' }}</td>
+                <td>{{ $data->getUniqueItem() ? $data->getUniqueItem()['item']['name']: 'Not connected'}}</td>
 
-                @if($data['unique_item'])
-                    <form action="{{ route('watcher.unique_item_disable', $data['unique_item']['id']) }}" method="POST">
+                @if($data->getUniqueItem())
+                    <form action="{{ route('watcher.unique_item_disable',$data->getUniqueItem()['id']) }}" method="POST">
                         @csrf
                         <td>
                             <button type="submit"
@@ -62,7 +62,7 @@
                     <td>
                         <div class="pull-left">
                             <button type="button" class="btn btn-primary macUniqueItem"
-                                    data-mac={{ $data['mac'] }} data-bs-toggle="modal"
+                                    data-mac={{ $data->getMac() }} data-bs-toggle="modal"
                                     data-bs-target="#antennaDataModal">
                                 {{ trans('page.antenna_data.to_plug') }}
                             </button>

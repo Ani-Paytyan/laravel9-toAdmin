@@ -101,5 +101,10 @@ $(document).ready(function() {
             </td>
          </tr>`;
     }
+
+    $(document).on('click','.macUniqueItem', function(e) {
+        let mac = $(e.target).data('mac');
+        $('#exampleModalLabel').html(mac);
+    });
 });
 
