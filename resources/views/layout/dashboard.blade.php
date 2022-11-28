@@ -64,14 +64,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="message">
-                    <x-alert-component />
-                </div>
             </header>
 
             <!-- Main -->
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
+                    <div class="message">
+                        <x-alert-component />
+                    </div>
                     @yield('content')
                 </div>
             </main>
