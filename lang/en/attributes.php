@@ -37,8 +37,10 @@ return [
 
     'unique_item' => [
         'id' => 'Id',
-        'article' => 'Article',
+        'article' => 'Article nr',
         'mac' => 'MAC',
+        'is_online' => 'Is Online',
+        'is_inside' => 'Is Inside',
     ],
 
     'antenna_data' => [
