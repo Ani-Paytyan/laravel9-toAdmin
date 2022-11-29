@@ -39,16 +39,16 @@
         <tr>
             <th>{{ trans('attributes.antenna_data.mac_address') }}</th>
             <th>{{ trans('attributes.antenna_data.rssi') }}</th>
-            <th>{{ trans('attributes.antenna_data.article_name') }}</th>
             <th>{{ trans('attributes.antenna_data.item_name') }}</th>
+            <th>{{ trans('attributes.antenna_data.article_name') }}</th>
             <th></th>
         </tr>
         @foreach ($antennaData as $data)
             <tr class="antennaData">
                 <td>{{ $data->getMac() }}</td>
                 <td>{{ abs($data->getRssi()) }}</td>
-                <td>{{ $data->getUniqueItem() ?$data->getUniqueItem()['article']: 'Not connected' }}</td>
                 <td>{{ $data->getUniqueItem() ? $data->getUniqueItem()['item']['name']: 'Not connected'}}</td>
+                <td>{{ $data->getUniqueItem() ?$data->getUniqueItem()['article']: 'Not connected' }}</td>
 
                 @if($data->getUniqueItem())
                     <form action="{{ route('watcher.unique_item_disable',$data->getUniqueItem()['id']) }}" method="POST">
@@ -86,7 +86,7 @@
                     <x-form.select name="item_id" :options="$items ?? []" id="items"
                                    label="{{ trans('attributes.antenna_data.item_name') }}"></x-form.select>
                     <x-form.select name="unique_id" :options="$uniqueItems ?? []" id="uniqueItems"
-                                   label="{{ trans('attributes.antenna_data.unique_item') }}"></x-form.select>
+                                   label="{{ trans('attributes.antenna_data.article_name') }}"></x-form.select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="addAntennaData"
