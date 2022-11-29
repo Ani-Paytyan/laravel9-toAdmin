@@ -47,5 +47,9 @@ return [
         'article_name' => 'Article',
         'item_name' => 'Item',
         'unique_item' => 'Unique Item',
+    ],
+    'filter' => [
+        'title' => 'Filter',
+        'clean' => 'Clean Filter',
     ]
 ];
