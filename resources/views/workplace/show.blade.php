@@ -30,7 +30,7 @@
         @foreach ($antenas as $antena)
             <tr>
                 <td>{{ $antena->mac_address }}</td>
-                <td>{{ $antena->type_id == 1 ? 'In' : 'Out' }}</td>
+                <td> {{ $antena->workplaces()->pluck('type')->first() }}</td>
                 <td>
                     <form action="{{ route('workplace.antena.destroy',[$workplace, $antena]) }}"  method="POST">
                         @csrf
