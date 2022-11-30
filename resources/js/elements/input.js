@@ -8,4 +8,3 @@ $('.form-control.is-invalid').on('input', function () {
 $('.select2').select2({
     theme: 'bootstrap-5',
 });
-
