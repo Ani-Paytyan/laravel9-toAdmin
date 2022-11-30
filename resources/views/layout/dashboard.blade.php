@@ -74,4 +74,7 @@
             </main>
         </div>
     </div>
+    <footer>
+        <p class="version">{{ AppVersionHelper::getAppVersion() }}</p>
+    </footer>
 @endsection
