@@ -5,5 +5,6 @@ mix
     .js('resources/js/antennaData/antenna-data.js', 'public/build/js')
     .js('resources/js/message/message-time.js', 'public/build/js')
     .js('resources/js/registrationBox/registration-box.js', 'public/build/js')
+    .js('resources/js/select2/input.js', 'public/build/js')
     .sass('resources/sass/app.scss', 'public/build/css')
     .version();

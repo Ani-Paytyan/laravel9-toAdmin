@@ -37,8 +37,10 @@ return [
 
     'unique_item' => [
         'id' => 'Id',
-        'article' => 'Article',
+        'article' => 'Article nr',
         'mac' => 'MAC',
+        'is_online' => 'Is Online',
+        'is_inside' => 'Is Inside',
     ],
 
     'antenna_data' => [
@@ -47,5 +49,9 @@ return [
         'article_name' => 'Article',
         'item_name' => 'Item',
         'unique_item' => 'Unique Item',
+    ],
+    'filter' => [
+        'title' => 'Filter',
+        'clean' => 'Clean Filter',
     ]
 ];

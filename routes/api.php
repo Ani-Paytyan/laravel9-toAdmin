@@ -16,12 +16,24 @@ use App\Http\Controllers\WatcherAntennaController;
 |
 */
 
+Route::get('/test', function(){
+    print "A";
+});
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware('api_auth')->group(function () {
-    Route::get('/antenas', [Api\AntennaController::class, 'getAntennas']);
-    Route::get('v1/unique', [Api\UniqueItemController::class, 'getUniqueItems']);
+    Route::get('/antennas', [Api\AntennaController::class, 'getAntennas']);
+    Route::post('/antennas/{mac}/{online}', [Api\AntennaController::class, 'setAntennaStatus']);
+
+    Route::get('/unique', [Api\UniqueItemController::class, 'getUniqueItems']);
+
+    Route::post('/unique/{mac}/online/{online}', [Api\UniqueItemController::class, 'setItemOnline']);
+    Route::post('/unique/{mac}/inside/{inside}', [Api\UniqueItemController::class, 'setItemInside']);
+
+    Route::get('/workplaces', [Api\WorkplaceController::class, 'getWorkplaces']);
 });
 Route::get('watcher/{name}', [WatcherAntennaController::class, 'getAntennaData']);

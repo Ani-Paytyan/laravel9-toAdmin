@@ -19,24 +19,40 @@
         @method('PUT')
         <table class="table table-bordered top-20">
             <tr>
-                <th>{{ trans('attributes.unique_item.id') }}</th>
+                <th>{{ trans('attributes.item.name') }}</th>
                 <th>{{ trans('attributes.unique_item.article') }}</th>
                 <th>{{ trans('attributes.unique_item.mac') }}</th>
+                <th>{{ trans('attributes.unique_item.is_online') }}</th>
+                <th>{{ trans('attributes.unique_item.is_inside') }}</th>
             </tr>
             @foreach ($uniqueItems as $uniqueItem)
                 <tr>
-                    <td>{{ $uniqueItem->id }}</td>
+                    <td>{{ $item->name }}</td>
                     <td>{{ $uniqueItem->article }}</td>
+
                     <td>
                         <div class="mb-5">
                             <x-form.input
                                 name="mac[{{$uniqueItem->id}}]"
                                 type="text"
                                 id="password"
-                                class="form-control-muted"
                                 value="{{ $uniqueItem->mac }}"
                             />
                         </div>
+                    </td>
+                    <td>
+                        @if($uniqueItem->is_online)
+                            <div style="background-color:green; color:white; text-align: center">Online</div>
+                        @else
+                            <div style="background-color:red; color:white; text-align: center">Offline</div>
+                        @endif
+                    </td>
+                    <td>
+                        @if($uniqueItem->is_inside)
+                            <div style="background-color:green; color:white; text-align: center">Inside</div>
+                        @else
+                            <div style="background-color:red; color:white; text-align: center">Outside</div>
+                        @endif
                     </td>
                 </tr>
             @endforeach
