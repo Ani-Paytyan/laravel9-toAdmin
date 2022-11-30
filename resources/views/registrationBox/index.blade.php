@@ -13,19 +13,17 @@
             </div>
         </div>
     </div>
-
+    @include('registrationBox.components.filter')
     <x-alert-component />
 
     <table class="table table-bordered">
         <tr>
-            <th>{{ trans('attributes.registration_box.id') }}</th>
             <th>{{ trans('attributes.registration_box.name') }}</th>
             <th>{{ trans('attributes.registration_box.rssi_throttle') }}</th>
             <th></th>
         </tr>
         @foreach ($boxes as $box)
             <tr>
-                <td>{{ $box->id }}</td>
                 <td>{{ $box->name }}</td>
                 <td>{{ $box->rssi_throttle }}</td>
                 <td>
@@ -46,3 +44,6 @@
         {!! $boxes->links('pagination::bootstrap-4') !!}
     </div>
 @endsection
+@push('bodyEnd')
+    <script src="{{ mix('build/js/registration-box.js')  }}"></script>
+@endpush
