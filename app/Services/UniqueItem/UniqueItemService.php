@@ -39,6 +39,6 @@ class UniqueItemService implements UniqueItemServiceInterface
 
     public function getUniqueItemByItemId(string $itemId): array
     {
-        return UniqueItem::where('item_id', $itemId)->pluck('article', 'id')->toArray();
+        return UniqueItem::where('item_id', $itemId)->whereNull('mac')->pluck('article', 'id')->toArray();
     }
 }
