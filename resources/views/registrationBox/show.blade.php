@@ -47,11 +47,11 @@
             <tr class="antennaData">
                 <td>{{ $data->getMac() }}</td>
                 <td>{{ abs($data->getRssi()) }}</td>
-                <td>{{ $data->getUniqueItem() ?$data->getUniqueItem()['article']: 'Not connected' }}</td>
+                <td>{{ $data->getUniqueItem() ? $data->getUniqueItem()['article']: 'Not connected' }}</td>
                 <td>{{ $data->getUniqueItem() ? $data->getUniqueItem()['item']['name']: 'Not connected'}}</td>
 
                 @if($data->getUniqueItem())
-                    <form action="{{ route('watcher.unique_item_disable',$data->getUniqueItem()['id']) }}" method="POST">
+                    <form action="{{ route('watcher.unique_item_disable', $data->getUniqueItem()['id']) }}" method="POST">
                         @csrf
                         <td>
                             <button type="submit"
@@ -83,9 +83,9 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="_token" value="{{ @csrf_token() }}">
-                    <x-form.select name="item_id" :options="$items ?? []" id="items"
+                    <x-form.select id="aaa" name="item_id" :withSearch="true" :options="$items ?? []" id="items"
                                    label="{{ trans('attributes.antenna_data.item_name') }}"></x-form.select>
-                    <x-form.select name="unique_id" :options="$uniqueItems ?? []" id="uniqueItems"
+                    <x-form.select name="unique_id" :withSearch="true" :options="$uniqueItems ?? []" id="uniqueItems"
                                    label="{{ trans('attributes.antenna_data.unique_item') }}"></x-form.select>
                 </div>
                 <div class="modal-footer">
@@ -107,5 +107,6 @@
         const token = '{{ @csrf_token() }}';
     </script>
     <script src="{{ mix('build/js/antenna-data.js')  }}"></script>
+    <script src="{{ mix('build/js/input.js')  }}"></script>
 @endpush
 
