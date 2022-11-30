@@ -20,7 +20,7 @@
         @method('PUT')
         <table class="table table-bordered top-20">
             <tr>
-                <th>{{ trans('attributes.unique_item.id') }}</th>
+                <th>{{ trans('attributes.item.name') }}</th>
                 <th>{{ trans('attributes.unique_item.article') }}</th>
                 <th>{{ trans('attributes.unique_item.mac') }}</th>
                 <th>{{ trans('attributes.unique_item.is_online') }}</th>
@@ -28,7 +28,7 @@
             </tr>
             @foreach ($uniqueItems as $uniqueItem)
                 <tr>
-                    <td>{{ $uniqueItem->id }}</td>
+                    <td>{{ $item->name }}</td>
                     <td>{{ $uniqueItem->article }}</td>
 
                     <td>
@@ -37,7 +37,6 @@
                                 name="mac[{{$uniqueItem->id}}]"
                                 type="text"
                                 id="password"
-                                class="form-control-muted"
                                 value="{{ $uniqueItem->mac }}"
                             />
                         </div>
