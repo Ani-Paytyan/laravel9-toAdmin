@@ -13,7 +13,6 @@
             </div>
         </div>
     </div>
-    <x-alert-component />
 
     <form action="{{ route('item.update', $item->id) }}" method="POST">
         @csrf
