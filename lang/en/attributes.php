@@ -46,7 +46,7 @@ return [
     'antenna_data' => [
         'mac_address' => 'Mac Address',
         'rssi' => 'RSSI',
-        'article_name' => 'Article',
+        'article_name' => 'Article nr',
         'item_name' => 'Item',
         'unique_item' => 'Unique Item',
     ],
