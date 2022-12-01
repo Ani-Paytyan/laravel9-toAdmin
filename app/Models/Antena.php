@@ -28,7 +28,7 @@ class Antena extends Model
 
     public function workplaces()
     {
-        return $this->belongsToMany(Workplace::class);
+        return $this->belongsToMany(Workplace::class)->withPivot('type');
     }
 
     public function registrationBoxes()
