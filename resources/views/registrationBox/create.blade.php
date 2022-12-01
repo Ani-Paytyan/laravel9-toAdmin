@@ -13,8 +13,6 @@
         </div>
     </div>
 
-    <x-alert-component />
-
     <form action="{{ route('registrationBox.store') }}" method="POST">
         @csrf
         <div class="mb-5">

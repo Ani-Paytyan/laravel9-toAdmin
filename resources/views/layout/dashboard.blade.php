@@ -69,9 +69,18 @@
             <!-- Main -->
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
+                    <div class="message">
+                        <x-alert-component />
+                    </div>
                     @yield('content')
                 </div>
             </main>
         </div>
     </div>
+    <footer>
+        <p class="version">{{ AppVersionHelper::getAppVersion() }}</p>
+    </footer>
 @endsection
+@push('bodyEnd')
+    <script src="{{ mix('build/js/message-time.js') }}"></script>
+@endpush

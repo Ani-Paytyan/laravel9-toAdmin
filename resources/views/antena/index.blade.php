@@ -14,8 +14,6 @@
         </div>
     </div>
 
-    <x-alert-component />
-
     <table class="table table-bordered">
         <tr>
             <th>{{ trans('attributes.antena.mac_address') }}</th>
@@ -50,3 +48,4 @@
         {!! $antenas->links('pagination::bootstrap-4') !!}
     </div>
 @endsection
+

@@ -36,6 +36,7 @@ class RegistrationBoxController extends Controller
     {
         $this->rssiRange = range(0, 100);
         $this->registrationBoxService = $registrationBoxService;
+        $this->antennaRepository = $antennaRepository;
         $this->registrationBoxSearchQuery = $registrationBoxSearchQuery;
     }
 

@@ -14,8 +14,6 @@
         </div>
     </div>
 
-    <x-alert-component />
-
     <form action="{{ route('antena.update', $antena->id) }}" method="POST">
         @csrf
         @method('PUT')

@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+
     <div class="d-none display_value">
             <x-success-component />
     </div>

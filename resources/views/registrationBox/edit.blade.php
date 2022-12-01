@@ -14,8 +14,6 @@
         </div>
     </div>
 
-    <x-alert-component />
-
     <form action="{{ route('registrationBox.update',$registrationBox->id) }}" method="POST">
         @csrf
         @method('PUT')

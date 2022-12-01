@@ -13,8 +13,6 @@
         </div>
     </div>
 
-    <x-alert-component />
-
     <form action="{{ route('antena.store') }}" method="POST">
         @csrf
 
