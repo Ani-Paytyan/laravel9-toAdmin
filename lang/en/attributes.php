@@ -39,6 +39,7 @@ return [
         'id' => 'Id',
         'article' => 'Article nr',
         'mac' => 'MAC',
+        'action' => 'Action',
         'is_online' => 'Is Online',
         'is_inside' => 'Is Inside',
     ],

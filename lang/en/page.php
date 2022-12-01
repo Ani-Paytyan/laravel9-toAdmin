@@ -10,6 +10,8 @@ return [
         'delete_button' => 'Delete',
         'restore_button' => 'Restore',
         'list_delete' => 'Deleted List',
+        'connect_button' => 'Connect',
+        'detach _button' => 'Detach',
     ],
 
     'login' => [
