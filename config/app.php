@@ -220,6 +220,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'AppVersionHelper' => App\Helpers\AppVersion::class,
     ])->toArray(),
 
     'force_https' => env('FORCE_HTTPS'),

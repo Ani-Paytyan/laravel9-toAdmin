@@ -53,5 +53,7 @@ return [
     'filter' => [
         'title' => 'Filter',
         'clean' => 'Clean Filter',
-    ]
+    ],
+
+    'version' => 'v'
 ];
