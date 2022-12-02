@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     $(document).on('click','.itemConnect', function(e) {
         let uniqueItemId = $(e.target).data("id");
+        $('.display_value').addClass('d-none');
         let mac = $(this).parent().siblings('.mac').find("input.mac").val();
         if (mac) {
                 $.ajax({
