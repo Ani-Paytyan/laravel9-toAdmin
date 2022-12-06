@@ -17,13 +17,23 @@ class UniqueItem extends Model
 
     protected $table = 'unique_items';
 
+    const DEFAULT_IS_ONLINE = false;
+    const DEFAULT_IS_INSIDE = false;
+
     protected $fillable = [
         'id',
         'item_id',
         'workplace_id',
         'article',
+        'is_online',
+        'is_inside',
         'mac',
         'deleted_at'
+    ];
+
+    protected $attributes = [
+        'is_online' => self::DEFAULT_IS_ONLINE,
+        'is_inside' => self::DEFAULT_IS_INSIDE,
     ];
 
     public function item()
