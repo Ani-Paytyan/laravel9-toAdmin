@@ -41,6 +41,7 @@
                             </a>
                         </li>
                     </ul>
+                    <p class="version">{{ AppVersionHelper::getAppVersion() }}</p>
                 </div>
             </div>
         </nav>
@@ -76,10 +77,8 @@
                 </div>
             </main>
         </div>
+
     </div>
-    <footer>
-        <p class="version">{{ AppVersionHelper::getAppVersion() }}</p>
-    </footer>
 @endsection
 @push('bodyEnd')
     <script src="{{ mix('build/js/message-time.js') }}"></script>
