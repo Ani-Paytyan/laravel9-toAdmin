@@ -45,8 +45,8 @@
         </tr>
         @foreach ($antennaData as $data)
             <tr class="antennaData">
-                <td>{{ $data->getMac() }}</td>
-                <td>{{ abs($data->getRssi()) }}</td>
+                <td>{{ $data->getMac() ? $data->getMac() : '' }}</td>
+                <td>{{ $data->getRssi() ? abs($data->getRssi()) :'' }}</td>
                 <td>{{ $data->getUniqueItem() ? $data->getUniqueItem()['item']['name']: 'Not connected'}}</td>
                 <td>{{ $data->getUniqueItem() ?$data->getUniqueItem()['article']: 'Not connected' }}</td>
 

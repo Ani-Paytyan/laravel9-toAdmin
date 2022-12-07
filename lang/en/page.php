@@ -18,7 +18,7 @@ return [
     ],
 
     'antena' => [
-        'title' => 'Antena',
+        'title' => 'Antenas',
         'add_antena' => 'Add Antena',
         'create_title' => 'Create Antena',
         'show_title' => 'Show Antena',
@@ -26,7 +26,7 @@ return [
     ],
 
     'workplace' => [
-        'title' => 'Workplace',
+        'title' => 'Workplaces',
         'modal_title' => 'Add antena',
     ],
 
