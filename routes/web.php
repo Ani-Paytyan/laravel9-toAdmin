@@ -38,7 +38,8 @@ Route::middleware('auth')->group(function ()
     Route::resource('workplace', WorkplaceController::class)->only('index', 'show', 'destroy')
         ->name('index', 'workplace.index')
         ->name('show', 'workplace.show');
-    Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy');
+    Route::resource('workplace.antena', WorkplaceAntentaController::class)->only('create', 'destroy', 'edit', 'update')
+        ->name('edit', 'workplace.antena.edit');
 
     Route::resource('item', ItemController::class)->only('index', 'edit', 'update')
         ->name('index', 'item.index')

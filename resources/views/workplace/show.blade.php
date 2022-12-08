@@ -33,7 +33,11 @@
                     <td> {{ $workplace->pivot->type }}</td>
                 @endforeach
                 <td>
-                    <form action="{{ route('workplace.antena.destroy',[$workplace, $antena]) }}"  method="POST">
+                    <a class="btn btn-info" href="{{ route('workplace.antena.edit', [$workplace, $antena]) }}">
+                        {{ trans('page.dashboard.edit_button') }}
+                    </a>
+
+                    <form action="{{ route('workplace.antena.destroy', [$workplace, $antena]) }}" method="POST" class="d-inline-block">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">{{ trans('page.dashboard.delete_button') }}</button>
