@@ -27,7 +27,6 @@ class Kernel extends ConsoleKernel
             $schedule->command(WorkplacesFetch::class),
             $schedule->command(ItemsFetch::class),
             $schedule->command(UniqueItemsFetch::class),
-            //$schedule->command(AntennaStatusFetch::class),
         ];
 
         foreach ($syncCommands as $command) {
@@ -38,6 +37,8 @@ class Kernel extends ConsoleKernel
                 $command->everyFifteenMinutes();
             }
         }
+
+        $schedule->command(AntennaStatusFetch::class)->everyMinute();
 
         /*$schedule->command(CompaniesFetch::class)->everyFifteenMinutes();
         $schedule->command(WorkplacesFetch::class)->everyFifteenMinutes();
