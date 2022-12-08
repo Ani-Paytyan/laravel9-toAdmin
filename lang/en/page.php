@@ -18,7 +18,7 @@ return [
     ],
 
     'antena' => [
-        'title' => 'Antena',
+        'title' => 'Antenas',
         'add_antena' => 'Add Antena',
         'create_title' => 'Create Antena',
         'show_title' => 'Show Antena',
@@ -26,7 +26,7 @@ return [
     ],
 
     'workplace' => [
-        'title' => 'Workplace',
+        'title' => 'Workplaces',
         'modal_title' => 'Add antena',
     ],
 
@@ -50,8 +50,8 @@ return [
 
     'antenna_data' => [
         'title' => 'Antenna Data',
-        'to_plug' => 'To Plug',
-        'disable' => 'Disable',
+        'to_plug' => 'Connect',
+        'disable' => 'Detach',
         'add_unique_item' => 'Connect Mac Address',
     ]
 ];

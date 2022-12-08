@@ -20,27 +20,28 @@
                 <div class="collapse navbar-collapse" id="sidebarCollapse">
                     <!-- Navigation -->
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/antena">
-                                <i class="bi bi-reception-3"></i> Antenas
+                        <li class="nav-item li-ac">
+                            <a class="nav-link {{ request()->is('antena*') ? 'active' : '' }}" href="{{ route('antena.index') }}">
+                                <i class="bi bi-reception-3"></i> {{trans('page.antena.title')}}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/workplace">
-                                <i class="bi bi-building"></i> Workplaces
+                            <a class="nav-link {{ request()->is('workplace*') ? 'active' : '' }}" href="{{ route('workplace.index') }}">
+                                <i class="bi bi-building"></i> {{trans('page.workplace.title')}}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/item">
-                                <i class="bi bi-layout-wtf"></i> Items
+                            <a class="nav-link {{ request()->is('item*') ? 'active' : '' }}" href="{{ route('item.index') }}">
+                                <i class="bi bi-layout-wtf"></i> {{trans('page.item.title')}}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/registrationBox">
-                                <i class="bi bi-box"></i> Registration boxes
+                            <a class="nav-link {{ request()->is('registrationBox*') ? 'active' : '' }}" href="{{ route('registrationBox.index') }}">
+                                <i class="bi bi-box"></i> {{trans('page.registration_box.title')}}
                             </a>
                         </li>
                     </ul>
+                    <p class="version">{{ AppVersionHelper::getAppVersion() }}</p>
                 </div>
             </div>
         </nav>
@@ -69,9 +70,16 @@
             <!-- Main -->
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
+                    <div class="message">
+                        <x-alert-component />
+                    </div>
                     @yield('content')
                 </div>
             </main>
         </div>
+
     </div>
 @endsection
+@push('bodyEnd')
+    <script src="{{ mix('build/js/message-time.js') }}"></script>
+@endpush

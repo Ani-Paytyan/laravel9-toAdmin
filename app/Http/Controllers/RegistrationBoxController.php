@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dto\RegistrationBox\RegistrationBoxCreateRequestDto;
+use App\Dto\RegistrationBox\RegistrationBoxSearchRequestDto;
 use App\Dto\RegistrationBox\RegistrationBoxUpdateRequestDto;
 use App\Dto\Response\MessageDto;
 use App\Http\Requests\RegistrationBoxCreateRequest;
@@ -11,6 +12,7 @@ use App\Http\Resources\AntennaDataResource;
 use App\Models\Antena;
 use App\Models\Item;
 use App\Models\RegistrationBox;
+use App\Queries\RegistrationBox\RegistrationBoxSearchQueryInterface;
 use App\Repositories\Antenna\AntennaRepositoryInterface;
 use App\Services\RegistrationBox\RegistrationBoxServiceInterface;
 use Illuminate\Http\Request;
@@ -24,19 +26,28 @@ class RegistrationBoxController extends Controller
     public RegistrationBoxServiceInterface $registrationBoxService;
     public AntennaRepositoryInterface $antennaRepository;
 
+    public RegistrationBoxSearchQueryInterface $registrationBoxSearchQuery;
+
     public function __construct(
         RegistrationBoxServiceInterface $registrationBoxService,
-        AntennaRepositoryInterface $antennaRepository
+        AntennaRepositoryInterface $antennaRepository,
+        RegistrationBoxSearchQueryInterface $registrationBoxSearchQuery
     )
     {
         $this->rssiRange = range(0, 100);
         $this->registrationBoxService = $registrationBoxService;
         $this->antennaRepository = $antennaRepository;
+        $this->registrationBoxSearchQuery = $registrationBoxSearchQuery;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $boxes = RegistrationBox::paginate(self::PAGE);
+        $dto = RegistrationBoxSearchRequestDto::createFromRequest($request);
+
+        (count($request->all()) > 0) ?
+            $boxes = $this->registrationBoxSearchQuery->getSearchRegistrationBoxQuery($dto)->paginate(self::PAGE)
+             : $boxes = RegistrationBox::paginate(self::PAGE);
+
         return view('registrationBox.index', compact('boxes'));
     }
 

@@ -14,4 +14,9 @@ $(document).ready(function() {
             error: function (data) {}
         });
     });
+
+    $(document).on('click','.filter-clean-form', function(e) {
+        $(this).closest('form').find("input[type=text]").val("");
+        window.location.href = '?';
+    });
 });

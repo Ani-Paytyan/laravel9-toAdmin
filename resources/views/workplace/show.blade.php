@@ -27,15 +27,23 @@
             <th>{{ trans('attributes.antena.position') }}</th>
             <th></th>
         </tr>
+
         @foreach ($antenas as $antena)
             <tr class="workplaceAntennaData">
                 <td>{{ $antena->mac_address }}</td>
+                @foreach ($antena->workplaces as $workplace)
+                    <td> {{ $workplace->pivot->type }}</td>
+                @endforeach
                 <td>
                     <span class="logged-in text-{{$antena->is_online ? 'success' : 'danger'}}">●</span>
                 </td>
                 <td>{{ $antena->type_id == 1 ? 'In' : 'Out' }}</td>
                 <td>
-                    <form action="{{ route('workplace.antena.destroy',[$workplace, $antena]) }}"  method="POST">
+                    <a class="btn btn-info" href="{{ route('workplace.antena.edit', [$workplace, $antena]) }}">
+                        {{ trans('page.dashboard.edit_button') }}
+                    </a>
+
+                    <form action="{{ route('workplace.antena.destroy', [$workplace, $antena]) }}" method="POST" class="d-inline-block">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">{{ trans('page.dashboard.delete_button') }}</button>
@@ -47,7 +55,7 @@
     </table>
 
     <!-- Modal -->
-    <div class="modal fade" id="antenaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="antenaModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -58,8 +66,8 @@
                     <form id="addAntena" action="{{ route('workplace.antena.create', $workplace) }}"  method="POST">
                         @csrf
                         @method('HEAD')
-                        <x-form.select name="antena_id"  :options="$filterAntena" label="{{ trans('attributes.antena.mac') }}" ></x-form.select>
-                        <x-form.select name="type"  :options="['in' => 'In', 'out' => 'Out']" label="{{ trans('attributes.antena.position') }}" ></x-form.select>
+                        <x-form.select name="antena_id" :withSearch="true" :options="$filterAntena" label="{{ trans('attributes.antena.mac') }}" @overwrite></x-form.select>
+                        <x-form.select name="type" :options="['in' => 'In', 'out' => 'Out']" label="{{ trans('attributes.antena.position') }}" ></x-form.select>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -70,11 +78,12 @@
     </div>
 @endsection
 @push('bodyEnd')
+    <script src="{{ mix('build/js/input.js')  }}"></script>
     <script>
-        const translation = {
-            'btn_delete': '{{ trans('page.dashboard.delete_button') }}',
-        };
-        const tokenStatus = '{{ @csrf_token() }}';
+      const translation = {
+        'btn_delete': '{{ trans('page.dashboard.delete_button') }}',
+      };
+      const tokenStatus = '{{ @csrf_token() }}';
     </script>
-<script src="{{ mix('build/js/antenna-status.js')  }}"></script>
+    <script src="{{ mix('build/js/antenna-status.js')  }}"></script>
 @endpush

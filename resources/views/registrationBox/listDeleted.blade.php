@@ -14,7 +14,6 @@
         </div>
     </div>
 
-    <x-alert-component />
     <table class="table table-bordered">
         <tr>
             <th>{{ trans('attributes.registration_box.id') }}</th>

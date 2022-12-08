@@ -48,7 +48,7 @@ class AntennaRepository implements AntennaRepositoryInterface
     private function getFilteredItems(array $apiResult, int $rssi): array
     {
         return array_filter($apiResult['result'] ?? [], function ($item) use ($rssi) {
-            return abs($item['rssi']) >= $rssi;
+            return abs($item['rssi']) <= $rssi;
         });
     }
 

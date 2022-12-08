@@ -26,7 +26,7 @@ $(document).ready(function() {
     });
 
     $('.addAntennaData').on('click', function(e) {
-        let mac = $('.macUniqueItem').data('mac');
+        let mac = $('#exampleModalLabel').data('mac');
         let uniqueItemId = $("#uniqueItems").val();
         if(mac && uniqueItemId) {
                 $.ajax({
@@ -101,5 +101,10 @@ $(document).ready(function() {
             </td>
          </tr>`;
     }
+
+    $(document).on('click','.macUniqueItem', function(e) {
+        let mac = $(e.target).data('mac');
+        $('#exampleModalLabel').html(mac).attr('data-mac', mac);
+    });
 });
 
