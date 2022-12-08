@@ -9,7 +9,7 @@
                 <h2>{{ trans('page.antena.edit_title') }}</h2>
             </div>
             <div class="pull-right float-end">
-                <a class="btn btn-primary" href="{{ route('antena.index') }}">{{ trans('page.dashboard.back_button') }}</a>
+                <a class="btn btn-primary" href="{{ route('workplace.show', $workplace) }}">{{ trans('page.dashboard.back_button') }}</a>
             </div>
         </div>
     </div>
