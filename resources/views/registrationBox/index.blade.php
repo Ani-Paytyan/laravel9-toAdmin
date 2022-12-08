@@ -22,7 +22,6 @@
         </tr>
         @foreach ($boxes as $box)
             <tr>
-                <td>{{ $box->id }}</td>
                 <td>{{ $box->name }}</td>
                 <td>{{ $box->rssi_throttle }}</td>
                 <td>
