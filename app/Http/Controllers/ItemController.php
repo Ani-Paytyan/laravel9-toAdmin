@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Dto\Response\MessageDto;
 use App\Http\Requests\UniqueItemUpdateRequest;
 use App\Models\Item;
+use App\Models\UniqueItem;
 use App\Services\Item\ItemServiceInterface;
 use App\Services\UniqueItem\UniqueItemServiceInterface;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -41,4 +43,17 @@ class ItemController extends Controller
         ]);
     }
 
+    public function updateByMac(UniqueItem $uniqueItem, Request $request)
+    {
+        $this->uniqueItemService->updateUniqueItemMac($uniqueItem, $request->get('mac'));
+
+        return ['message' => 'success'];
+    }
+
+    public function detachedByMac(UniqueItem $uniqueItem)
+    {
+        $this->uniqueItemService->detachUniqueItemMac($uniqueItem);
+
+        return ['message' => 'success'];
+    }
 }

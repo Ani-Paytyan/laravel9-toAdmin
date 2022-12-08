@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function ()
     Route::resource('item', ItemController::class)->only('index', 'edit', 'update')
         ->name('index', 'item.index')
         ->name('edit', 'item.edit');
+    Route::post('updateByMac/{uniqueItem}', [ItemController::class, 'updateByMac'])->name('item.updateMac');
+    Route::post('detachedByMac/{uniqueItem}', [ItemController::class, 'detachedByMac'])->name('item.detachedMac');
 
     Route::resource('registrationBox', RegistrationBoxController::class)
         ->name('index', 'registrationBox.index')

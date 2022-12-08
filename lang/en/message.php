@@ -7,5 +7,7 @@ return [
 
     'antena' => [
         'success_message' => 'Success'
-    ]
+    ],
+
+    'success_message' => 'Success'
 ];
