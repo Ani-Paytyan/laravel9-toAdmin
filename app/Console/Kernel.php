@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(WorkplacesFetch::class),
             $schedule->command(ItemsFetch::class),
             $schedule->command(UniqueItemsFetch::class),
-            $schedule->command(AntennaStatusFetch::class),
+            //$schedule->command(AntennaStatusFetch::class),
         ];
 
         foreach ($syncCommands as $command) {
