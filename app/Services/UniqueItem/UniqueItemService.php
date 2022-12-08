@@ -44,7 +44,7 @@ class UniqueItemService implements UniqueItemServiceInterface
 
     public function updateUniqueItemMac(UniqueItem $uniqueItem, string $mac): void
     {
-        UniqueItem::find($uniqueItem->id)->update(['mac' => $mac]);
+        $uniqueItem->update(['mac' => $mac]);
     }
 
     public function detachUniqueItemMac(UniqueItem $uniqueItem): void
