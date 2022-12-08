@@ -34,7 +34,6 @@
             </div>
         </div>
     </div>
-    <x-alert-component/>
     <table class="table table-bordered top-20 antennaDataTable">
         <tr>
             <th>{{ trans('attributes.antenna_data.mac_address') }}</th>

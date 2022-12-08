@@ -3,6 +3,7 @@
 namespace App\Services\UniqueItem;
 
 use App\Dto\UniqueItem\UniqueItemRequestDto;
+use App\Models\UniqueItem;
 
 interface UniqueItemServiceInterface
 {
@@ -11,6 +12,8 @@ interface UniqueItemServiceInterface
     public function updateUniqueItems(array $uniqueItems): void;
 
     public function updateUniqueItem(UniqueItemRequestDto $uniqueItemRequestDto): void;
+
+    public function disableUniqueItem(UniqueItem $uniqueItem): void;
 
     public function getUniqueItemByItemId(string $itemId): array;
 }
