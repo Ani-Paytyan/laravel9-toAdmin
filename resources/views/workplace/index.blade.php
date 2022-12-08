@@ -23,9 +23,17 @@
                 <td>{{ $workplace->name }}</td>
                 <td>{{ $workplace->company?->name}}</td>
                 <td>{{ $workplace->address}}</td>
-                <td>{{ $workplace->antenas_count}}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('workplace.show',$workplace->id.'/') }}">{{ trans('page.dashboard.show_button') }}</a>
+                    @if( $workplace->antenas_count)
+                        @foreach($workplace->antenas as $antena)
+                            <span class="logged-in text-success" title="{{$antena->mac_address}} {{$workplace->name}}">●</span>
+                        @endforeach
+                    @else
+                        <span>-</span>
+                    @endif
+                </td>
+                <td>
+                    <a class="btn btn-info" class="antennasStatusData" href="{{ route('workplace.show',$workplace->id.'/') }}">{{ trans('page.dashboard.show_button') }}</a>
                 </td>
             </tr>
         @endforeach

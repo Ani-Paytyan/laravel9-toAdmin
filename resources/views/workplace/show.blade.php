@@ -18,20 +18,25 @@
             </div>
         </div>
     </div>
+    <x-alert-component />
 
-    <table class="table table-bordered top-20">
+    <table class="table table-bordered top-20" id="workplaceAntennaDataTable">
         <tr>
             <th>{{ trans('attributes.antena.mac') }}</th>
             <th>{{ trans('attributes.antena.position') }}</th>
+            <th>{{ trans('attributes.antena.status') }}</th>
             <th></th>
         </tr>
 
         @foreach ($antenas as $antena)
-            <tr>
+            <tr class="workplaceAntennaData">
                 <td>{{ $antena->mac_address }}</td>
-                @foreach ($antena->workplaces as $workplace)
-                    <td> {{ $workplace->pivot->type }}</td>
-                @endforeach
+                    <td>
+                        {{ $antena->pivot->type }}
+                    </td>
+                <td>
+                    <span class="logged-in text-{{$antena->is_online ? 'success' : 'danger'}}">●</span>
+                </td>
                 <td>
                     <a class="btn btn-info" href="{{ route('workplace.antena.edit', [$workplace, $antena]) }}">
                         {{ trans('page.dashboard.edit_button') }}
@@ -73,4 +78,11 @@
 @endsection
 @push('bodyEnd')
     <script src="{{ mix('build/js/input.js')  }}"></script>
+    <script>
+      const translation = {
+        'btn_delete': '{{ trans('page.dashboard.delete_button') }}',
+      };
+      const tokenStatus = '{{ @csrf_token() }}';
+    </script>
+    <script src="{{ mix('build/js/antenna-status.js')  }}"></script>
 @endpush

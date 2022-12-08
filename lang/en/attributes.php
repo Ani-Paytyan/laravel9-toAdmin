@@ -10,9 +10,10 @@ return [
         'mac_address' => 'Mac Address',
         'type' => 'Type',
         'choose_type' => 'Choose Type',
+        'manufacture_type' => 'Manufacture Type',
+        'status' => 'Status',
         'mac' => 'MAC',
         'position' => 'Position',
-        'manufacture_type' => 'Manufacture Type'
     ],
 
     'workplace' => [

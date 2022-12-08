@@ -30,6 +30,11 @@ class WorkplaceController extends Controller
     public function show(Workplace $workplace)
     {
         $antenas = $workplace->antenas;
+
+        if(request()->ajax()) {
+            return ['antenas' => $antenas, 'workplace' => $workplace];
+        }
+
         $filterAntena = $this->antennaQueries
             ->getAntenasWhichNotBelongsToWorkplace($workplace)
             ->get()->pluck( 'mac_address', 'id')

@@ -15,4 +15,11 @@ class WatcherAntennaApiService extends AbstractWatcherApi implements WatcherAnte
     {
         return ($this->getRequestBuilder()->get('v1/antenna/see/'. $mac))->json();
     }
+
+    public function antennaStatus(array $antennasMacs)
+    {
+        return $this->getRequestBuilder()->post('v1/antenna/statuses', [
+                'list' => $antennasMacs
+            ])->json();
+    }
 }

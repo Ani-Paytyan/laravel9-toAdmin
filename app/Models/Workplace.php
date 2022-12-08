@@ -56,7 +56,7 @@ class Workplace extends Model
 
     public function antenas()
     {
-        return $this->belongsToMany(Antena::class);
+        return $this->belongsToMany(Antena::class)->withPivot(['type']);
     }
 
     public function items()
