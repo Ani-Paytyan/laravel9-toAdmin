@@ -54,6 +54,6 @@ return [
         'title' => 'Antenna Data',
         'to_plug' => 'Connect',
         'disable' => 'Detach',
-        'add_unique_item' => 'Connect Mac Address',
+        'add_unique_item' => 'Connect to MAC',
     ]
 ];
