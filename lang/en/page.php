@@ -5,6 +5,7 @@ return [
         'title' => 'Dashboard',
         'back_button' => 'Back',
         'submit_button' => 'Submit',
+        'submit_button_popup' => 'Connect',
         'show_button' => 'Show',
         'edit_button' => 'Edit',
         'delete_button' => 'Delete',
