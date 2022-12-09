@@ -8,8 +8,9 @@
             <div class="pull-left">
                 <h2>{{ trans('page.registration_box.title') }}</h2>
             </div>
-            <div class="pull-right float-end m-2">
-                <a class="btn btn-success" href="{{ route('registrationBox.create') }}">{{ trans('page.registration_box.add_registration_box') }}</a>
+            <div class="pull-right m-2">
+                <a class="btn  btn-primary float-end" href="{{ route('registrationBox.listDeleted') }}">{{ trans('page.dashboard.list_delete') }}</a>
+                <a class="btn btn-success btn-primary" href="{{ route('registrationBox.create') }}">{{ trans('page.registration_box.add_registration_box') }}</a>
             </div>
         </div>
     </div>
@@ -30,13 +31,11 @@
                     <form action="{{ route('registrationBox.destroy',$box->id) }}" method="POST" class="d-inline-block">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">{{ trans('page.dashboard.delete_button') }}</button>
+                        <button type="submit" class="btn btn-danger">{{ trans('page.dashboard.list_delete') }}</button>
                     </form>
                 </td>
             </tr>
         @endforeach
-        <a class="btn btn-primary" href="{{ route('registrationBox.listDeleted') }}">{{ trans('page.dashboard.list_delete') }}</a>
-
     </table>
     <div class="d-flex">
         {!! $boxes->links('pagination::bootstrap-4') !!}
