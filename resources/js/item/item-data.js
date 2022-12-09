@@ -9,8 +9,17 @@ $(document).ready(function() {
     $(document).on('click','.itemConnect', function(e) {
         let uniqueItemId = $(e.target).data("id");
         $('.display_value').addClass('d-none');
+        $('.display_value_error').addClass('d-none');
         let mac = $(this).parent().siblings('.mac').find("input.mac").val();
-        if (mac) {
+        var macAll = document.querySelectorAll('input.mac');
+        let count = 0;
+        [].forEach.call(macAll, function(macItem) {
+            if(mac === macItem.value )
+            {
+                count++;
+            }
+        });
+        if (mac &&  count < 2 ) {
                 $.ajax({
                 url: "/updateByMac/" + uniqueItemId,
                 data: {
@@ -24,6 +33,9 @@ $(document).ready(function() {
                 },
                 error: function (data) {}
             });
+        }
+        else{
+            $('.display_value_error').removeClass('d-none');
         }
     });
 

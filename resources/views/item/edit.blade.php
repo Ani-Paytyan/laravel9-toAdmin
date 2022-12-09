@@ -17,6 +17,9 @@
     <div class="d-none display_value">
             <x-success-component />
     </div>
+    <div class="d-none display_value_error">
+        <x-error-component />
+    </div>
     <form action="{{ route('item.update', $item->id) }}" method="POST">
         @csrf
         @method('PUT')
