@@ -42,9 +42,14 @@ class UniqueItemService implements UniqueItemServiceInterface
         return UniqueItem::where('item_id', $itemId)->whereNull('mac')->pluck('article', 'id')->toArray();
     }
 
-    public function updateUniqueItemMac(UniqueItem $uniqueItem, string $mac): void
+    public function updateUniqueItemMac(UniqueItem $uniqueItem, string $mac): bool
     {
-        $uniqueItem->update(['mac' => $mac]);
+        if (is_null(UniqueItem::where('mac', $mac)->first()))
+        {
+            $uniqueItem->update(['mac' => $mac]);
+            return true;
+        }
+        return false;
     }
 
     public function detachUniqueItemMac(UniqueItem $uniqueItem): void

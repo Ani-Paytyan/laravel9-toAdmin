@@ -45,9 +45,12 @@ class ItemController extends Controller
 
     public function updateByMac(UniqueItem $uniqueItem, Request $request)
     {
-        $this->uniqueItemService->updateUniqueItemMac($uniqueItem, $request->get('mac'));
-
-        return ['message' => 'success'];
+        if ($this->uniqueItemService->updateUniqueItemMac($uniqueItem, $request->get('mac')))
+        {
+            return response()->json(['error' => 'Success msg'], 200);
+        } else {
+            return response()->json(['error' => 'Error msg'], 404);
+        }
     }
 
     public function detachedByMac(UniqueItem $uniqueItem)

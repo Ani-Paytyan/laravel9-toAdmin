@@ -11,15 +11,7 @@ $(document).ready(function() {
         $('.display_value').addClass('d-none');
         $('.display_value_error').addClass('d-none');
         let mac = $(this).parent().siblings('.mac').find("input.mac").val();
-        var macAll = document.querySelectorAll('input.mac');
-        let count = 0;
-        [].forEach.call(macAll, function(macItem) {
-            if(mac === macItem.value )
-            {
-                count++;
-            }
-        });
-        if (mac &&  count < 2 ) {
+        if (mac) {
                 $.ajax({
                 url: "/updateByMac/" + uniqueItemId,
                 data: {
@@ -31,11 +23,10 @@ $(document).ready(function() {
                 success: function (data) {
                     $('.display_value').removeClass('d-none');
                 },
-                error: function (data) {}
+                error: function (data) {
+                    $('.display_value_error').removeClass('d-none');
+                }
             });
-        }
-        else{
-            $('.display_value_error').removeClass('d-none');
         }
     });
 

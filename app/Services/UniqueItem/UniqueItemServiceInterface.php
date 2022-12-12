@@ -15,7 +15,7 @@ interface UniqueItemServiceInterface
 
     public function getUniqueItemByItemId(string $itemId): array;
 
-    public function updateUniqueItemMac(UniqueItem $uniqueItem, string  $mac): void;
+    public function updateUniqueItemMac(UniqueItem $uniqueItem, string  $mac): bool;
 
     public function detachUniqueItemMac(UniqueItem $uniqueItem): void;
 }
