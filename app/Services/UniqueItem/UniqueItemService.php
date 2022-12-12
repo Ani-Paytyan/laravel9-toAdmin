@@ -44,7 +44,7 @@ class UniqueItemService implements UniqueItemServiceInterface
 
     public function updateUniqueItemMac(UniqueItem $uniqueItem, string $mac): bool
     {
-        if (is_null(UniqueItem::where('mac', $mac)->first()))
+        if (!(UniqueItem::where('mac', $mac)->count()))
         {
             $uniqueItem->update(['mac' => $mac]);
             return true;

@@ -47,10 +47,10 @@ class ItemController extends Controller
     {
         if ($this->uniqueItemService->updateUniqueItemMac($uniqueItem, $request->get('mac')))
         {
-            return response()->json(['error' => 'Success msg'], 200);
-        } else {
-            return response()->json(['error' => 'Error msg'], 404);
+            return response()->json(['error' => 'Success message'], 200);
         }
+
+        return response()->json(['error' => 'Error message'], 404);
     }
 
     public function detachedByMac(UniqueItem $uniqueItem)
