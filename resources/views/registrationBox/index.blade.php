@@ -18,12 +18,16 @@
         <tr>
             <th>{{ trans('attributes.registration_box.name') }}</th>
             <th>{{ trans('attributes.registration_box.rssi_throttle') }}</th>
+            <th>{{ trans('attributes.antena.status') }}</th>
             <th></th>
         </tr>
         @foreach ($boxes as $box)
             <tr>
                 <td>{{ $box->name }}</td>
                 <td>{{ $box->rssi_throttle }}</td>
+                <td>
+                    <span class="logged-in text-{{$box->antenna->is_online ? 'success' : 'danger'}}">●</span>
+                </td>
                 <td>
                     <a class="btn btn-info" href="{{ route('registrationBox.show',$box->id) }}">{{ trans('page.dashboard.show_button') }}</a>
                     <a class="btn btn-primary" href="{{ route('registrationBox.edit',$box->id) }}">{{ trans('page.dashboard.edit_button') }}</a>
