@@ -81,6 +81,7 @@
     <script>
       const translation = {
         'btn_delete': '{{ trans('page.dashboard.delete_button') }}',
+        'btn_edit': ' {{trans('page.dashboard.edit_button') }}',
       };
       const tokenStatus = '{{ @csrf_token() }}';
     </script>
