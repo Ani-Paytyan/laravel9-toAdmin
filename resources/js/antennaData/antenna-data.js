@@ -104,7 +104,7 @@ $(document).ready(function() {
 
     $(document).on('click','.macUniqueItem', function(e) {
         let mac = $(e.target).data('mac');
-        $('#exampleModalLabel').html(mac).attr('data-mac', mac);
+        $('#exampleModalLabel').find('.macHeader').html('['+mac+']').attr('data-mac', mac);
     });
 });
 
