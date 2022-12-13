@@ -26,7 +26,7 @@
                 <td>
                     @if( $workplace->antenas_count)
                         @foreach($workplace->antenas as $antena)
-                            <span class="logged-in text-success" title="{{$antena->mac_address}} {{$workplace->name}}">●</span>
+                            <span class="logged-in text-{{$antena->is_online ? 'success' : 'danger'}}" title="{{$antena->mac_address}} {{$workplace->name}}">●</span>
                         @endforeach
                     @else
                         <span>-</span>
