@@ -91,7 +91,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="addAntennaData"
-                            form="addAntennaData">{{ trans('page.dashboard.submit_button') }}</button>
+                            form="addAntennaData">{{ trans('page.dashboard.submit_button_popup') }}</button>
                 </div>
             </div>
         </div>
