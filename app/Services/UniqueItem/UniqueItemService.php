@@ -28,6 +28,12 @@ class UniqueItemService implements UniqueItemServiceInterface
         UniqueItem::whereIn('mac', array_values($uniqueItems))->update(['mac' => null]);
         foreach($uniqueItems as $id => $mac) {
             UniqueItem::find($id)->update(['mac' => $mac]);
+            $uniqueItem = UniqueItem::where('id', $id)->firstOrFail();
+            if (!$mac) {
+                $uniqueItem->is_online = false;
+                $uniqueItem->is_inside = false;
+                $uniqueItem->save();
+            }
         }
     }
 
@@ -36,6 +42,16 @@ class UniqueItemService implements UniqueItemServiceInterface
         UniqueItem::find($uniqueItemRequestDto->getUniqueItemId())
             ->update(['mac' => $uniqueItemRequestDto->getMac()]);
     }
+
+    public function disableUniqueItem(UniqueItem $uniqueItem): void
+    {
+        $uniqueItem->update(['mac' => null]);
+        $uniqueItem = UniqueItem::where('id', $uniqueItem->id)->firstOrFail();
+        $uniqueItem->is_online = false;
+        $uniqueItem->is_inside = false;
+        $uniqueItem->save();
+    }
+
 
     public function getUniqueItemByItemId(string $itemId): array
     {

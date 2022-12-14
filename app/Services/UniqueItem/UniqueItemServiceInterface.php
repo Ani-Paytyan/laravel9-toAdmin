@@ -13,6 +13,8 @@ interface UniqueItemServiceInterface
 
     public function updateUniqueItem(UniqueItemRequestDto $uniqueItemRequestDto): void;
 
+    public function disableUniqueItem(UniqueItem $uniqueItem): void;
+
     public function getUniqueItemByItemId(string $itemId): array;
 
     public function updateUniqueItemMac(UniqueItem $uniqueItem, string  $mac): void;
