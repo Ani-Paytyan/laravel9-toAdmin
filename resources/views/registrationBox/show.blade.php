@@ -84,13 +84,26 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="_token" value="{{ @csrf_token() }}">
-                    <x-form.select name="item_id" :withSearch="true" :options="$items ?? []" id="items"
-                                   label="{{ trans('attributes.antenna_data.item_name') }}"></x-form.select>
-                    <x-form.select name="unique_id" :withSearch="true" :options="$uniqueItems ?? []" id="uniqueItems"
-                                   label="{{ trans('attributes.antenna_data.article_name') }}"></x-form.select>
+                    <div class="mb-4">
+                        <x-form.select
+                            name="item_id"
+                            :withSearch="true"
+                            :options="$items ?? []" id="items"
+                            label="{{ trans('attributes.antenna_data.item_name') }}"
+                            placeholder="{{ trans('common.choose') }}"
+                        />
+                    </div>
+                    <x-form.select
+                        name="unique_id"
+                        :withSearch="true"
+                        :options="$uniqueItems ?? []"
+                        id="uniqueItems"
+                        label="{{ trans('attributes.antenna_data.article_name') }}"
+                        placeholder="{{ trans('common.choose') }}"
+                    />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="addAntennaData"
+                    <button type="button" class="btn btn-primary addAntennaData"
                             form="addAntennaData">{{ trans('page.dashboard.submit_button_popup') }}</button>
                 </div>
             </div>
