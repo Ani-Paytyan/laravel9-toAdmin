@@ -43,6 +43,15 @@ class UniqueItemService implements UniqueItemServiceInterface
             ->update(['mac' => $uniqueItemRequestDto->getMac()]);
     }
 
+    public function disableUniqueItem(UniqueItem $uniqueItem): void
+    {
+        $uniqueItem->update(['mac' => null]);
+        $uniqueItem = UniqueItem::where('id', $uniqueItem->id)->firstOrFail();
+        $uniqueItem->is_online = false;
+        $uniqueItem->is_inside = false;
+        $uniqueItem->save();
+    }
+
     public function getUniqueItemByItemId(string $itemId): array
     {
         return UniqueItem::where('item_id', $itemId)->whereNull('mac')->pluck('article', 'id')->toArray();
