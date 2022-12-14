@@ -13,11 +13,12 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function (data) {
                     $.each(data.uniqueItems, function(key, value) {
-                        var $option = $("<option/>", {
+                        let chooseOption = `<option hidden>Choose</option>`;
+                        let optionData = $("<option/>", {
                             value: key,
                             text: value
                         });
-                        $('#uniqueItems').append($option);
+                        $('#uniqueItems').append(chooseOption, optionData);
                     });
                 },
                 error: function (data) {}
