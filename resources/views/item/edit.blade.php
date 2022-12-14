@@ -52,18 +52,18 @@
                         <button class="btn btn-danger itemDetach" type="button" data-id="{{ $uniqueItem->id }}">{{ trans('page.dashboard.detach _button') }}</button>
                     </td>
                     <td>
-                        @if($uniqueItem->is_online)
-                            <div style="background-color:green; color:white; text-align: center">Online</div>
-                        @else
-                            <div style="background-color:red; color:white; text-align: center">Offline</div>
-                        @endif
+                        <?php $styleOnline = $uniqueItem->is_online? 'green' : 'red';
+                            $onlineText = $uniqueItem->is_online? 'Online' : 'Offline';
+                        ?>
+                        <div class="onlineButton" style="background-color: {{$styleOnline}}; color:white; text-align: center">
+                            {{$onlineText}}
+                        </div>
                     </td>
                     <td>
-                        @if($uniqueItem->is_inside)
-                            <div style="background-color:green; color:white; text-align: center">Inside</div>
-                        @else
-                            <div style="background-color:red; color:white; text-align: center">Outside</div>
-                        @endif
+                        <?php $styleInside = $uniqueItem->is_inside ? 'green' : 'red';
+                            $insideText = $uniqueItem->is_inside? 'Online' : 'Offline';
+                        ?>
+                        <div class="insideButton" style="background-color:{{$styleInside}}; color:white; text-align: center">{{$insideText}}</div>
                     </td>
                 </tr>
             @endforeach

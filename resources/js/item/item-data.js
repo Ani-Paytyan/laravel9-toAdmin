@@ -52,6 +52,10 @@ $(document).ready(function() {
                 self.parent().find("button.itemEdit").addClass('d-none');
                 self.parent().find("button.itemConnect").attr('disabled','disabled');
                 self.parent().find("button.itemDetach").addClass('disabled');
+                self.parent().parent().find("div.onlineButton").css('background-color','red');
+                self.parent().parent().find("div.onlineButton").html('Offline');
+                self.parent().parent().find("div.insideButton").css('background-color','red');
+                self.parent().parent().find("div.insideButton").html('Offline');
             },
             error: function (data) {}
         });

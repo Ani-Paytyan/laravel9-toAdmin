@@ -27,13 +27,13 @@ class UniqueItemService implements UniqueItemServiceInterface
     {
         UniqueItem::whereIn('mac', array_values($uniqueItems))->update(['mac' => null]);
         foreach($uniqueItems as $id => $mac) {
-            UniqueItem::find($id)->update(['mac' => $mac]);
-            $uniqueItem = UniqueItem::where('id', $id)->firstOrFail();
+            $uniqueItem = UniqueItem::find($id);
+            $uniqueItem->mac = $mac;
             if (!$mac) {
                 $uniqueItem->is_online = false;
                 $uniqueItem->is_inside = false;
-                $uniqueItem->save();
             }
+            $uniqueItem->save();
         }
     }
 
@@ -52,7 +52,6 @@ class UniqueItemService implements UniqueItemServiceInterface
         $uniqueItem->save();
     }
 
-
     public function getUniqueItemByItemId(string $itemId): array
     {
         return UniqueItem::where('item_id', $itemId)->whereNull('mac')->pluck('article', 'id')->toArray();
@@ -60,11 +59,19 @@ class UniqueItemService implements UniqueItemServiceInterface
 
     public function updateUniqueItemMac(UniqueItem $uniqueItem, string $mac): void
     {
-        $uniqueItem->update(['mac' => $mac]);
+        $uniqueItem->mac = $mac;
+        if (!$mac) {
+            $uniqueItem->is_online = false;
+            $uniqueItem->is_inside = false;
+        }
+        $uniqueItem->save();
     }
 
     public function detachUniqueItemMac(UniqueItem $uniqueItem): void
     {
         $uniqueItem->update(['mac' => null]);
+        $uniqueItem->is_online = false;
+        $uniqueItem->is_inside = false;
+        $uniqueItem->save();
     }
 }
