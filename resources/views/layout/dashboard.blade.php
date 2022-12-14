@@ -41,7 +41,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="version">{{ AppVersionHelper::getAppVersion() }}</p>
+                    <p class="mt-auto">{{ AppVersionHelper::getAppVersion() }}</p>
                 </div>
             </div>
         </nav>
