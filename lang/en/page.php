@@ -10,7 +10,7 @@ return [
         'edit_button' => 'Edit',
         'delete_button' => 'Delete',
         'restore_button' => 'Restore',
-        'list_delete' => 'Deleted List',
+        'list_delete' => 'Archive',
         'connect_button' => 'Connect',
         'detach _button' => 'Detach',
     ],
