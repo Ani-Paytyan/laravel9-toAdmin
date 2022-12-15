@@ -19,7 +19,10 @@ $(document).ready(function() {
                         <td>${data.antenas[i]['pivot']['type']}</td>
                         <td><span class="logged-in text-${style}">●</span></td>
                         <td>
-                            <form action="/workplace/${data.workplace.id}/antena/${data.antenas[i].id}" method="POST">
+                            <a class="btn btn-info" href="/workplace/${data.workplace.id}/antena/${data.antenas[i].id}/edit">
+                                ${translation.btn_edit}
+                            </a>
+                            <form action="/workplace/${data.workplace.id}/antena/${data.antenas[i].id}" method="POST" class="d-inline-block">
                                 <input type="hidden" name="_token" value="${tokenStatus}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger">${translation.btn_delete}</button>
