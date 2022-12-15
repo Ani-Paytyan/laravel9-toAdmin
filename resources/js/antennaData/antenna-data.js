@@ -92,8 +92,8 @@ $(document).ready(function() {
         return `<tr class='antennaData'>
             <td>${antennaData['mac']}</td>
             <td>${Math.abs(antennaData['rssi'])}</td>
-            <td>${antennaData['unique_item']['article'] ?? ''}</td>
             <td>${antennaData['unique_item']['item']['name'] ?? ''}</td>
+            <td>${antennaData['unique_item']['article'] ?? ''}</td>
             <td>
                 <form action="/watcher/item_unique/disable/${antennaData['unique_item']['id']}" method="POST">
                     <input type="hidden" name="_token" value="${token}">
