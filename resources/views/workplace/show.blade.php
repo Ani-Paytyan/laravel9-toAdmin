@@ -18,7 +18,6 @@
             </div>
         </div>
     </div>
-    <x-alert-component />
 
     <table class="table table-bordered top-20" id="workplaceAntennaDataTable">
         <tr>
