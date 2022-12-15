@@ -27,7 +27,9 @@
                 <td>{{ $box->name }}</td>
                 <td>{{ $box->rssi_throttle }}</td>
                 <td>
-                    <span class="logged-in text-{{$box->antenna->is_online ? 'success' : 'danger'}}">●</span>
+                    @if ($box->antenna)
+                        <span class="logged-in text-{{$box->antenna->is_online ? 'success' : 'danger'}}">●</span>
+                    @endif
                 </td>
                 <td>
                     <a class="btn btn-info" href="{{ route('registrationBox.show',$box->id) }}">{{ trans('page.dashboard.show_button') }}</a>
