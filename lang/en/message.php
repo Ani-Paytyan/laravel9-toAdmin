@@ -9,5 +9,6 @@ return [
         'success_message' => 'Success'
     ],
 
-    'success_message' => 'Success'
+    'success_message' => 'Success',
+    'error_message' => 'Error'
 ];

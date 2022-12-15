@@ -11,6 +11,7 @@ $(document).ready(function() {
         $('tr').removeClass('table-active');
         let uniqueItemId = $(e.target).data("id");
         $('.display_value').addClass('d-none');
+        $('.display_value_error').addClass('d-none');
         let self = $(this);
         let mac = $(this).parent().siblings('.mac').find("input.mac").val();
         if (mac) {
@@ -29,7 +30,9 @@ $(document).ready(function() {
                     self.parent().find("button.itemConnect").attr('disabled','disabled');
                     self.closest('tr').addClass('table-active');
                 },
-                error: function (data) {}
+                error: function (data) {
+                    $('.display_value_error').removeClass('d-none');
+                }
             });
         }
     });

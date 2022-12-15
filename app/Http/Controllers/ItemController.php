@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Dto\Response\MessageDto;
+use App\Http\Requests\UniqueItemMacUpdateRequest;
 use App\Http\Requests\UniqueItemUpdateRequest;
 use App\Models\Item;
 use App\Models\UniqueItem;
 use App\Services\Item\ItemServiceInterface;
 use App\Services\UniqueItem\UniqueItemServiceInterface;
-use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -43,11 +43,11 @@ class ItemController extends Controller
         ]);
     }
 
-    public function updateByMac(UniqueItem $uniqueItem, Request $request)
+    public function updateByMac(UniqueItem $uniqueItem, UniqueItemMacUpdateRequest $request)
     {
         $this->uniqueItemService->updateUniqueItemMac($uniqueItem, $request->get('mac'));
 
-        return ['message' => 'success'];
+        return response()->json(['message' => 'Success message'], 200);
     }
 
     public function detachedByMac(UniqueItem $uniqueItem)
