@@ -34,40 +34,39 @@
                 <th>{{ trans('attributes.unique_item.is_inside') }}</th>
             </tr>
             @foreach ($uniqueItems as $uniqueItem)
-                <tr>
+                <tr class="correct">
                     <td>{{ $item->name }}</td>
                     <td>{{ $uniqueItem->article }}</td>
 
                     <td class="mac">
                         <div class="mb-5">
                             <x-form.input
-                                name="mac[{{$uniqueItem->id}}]" class="mac {{ ($uniqueItem->mac) ? 'form-control-muted': ''}}"
+                                name="mac[{{$uniqueItem->id}}]" class="mac"
                                 type="text"
                                 id="password"
                                 value="{{ $uniqueItem->mac }}"
-                            />
+                                :disabled="$uniqueItem->mac ? true : false">
+                            </x-form.input>
                         </div>
                     </td>
                     <td>
-                        @if($uniqueItem->mac)
-                            <button class="btn btn-primary itemEdit" type="button" data-mac="{{ $uniqueItem->mac }}" data-id="{{ $uniqueItem->id }}">{{ trans('page.dashboard.edit_button') }}</button>
-                        @endif
-                            <button class="btn btn-info itemConnect {{($uniqueItem->mac) ? '': 'disabled'}}" type="button"  data-id="{{ $uniqueItem->id }}">{{ trans('page.dashboard.connect_button') }}</button>
-                            <button class="btn btn-danger itemDetach {{($uniqueItem->mac) ? '': 'disabled'}}" type="button" data-id="{{ $uniqueItem->id }}">{{ trans('page.dashboard.detach _button') }}</button>
+                        <button class="btn btn-primary itemEdit {{$uniqueItem->mac ? '':'d-none'}}" type="button" data-mac="{{ $uniqueItem->mac }}" data-id="{{ $uniqueItem->id }}">{{ trans('page.dashboard.edit_button') }}</button>
+                        <button class="btn btn-info itemConnect" disabled="{{$uniqueItem->mac ? true : false}}" type="button" data-id="{{ $uniqueItem->id }}">{{ trans('page.dashboard.connect_button') }}</button>
+                        <button class="btn btn-danger itemDetach" type="button" data-id="{{ $uniqueItem->id }}">{{ trans('page.dashboard.detach _button') }}</button>
                     </td>
                     <td>
-                        @if($uniqueItem->is_online)
-                            <div style="background-color:green; color:white; text-align: center">Online</div>
-                        @else
-                            <div style="background-color:red; color:white; text-align: center">Offline</div>
-                        @endif
+                        <?php $styleOnline = $uniqueItem->is_online? 'green' : 'red';
+                            $onlineText = $uniqueItem->is_online? 'Online' : 'Offline';
+                        ?>
+                        <div class="onlineButton" style="background-color: {{$styleOnline}}; color:white; text-align: center">
+                            {{$onlineText}}
+                        </div>
                     </td>
                     <td>
-                        @if($uniqueItem->is_inside)
-                            <div style="background-color:green; color:white; text-align: center">Inside</div>
-                        @else
-                            <div style="background-color:red; color:white; text-align: center">Outside</div>
-                        @endif
+                        <?php $styleInside = $uniqueItem->is_inside ? 'green' : 'red';
+                            $insideText = $uniqueItem->is_inside? 'Online' : 'Offline';
+                        ?>
+                        <div class="insideButton" style="background-color:{{$styleInside}}; color:white; text-align: center">{{$insideText}}</div>
                     </td>
                 </tr>
             @endforeach

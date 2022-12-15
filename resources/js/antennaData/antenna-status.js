@@ -16,8 +16,8 @@ $(document).ready(function() {
                     let style = data.antenas[i]['is_online'] ? 'success': 'danger';
                     let tr =`<tr class='workplaceAntennaData'>
                         <td>${data.antenas[i]['mac_address']}</td>
+                        <td>${data.antenas[i]['pivot']['type']}</td>
                         <td><span class="logged-in text-${style}">●</span></td>
-                        <td>${data.antenas[i]['type_id']}</td>
                         <td>
                             <form action="/workplace/${data.workplace.id}/antena/${data.antenas[i].id}" method="POST">
                                 <input type="hidden" name="_token" value="${tokenStatus}">

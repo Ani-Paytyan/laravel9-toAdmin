@@ -38,7 +38,7 @@ class WatcherAntennaController extends Controller
 
     public function uniqueItemDisable(UniqueItem $uniqueItem)
     {
-        $uniqueItem->update(['mac' => null]);
+        $this->uniqueItemService->disableUniqueItem($uniqueItem);
 
         return redirect()->back()->with([
             'message' => new MessageDto(

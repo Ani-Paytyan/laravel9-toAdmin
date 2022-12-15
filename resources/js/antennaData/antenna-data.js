@@ -1,8 +1,19 @@
 $(document).ready(function() {
     let token = $("input[name='_token']").val();
 
+    const $uniqueItems = $('#uniqueItems');
+
+    $uniqueItems.prop('disabled', true);
+
     $('#items').on('change', function(e) {
-        $('#uniqueItems').empty();
+        if (e.target.value) {
+            $uniqueItems.prop('disabled', false);
+        } else {
+            $uniqueItems.prop('disabled', true);
+        }
+
+        $uniqueItems.empty();
+
         let itemId = $('#items').val();
         if(itemId)
         {
@@ -12,12 +23,14 @@ $(document).ready(function() {
                 type: "GET",
                 dataType: 'json',
                 success: function (data) {
+                    $uniqueItems.append(new Option());
+
                     $.each(data.uniqueItems, function(key, value) {
-                        var $option = $("<option/>", {
+                        let optionData = $("<option/>", {
                             value: key,
                             text: value
                         });
-                        $('#uniqueItems').append($option);
+                        $uniqueItems.append(optionData);
                     });
                 },
                 error: function (data) {}
@@ -26,10 +39,17 @@ $(document).ready(function() {
     });
 
     $('.addAntennaData').on('click', function(e) {
+        console.log('Click');
+
         let mac = $('#exampleModalLabel').data('mac');
         let uniqueItemId = $("#uniqueItems").val();
+
+        console.log(`MAC: ${mac}, id: ${uniqueItemId}`);
+
         if(mac && uniqueItemId) {
-                $.ajax({
+            console.log('Send request');
+
+            $.ajax({
                 url: "/watcher/item_unique/" + uniqueItemId,
                 data: {
                     _token: token,
@@ -104,7 +124,11 @@ $(document).ready(function() {
 
     $(document).on('click','.macUniqueItem', function(e) {
         let mac = $(e.target).data('mac');
-        $('#exampleModalLabel').html(mac).attr('data-mac', mac);
+
+        const $label = $('#exampleModalLabel');
+
+        $label.find('.macHeader').html('['+mac+']');
+        $label.attr('data-mac', mac);
     });
 });
 

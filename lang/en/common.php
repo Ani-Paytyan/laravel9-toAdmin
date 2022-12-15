@@ -2,4 +2,5 @@
 
 return [
     'logout' => 'Logout',
+    'choose' => 'Choose',
 ];

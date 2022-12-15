@@ -5,11 +5,12 @@ return [
         'title' => 'Dashboard',
         'back_button' => 'Back',
         'submit_button' => 'Submit',
+        'submit_button_popup' => 'Connect',
         'show_button' => 'Show',
         'edit_button' => 'Edit',
         'delete_button' => 'Delete',
         'restore_button' => 'Restore',
-        'list_delete' => 'Deleted List',
+        'list_delete' => 'Archive',
         'connect_button' => 'Connect',
         'detach _button' => 'Detach',
     ],
@@ -54,6 +55,6 @@ return [
         'title' => 'Antenna Data',
         'to_plug' => 'Connect',
         'disable' => 'Detach',
-        'add_unique_item' => 'Connect Mac Address',
+        'add_unique_item' => 'Connect to MAC',
     ]
 ];

@@ -53,7 +53,9 @@ abstract class AbstractWatcherApi
     protected function handleError(Response $response)
     {
         if (!$response->successful()) {
-            $message = $response->json()['errors'] ? implode(' ', $response->json()['errors']) : [];
+            $message = isset($response->json()['errors'])
+                ? implode(' ', $response->json()['errors'])
+                : 'Watcher error: ' . $response->status();
             throw new WatcherApiError($message, $response->status());
         }
     }
