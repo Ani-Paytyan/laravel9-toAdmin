@@ -34,7 +34,9 @@ class Kernel extends ConsoleKernel
             if (config('app.sync_testing')) {
                 $command->everyMinute();
             } else {
-                $command->everyFifteenMinutes();
+                // ToDo change after events dispatche if upp and running
+                $command->everyMinute()->withoutOverlapping();
+                //$command->everyFifteenMinutes();
             }
         }
 
