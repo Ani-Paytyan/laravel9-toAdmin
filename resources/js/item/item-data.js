@@ -65,8 +65,14 @@ $(document).ready(function() {
     });
 
     $(document).on('input','.mac', function(e) {
-        (e.target.value.length > 0)? $(this).parent().find("button.itemConnect").removeAttr('disabled')
-            : $(this).parent().find("button.itemConnect").attr('disabled', 'disabled');
+        if (e.target.value.length > 0) {
+            $(this).parent().find("button.itemConnect").removeAttr('disabled');
+            $(this).parent().find("button.itemDetach").removeAttr('disabled');
+        }
+        else {
+            $(this).parent().find("button.itemConnect").attr('disabled', 'disabled');
+            $(this).parent().find("button.itemDetach").attr('disabled', 'disabled');
+        }
     });
 });
 
